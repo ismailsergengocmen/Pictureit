@@ -1,0 +1,170 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite">
+
+        <!-- top toolbar -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/relLayout1">
+
+            <include layout="@layout/snippet_top_profilebar"/>
+
+        </RelativeLayout>
+
+        <!-- middle section -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/relLayout1"
+            android:id="@id/relLayout2"
+            android:background="@drawable/white_grey_border_bottom">
+
+            <LinearLayout
+                android:id="@+id/linLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="50dp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_centerHorizontal="true"
+                        android:id="@+id/profileImage"
+                        app:civ_border_color="@color/colorBlack"
+                        app:civ_border_width="2dp">
+
+                    </de.hdodenhof.circleimageview.CircleImageView>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+            
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_below="@id/linLayout"
+                android:padding="15dp"
+                android:id="@+id/linLayout2">
+                
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/displayName"
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="bold"
+                    android:gravity="center_horizontal"
+                    android:text="asalihcezayir"
+                    android:textAllCaps="true"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/displayPhotoCount"
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="italic"
+                    android:gravity="center_horizontal"
+                    android:text="20 photograohs are taken" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <!--- Bottom Section -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/relLayout2">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:weightSum="100"
+                android:orientation="vertical">
+
+                <!--- Progress Map -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="52">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginStart="51dp"
+                        android:text="Progress Map"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_centerHorizontal="true">
+
+                    </TextView>
+
+                    <ImageView
+                        android:layout_width="200dp"
+                        android:layout_height="172dp"
+                        android:layout_centerVertical="true"
+                        android:id="@+id/imageViewEarth"
+                        android:src="@drawable/earth_cartoon"
+                        android:scaleX="0.9"
+                        android:scaleY="0.9"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="25dp">
+
+                    </ImageView>
+
+                </RelativeLayout>
+
+                <!--- Badges Section -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="50">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginStart="71dp"
+                        android:text="Badges"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_centerHorizontal="true">
+
+                    </TextView>
+
+                    <ImageView
+                        android:id="@+id/imageViewBadges"
+                        android:layout_width="206dp"
+                        android:layout_height="172dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="30dp"
+                        android:scaleX="0.65"
+                        android:scaleY="0.65"
+                        android:src="@drawable/badge_cartoon"
+                        android:layout_centerHorizontal="true">
+
+                    </ImageView>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</merge>
