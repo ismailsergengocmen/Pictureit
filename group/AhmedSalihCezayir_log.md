@@ -14,4 +14,8 @@ This week I will continue my study of how to use android studio
 I will think about the UML diagram of our app
 I will study how to use Firebase or another database (if there is a problem with Firebase)  
 
+### ~ 04/05/2020
+This week I designed the basic layout of the app
+I created home, search and profile menu layout and added some basic functionality like moving between different activities. I also worked with firebase and learned how to use authentication etc.
+
 ****
