@@ -9,18 +9,12 @@
         android:layout_height="match_parent"
         android:background="@color/colorWhite">
 
-        <include layout="@layout/layout_center_profile" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/frameLayout">
 
-        <include layout="@layout/layout_bottom_navigation_view"/>
-        
-        <ProgressBar
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:id="@+id/profileProgressBar"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="100dp">
-
-        </ProgressBar>
+        </FrameLayout>
 
     </RelativeLayout>
 

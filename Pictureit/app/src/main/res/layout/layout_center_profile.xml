@@ -4,23 +4,14 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorWhite">
+        android:background="@color/colorWhite"
+        android:layout_marginBottom="50dp">
 
-        <!-- top toolbar -->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:id="@+id/relLayout1">
-
-            <include layout="@layout/snippet_top_profilebar"/>
-
-        </RelativeLayout>
 
         <!-- middle section -->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/relLayout1"
             android:id="@id/relLayout2"
             android:background="@drawable/white_grey_border_bottom">
 

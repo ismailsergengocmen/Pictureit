@@ -2,6 +2,10 @@
     <string name="app_name">Pictureit</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="help">Help</string>
+
+    <!--- Fragment names -->
     <string name="send_feedback">Send Feedback</string>
     <string name="sign_out">Sign Out</string>
+    <string name="profile_fragment">Profile</string>
+
 </resources>

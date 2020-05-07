@@ -14,6 +14,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.pictureit.R;
 import com.example.pictureit.Utils.BottomNavigationViewHelper;
@@ -35,52 +36,67 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         Log.d(TAG, "onCreate: started.");
 
-        setupBottomNavigationView();
-        setupToolBar();
-        setupActivityWidgets();
-        setProfileImage();
-    }
+        init();
 
-    //This method will be changed later since firebase is needed
-    private void setProfileImage() {
-        Log.d(TAG, "setProfileImage: setting profile image.");
-        String imgURL = "cdn.webrazzi.com/uploads/2013/06/android-malware.jpg";
-        UniversalImageLoader.setImage(imgURL, profileImage, mProgressBar, "https://");
-    }
-
-    private void setupActivityWidgets() {
-        mProgressBar = findViewById(R.id.profileProgressBar);
-        mProgressBar.setVisibility(View.GONE);
-        profileImage = findViewById(R.id.profileImage);
-    }
-
-    private void setupToolBar() {
-        Toolbar profileToolBar = (Toolbar) findViewById(R.id.profileToolBar);
-        setSupportActionBar(profileToolBar);
-
-        ImageView profileMenu = findViewById(R.id.profileMenu);
-        profileMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "onClick: navigating to settings");
-                Intent intent = new Intent(mContext,AccountSettingsActivity.class);
-                startActivity(intent);
-            }
-        });
+//        setupBottomNavigationView();
+//        setupToolBar();
+//        setupActivityWidgets();
+//        setProfileImage();
     }
 
     /**
-     * BottomNavigationView setup
+     * This method manages frames inside of the Profile Activity
      */
-    private void setupBottomNavigationView() {
-        Log.d(TAG, "setupBottomNavigationView: setting up BottomNavigationView");
-        BottomNavigationViewEx bottomNavigationViewEx = (BottomNavigationViewEx) findViewById(R.id.bottomNavViewBar);
-        BottomNavigationViewHelper.setupBottomNavigationView(bottomNavigationViewEx);
-        BottomNavigationViewHelper.enableNavigation(mContext, bottomNavigationViewEx);
+    private void init() {
+        Log.d(TAG, "init: inflating " + getString(R.string.profile_fragment));
 
-        Menu menu = bottomNavigationViewEx.getMenu();
-        MenuItem menuItem = menu.getItem(ACTIVITY_NUMBER);
-        menuItem.setChecked(true);
+        ProfileFragment fragment = new ProfileFragment();
+        FragmentTransaction transaction = ProfileActivity.this.getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frameLayout, fragment);
+        transaction.addToBackStack(getString(R.string.profile_fragment));
+        transaction.commit();
     }
+//
+//    //This method will be changed later since firebase is needed
+//    private void setProfileImage() {
+//        Log.d(TAG, "setProfileImage: setting profile image.");
+//        String imgURL = "cdn.webrazzi.com/uploads/2013/06/android-malware.jpg";
+//        UniversalImageLoader.setImage(imgURL, profileImage, mProgressBar, "https://");
+//    }
+//
+//    private void setupActivityWidgets() {
+//        mProgressBar = findViewById(R.id.profileProgressBar);
+//        mProgressBar.setVisibility(View.GONE);
+//        profileImage = findViewById(R.id.profileImage);
+//    }
+//
+//    private void setupToolBar() {
+//        Toolbar profileToolBar = (Toolbar) findViewById(R.id.profileToolBar);
+//        setSupportActionBar(profileToolBar);
+//
+//        ImageView profileMenu = findViewById(R.id.profileMenu);
+//        profileMenu.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Log.d(TAG, "onClick: navigating to settings");
+//                Intent intent = new Intent(mContext,AccountSettingsActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//    }
+//
+//    /**
+//     * BottomNavigationView setup
+//     */
+//    private void setupBottomNavigationView() {
+//        Log.d(TAG, "setupBottomNavigationView: setting up BottomNavigationView");
+//        BottomNavigationViewEx bottomNavigationViewEx = (BottomNavigationViewEx) findViewById(R.id.bottomNavViewBar);
+//        BottomNavigationViewHelper.setupBottomNavigationView(bottomNavigationViewEx);
+//        BottomNavigationViewHelper.enableNavigation(mContext, bottomNavigationViewEx);
+//
+//        Menu menu = bottomNavigationViewEx.getMenu();
+//        MenuItem menuItem = menu.getItem(ACTIVITY_NUMBER);
+//        menuItem.setChecked(true);
+//    }
 
 }
