@@ -21,6 +21,7 @@ import com.example.pictureit.Utils.BottomNavigationViewHelper;
 import com.example.pictureit.Utils.UniversalImageLoader;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
+
 public class ProfileActivity extends AppCompatActivity {
 
     private static final String TAG = "ProfileActivity";
