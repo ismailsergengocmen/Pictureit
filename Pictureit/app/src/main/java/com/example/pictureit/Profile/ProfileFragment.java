@@ -18,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
+import com.example.pictureit.Profile.Settings.AccountSettingsActivity;
 import com.example.pictureit.R;
 import com.example.pictureit.Utils.BottomNavigationViewHelper;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
@@ -66,7 +67,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick: navigating to settings");
-                Intent intent = new Intent(mContext,AccountSettingsActivity.class);
+                Intent intent = new Intent(mContext, AccountSettingsActivity.class);
                 startActivity(intent);
             }
         });

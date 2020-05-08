@@ -39,7 +39,7 @@
         </activity>
 
         <!--- Account Settings Activity -->
-        <activity android:name=".Profile.AccountSettingsActivity"
+        <activity android:name=".Profile.Settings.AccountSettingsActivity"
             android:screenOrientation="portrait"
             android:configChanges="orientation"
             tools:ignore="LockedOrientationActivity">
