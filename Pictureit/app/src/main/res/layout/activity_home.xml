@@ -3,36 +3,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/fragment_container">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <!-- top tool bar -->
+            <!-- top tool bar -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/relLayout1">
+
+                    <include layout="@layout/layout_top_tabs"/>
+
+                </RelativeLayout>
+
+            <!-- middle section (body) -->
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/relLayout1">
+                android:layout_height="match_parent"
+                android:layout_marginBottom="50dp"
+                android:id="@+id/relLayout2"
+                android:layout_below="@id/relLayout1">
 
-                <include layout="@layout/layout_top_tabs"/>
+                <include layout="@layout/layout_center_viewpager"/>
+
 
             </RelativeLayout>
 
-        <!-- middle section (body) -->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="50dp"
-            android:id="@+id/relLayout2"
-            android:layout_below="@id/relLayout1">
-
-            <include layout="@layout/layout_center_viewpager"/>
+            <!-- bottom navigation bar -->
+            <include layout="@layout/layout_bottom_navigation_view"/>
 
         </RelativeLayout>
-
-        <!-- bottom navigation bar -->
-        <include layout="@layout/layout_bottom_navigation_view"/>
-
-    </RelativeLayout>
+    </FrameLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

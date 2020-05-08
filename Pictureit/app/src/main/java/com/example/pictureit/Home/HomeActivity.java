@@ -1,13 +1,17 @@
 package com.example.pictureit.Home;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.example.pictureit.R;
 import com.example.pictureit.Utils.BottomNavigationViewHelper;
@@ -22,12 +26,18 @@ public class HomeActivity extends AppCompatActivity {
     private static final int ACTIVITY_NUMBER = 0;
 
     private Context mContext = HomeActivity.this;
+
+    private Button buttonEasy;
+    private Button buttonMedium;
+    private Button buttonHard;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         Log.d(TAG, "onCreate: starting.");
+
+
 
         initImageLoader();
         setupBottomNavigationView();
@@ -69,4 +79,6 @@ public class HomeActivity extends AppCompatActivity {
         MenuItem menuItem = menu.getItem(ACTIVITY_NUMBER);
         menuItem.setChecked(true);
     }
+
+
 }
