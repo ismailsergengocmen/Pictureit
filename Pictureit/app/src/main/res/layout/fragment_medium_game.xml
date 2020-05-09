@@ -2,7 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-<<<<<<< HEAD
     android:background="@drawable/homepage_background"
     android:id="@+id/medium_game_layout">
     <RelativeLayout
@@ -13,6 +12,7 @@
         <include layout="@layout/snippet_top_medium_game_toolbar"/>
 
     </RelativeLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -29,9 +29,8 @@
             android:gravity="center"
             android:layout_marginTop="1dp">
         </GridView>
+
     </RelativeLayout>
-=======
-    android:background="@color/colorPrimary">
 
     <TextView
         android:layout_width="match_parent"
@@ -40,7 +39,5 @@
         android:layout_centerVertical="true"
         android:text="mediumGame"
         android:textSize="50sp" />
->>>>>>> a14856d50089c1bbc7b07bdaa843121b43eb943b
-
 
 </RelativeLayout>
