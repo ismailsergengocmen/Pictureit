@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="55dp"
+        android:orientation="vertical"
         android:paddingLeft="25dp"
-        android:paddingRight="25dp"
-        >
+        android:paddingTop="55dp"
+        android:paddingRight="25dp">
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="80dp"
-            android:src="@drawable/pictureit_logo_with_name"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="25dp"/>
+            android:layout_marginBottom="25dp"
+            android:src="@drawable/pictureit_logo_with_name" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp" >
+            android:layout_marginBottom="8dp">
+
             <EditText
+                android:id="@+id/input_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
                 android:hint="Email"
-                android:id="@+id/input_email" />
+                android:inputType="textEmailAddress" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -37,35 +37,35 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp" >
+            android:layout_marginBottom="8dp">
+
             <EditText
+                android:id="@+id/input_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
                 android:hint="Password"
-                android:id="@+id/input_password" />
+                android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-      <androidx.appcompat.widget.AppCompatButton
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
 
-          android:layout_marginBottom="25dp"
-          android:text="Login"
-          android:id="@+id/btn_login"
-          android:background="@drawable/white_rounded_button">
-      </androidx.appcompat.widget.AppCompatButton>
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
+            android:background="@drawable/white_rounded_button"
+            android:text="Login"></androidx.appcompat.widget.AppCompatButton>
 
         <TextView
+            android:id="@+id/link_signup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="25dp"
-            android:text="No account yet? Create one"
             android:gravity="center"
-            android:textSize="16dp"
-            android:id="@+id/link_signup"
-            android:textColor="@color/colorLinkBlue"/>
+            android:text="No account yet? Create one"
+            android:textColor="@color/colorLinkBlue"
+            android:textSize="16dp" />
 
     </LinearLayout>
 
@@ -73,7 +73,7 @@
         android:id="@+id/progressBar"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_centerInParent="true"/>
+        android:layout_centerInParent="true" />
 
     <TextView
         android:id="@+id/pleaseWait"
@@ -85,8 +85,8 @@
         android:layout_alignBottom="@+id/progressBar"
         android:layout_marginTop="40dp"
         android:layout_marginBottom="-91dp"
+        android:paddingLeft="20dp"
         android:text="Please wait..."
         android:textColor="@color/colorBlack"
-        android:textSize="20sp"
-        android:paddingLeft="20dp"/>
+        android:textSize="20sp" />
 </RelativeLayout>

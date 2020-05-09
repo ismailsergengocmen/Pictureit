@@ -2,6 +2,7 @@ package com.example.pictureit.Home;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
@@ -10,6 +11,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.example.pictureit.Login.LoginActivity;
 import com.example.pictureit.R;
@@ -28,9 +31,16 @@ public class HomeActivity extends AppCompatActivity {
 
     private Context mContext = HomeActivity.this;
 
+
     //Firebase
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+
+
+    private Button buttonEasy;
+    private Button buttonMedium;
+    private Button buttonHard;
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +48,12 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         Log.d(TAG, "onCreate: starting.");
 
+
         setupFirebaseAuth();
+
+
+
+
         initImageLoader();
         setupBottomNavigationView();
         setupViewPager();
@@ -79,6 +94,7 @@ public class HomeActivity extends AppCompatActivity {
         MenuItem menuItem = menu.getItem(ACTIVITY_NUMBER);
         menuItem.setChecked(true);
     }
+
 
 
 //-----------------------------------------Firebase-------------------------------------------------
@@ -137,3 +153,6 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 }
+
+
+

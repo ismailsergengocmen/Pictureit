@@ -1,4 +1,4 @@
-package com.example.pictureit.Profile;
+package com.example.pictureit.Home;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,14 +11,13 @@ import androidx.fragment.app.Fragment;
 
 import com.example.pictureit.R;
 
-public class HelpFragment extends Fragment {
-
-    private static final String TAG = "HelpFragment";
+public class EasyGameFragment extends Fragment {
+    private static final String TAG = "EasyGameFragment";
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_help, container, false);
+        View view = inflater.inflate(R.layout.fragment_easy_game, container, false);
         return view;
     }
 }

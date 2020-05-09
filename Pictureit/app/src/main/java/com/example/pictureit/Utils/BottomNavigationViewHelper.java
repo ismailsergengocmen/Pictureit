@@ -8,7 +8,6 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 
 import com.example.pictureit.Home.HomeActivity;
-import com.example.pictureit.Profile.AccountSettingsActivity;
 import com.example.pictureit.Profile.ProfileActivity;
 import com.example.pictureit.R;
 import com.example.pictureit.Search.SearchActivity;
