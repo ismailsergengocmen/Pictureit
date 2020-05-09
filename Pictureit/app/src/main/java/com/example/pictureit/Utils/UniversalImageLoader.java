@@ -41,15 +41,17 @@ public class UniversalImageLoader {
         ImageLoaderConfiguration configuration = new ImageLoaderConfiguration.Builder(mContext)
                 .defaultDisplayImageOptions(defaultOptions)
                 .memoryCache(new WeakMemoryCache())
-                .diskCacheSize(100*1024*1024).build();
+                .diskCacheSize(100 * 1024 * 1024).build();
 
         return configuration;
     }
 
     //Use this only for small number of photos like profile photo
+
     /**
      * This method can be used to set images that are static. It cannot be used if the images
      * are being changed in the fragment/activity - Or if they are being  set in  a list or a gridView !!
+     *
      * @param imgURL
      * @param image
      * @param mProgressBar

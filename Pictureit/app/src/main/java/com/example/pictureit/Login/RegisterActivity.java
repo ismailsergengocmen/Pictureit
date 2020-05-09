@@ -20,11 +20,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class RegisterActivity extends AppCompatActivity {
+
     private static final String TAG = "RegisterActivity";
 
     private Context mContext;
-    private String email,username,password;
-    private EditText mEmail,mPassword,mUsername;
+
+    //Widgets
+    private String email, username, password;
+    private EditText mEmail, mPassword, mUsername;
     private TextView loadingPleaseWait;
     private Button btnRegister;
     private ProgressBar mProgressBar;
@@ -39,7 +42,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         firebaseMethods = new FirebaseMethods(mContext);
-        mContext=RegisterActivity.this;
+        mContext = RegisterActivity.this;
         Log.d(TAG, "onCreate: started.");
 
         initWidgets();
@@ -47,7 +50,7 @@ public class RegisterActivity extends AppCompatActivity {
         init();
     }
 
-    private  void init(){
+    private void init() {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,44 +62,43 @@ public class RegisterActivity extends AppCompatActivity {
                     mProgressBar.setVisibility(View.VISIBLE);
                     loadingPleaseWait.setVisibility(View.VISIBLE);
 
-                    firebaseMethods.registerNewEmail(email,password,username);
+                    firebaseMethods.registerNewEmail(email, password, username);
                 }
             }
         });
     }
 
-    private boolean checkInputs(String email, String username, String password){
-            Log.d(TAG,"checkInputs: checking inputs for null values.");
-            if(email.equals("") || username.equals("") || password.equals("")){
-                Toast.makeText(mContext,"All fields must be filled out",Toast.LENGTH_SHORT).show();
-                return false;
-            }
-            return true;
+    private boolean checkInputs(String email, String username, String password) {
+        Log.d(TAG, "checkInputs: checking inputs for null values.");
+        if (email.equals("") || username.equals("") || password.equals("")) {
+            Toast.makeText(mContext, "All fields must be filled out", Toast.LENGTH_SHORT).show();
+            return false;
         }
+        return true;
+    }
 
     /**
-     *  Initialize the activity widgets
+     * Initialize the activity widgets
      */
-    private void initWidgets(){
+    private void initWidgets() {
         Log.d(TAG, "initWidgets: Initializing Widgets.");
         mEmail = (EditText) findViewById(R.id.input_email);
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
         mUsername = (EditText) findViewById(R.id.input_username);
-        btnRegister=(Button) findViewById(R.id.btn_register);
+        btnRegister = (Button) findViewById(R.id.btn_register);
         loadingPleaseWait = (TextView) findViewById(R.id.loadingPleaseWait);
-        mPassword= (EditText) findViewById(R.id.input_password);
-        mContext= RegisterActivity.this;
+        mPassword = (EditText) findViewById(R.id.input_password);
+        mContext = RegisterActivity.this;
         mProgressBar.setVisibility(View.GONE);
         loadingPleaseWait.setVisibility(View.GONE);
     }
 
-    private boolean isStringNull(String string){
-        Log.d(TAG,"isStringNull: checking string if null.");
+    private boolean isStringNull(String string) {
+        Log.d(TAG, "isStringNull: checking string if null.");
 
-        if (string.equals("")){
+        if (string.equals("")) {
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }

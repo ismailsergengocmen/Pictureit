@@ -30,6 +30,7 @@ public class ProfileFragment extends Fragment {
 
     private static final int ACTIVITY_NUMBER = 2;
 
+    //Widgets
     private TextView mDisplayName, mUserName, mPhotoNumber;
     private ProgressBar mProgressBar;
     private CircleImageView mProfilePhoto;
@@ -60,7 +61,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private void setupToolBar() {
-        ((ProfileActivity)getActivity()).setSupportActionBar(toolbar);
+        ((ProfileActivity) getActivity()).setSupportActionBar(toolbar);
 
         profileMenu.setOnClickListener(new View.OnClickListener() {
             @Override
