@@ -52,6 +52,7 @@ public class HomeActivity extends AppCompatActivity {
         initImageLoader();
         setupBottomNavigationView();
         setupViewPager();
+
     }
 
     private void initImageLoader() {
@@ -91,7 +92,6 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 //-----------------------------------------Firebase-------------------------------------------------
-
     /**
      * check to see if the user is logged in
      *
