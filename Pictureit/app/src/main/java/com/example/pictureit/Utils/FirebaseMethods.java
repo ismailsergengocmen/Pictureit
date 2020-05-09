@@ -13,32 +13,35 @@ import com.google.firebase.auth.FirebaseAuth;
 import androidx.annotation.NonNull;
 
 public class FirebaseMethods {
-    private static final String TAG = "FirenaseMethods";
+
+    private static final String TAG = "FirebaseMethods";
+
+    private Context mContext;
 
     //Firebase
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private String userID;
 
-    private Context mContext;
 
-    public FirebaseMethods(Context context){
+    public FirebaseMethods(Context context) {
         mAuth = FirebaseAuth.getInstance();
         mContext = context;
 
-        if (mAuth.getCurrentUser() != null){
+        if (mAuth.getCurrentUser() != null) {
             userID = mAuth.getCurrentUser().getUid();
         }
     }
 
     /**
      * Register a new email and password to Firebase Authentication
+     *
      * @param email
      * @param password
-     * @param Username
+     * @param username
      */
-    public void registerNewEmail(final String email,String password,final String Username){
-          mAuth.createUserWithEmailAndPassword(email, password)
+    public void registerNewEmail(final String email, String password, final String username) {
+        mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -47,13 +50,12 @@ public class FirebaseMethods {
                         //If sign in fails, display a massage to the user.If sign in succeeds the auth
                         //state listener will be notified and logic to handle the signed in user can
                         //be handled in the listener
-                        if(!task.isSuccessful()) {
+                        if (!task.isSuccessful()) {
                             Toast.makeText(mContext, R.string.auth_failed,
-                                Toast.LENGTH_SHORT).show();
-                        }
-                        else if(task.isSuccessful()){
-                            userID= mAuth.getCurrentUser().getUid();
-                            Log.d(TAG, "onConplete: Authstate changed:" + userID);
+                                    Toast.LENGTH_SHORT).show();
+                        } else if (task.isSuccessful()) {
+                            userID = mAuth.getCurrentUser().getUid();
+                            Log.d(TAG, "onComplete: Authstate changed:" + userID);
                         }
                     }
                 });

@@ -12,6 +12,7 @@ import java.util.List;
  * Class that stores fragments for tabs
  */
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
+
     private static final String TAG = "SectionsPagerAdapter";
 
     private final List<Fragment> mFragmentList = new ArrayList<>();
@@ -28,7 +29,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return mFragmentList.size() ;
+        return mFragmentList.size();
     }
 
     public void addFragment(Fragment fragment) {

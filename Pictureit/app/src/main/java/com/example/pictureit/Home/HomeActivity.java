@@ -26,11 +26,11 @@ import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class HomeActivity extends AppCompatActivity {
+
     private static final String TAG = "HomeActivity";
+
     private static final int ACTIVITY_NUMBER = 0;
-
     private Context mContext = HomeActivity.this;
-
 
     //Firebase
     private FirebaseAuth mAuth;
@@ -40,7 +40,7 @@ public class HomeActivity extends AppCompatActivity {
     private Button buttonEasy;
     private Button buttonMedium;
     private Button buttonHard;
-    
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,17 +90,16 @@ public class HomeActivity extends AppCompatActivity {
         menuItem.setChecked(true);
     }
 
-
-
 //-----------------------------------------Firebase-------------------------------------------------
 
     /**
      * check to see if the user is logged in
+     *
      * @param user
      */
-    private void checkCurrentUser(FirebaseUser user){
+    private void checkCurrentUser(FirebaseUser user) {
         Log.d(TAG, "checkCurrentUser: checking if user is logged in");
-        if (user == null){
+        if (user == null) {
             Intent intent = new Intent(mContext, LoginActivity.class);
             startActivity(intent);
         }

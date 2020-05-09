@@ -14,9 +14,10 @@ import com.example.pictureit.Utils.BottomNavigationViewHelper;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 public class SearchActivity extends AppCompatActivity {
-    private static final String TAG = "SearchActivity";
-    private static final int ACTIVITY_NUMBER = 1;
 
+    private static final String TAG = "SearchActivity";
+
+    private static final int ACTIVITY_NUMBER = 1;
     private Context mContext = SearchActivity.this;
 
     @Override

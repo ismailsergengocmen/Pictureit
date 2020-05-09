@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import com.example.pictureit.R;
 
 public class MediumGameFragment extends Fragment {
+
     private static final String TAG = "MediumGameFragment";
 
     @Nullable
