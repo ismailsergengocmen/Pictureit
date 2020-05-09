@@ -45,7 +45,7 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         mDisplayName = view.findViewById(R.id.displayName);
-        mUserName = view.findViewById(R.id.profileName);
+        mUserName = view.findViewById(R.id.username);
         mProfilePhoto = view.findViewById(R.id.profileImage);
         mProgressBar = view.findViewById(R.id.profileProgressBar);
         toolbar = view.findViewById(R.id.profileBar);

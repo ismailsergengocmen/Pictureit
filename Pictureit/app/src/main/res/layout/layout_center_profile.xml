@@ -4,15 +4,15 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorWhite"
-        android:layout_marginBottom="50dp">
+        android:layout_marginBottom="50dp"
+        android:background="@color/colorWhite">
 
 
         <!-- middle section -->
         <RelativeLayout
+            android:id="@id/relLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@id/relLayout2"
             android:background="@drawable/white_grey_border_bottom">
 
             <LinearLayout
@@ -20,18 +20,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginHorizontal="50dp">
 
                     <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/profileImage"
                         android:layout_width="120dp"
                         android:layout_height="120dp"
-                        android:layout_marginTop="20dp"
                         android:layout_centerHorizontal="true"
-                        android:id="@+id/profileImage"
+                        android:layout_marginTop="20dp"
                         app:civ_border_color="@color/colorBlack"
                         app:civ_border_width="2dp">
 
@@ -40,33 +40,33 @@
                 </RelativeLayout>
 
             </LinearLayout>
-            
+
             <LinearLayout
+                android:id="@+id/linLayout2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_below="@id/linLayout"
-                android:padding="15dp"
-                android:id="@+id/linLayout2">
-                
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/displayName"
-                    android:textColor="@color/colorBlack"
-                    android:textStyle="bold"
-                    android:gravity="center_horizontal"
-                    android:text="asalihcezayir"
-                    android:textAllCaps="true"/>
+                android:orientation="vertical"
+                android:padding="15dp">
 
                 <TextView
+                    android:id="@+id/displayName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/displayPhotoCount"
-                    android:textColor="@color/colorBlack"
-                    android:textStyle="italic"
                     android:gravity="center_horizontal"
-                    android:text="20 photograohs are taken" />
+                    android:text="asalihcezayir"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/displayPhotoCount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="20 photograohs are taken"
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="italic" />
 
             </LinearLayout>
 
@@ -81,8 +81,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:weightSum="100"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:weightSum="100">
 
                 <!--- Progress Map -->
                 <RelativeLayout
@@ -93,26 +93,26 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
+                        android:layout_centerHorizontal="true"
                         android:layout_marginStart="51dp"
+                        android:layout_marginTop="20dp"
                         android:text="Progress Map"
                         android:textColor="@color/colorBlack"
                         android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:layout_centerHorizontal="true">
+                        android:textStyle="bold">
 
                     </TextView>
 
                     <ImageView
+                        android:id="@+id/imageViewEarth"
                         android:layout_width="200dp"
                         android:layout_height="172dp"
+                        android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
-                        android:id="@+id/imageViewEarth"
-                        android:src="@drawable/earth_cartoon"
+                        android:layout_marginTop="25dp"
                         android:scaleX="0.9"
                         android:scaleY="0.9"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="25dp">
+                        android:src="@drawable/earth_cartoon">
 
                     </ImageView>
 
@@ -127,13 +127,13 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
+                        android:layout_centerHorizontal="true"
                         android:layout_marginStart="71dp"
+                        android:layout_marginTop="20dp"
                         android:text="Badges"
                         android:textColor="@color/colorBlack"
                         android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:layout_centerHorizontal="true">
+                        android:textStyle="bold">
 
                     </TextView>
 
@@ -141,12 +141,12 @@
                         android:id="@+id/imageViewBadges"
                         android:layout_width="206dp"
                         android:layout_height="172dp"
+                        android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
                         android:layout_marginTop="30dp"
                         android:scaleX="0.65"
                         android:scaleY="0.65"
-                        android:src="@drawable/badge_cartoon"
-                        android:layout_centerHorizontal="true">
+                        android:src="@drawable/badge_cartoon">
 
                     </ImageView>
 
