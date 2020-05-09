@@ -36,7 +36,7 @@ public class HomeActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
-
+    //widgets
     private Button buttonEasy;
     private Button buttonMedium;
     private Button buttonHard;
@@ -48,12 +48,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         Log.d(TAG, "onCreate: starting.");
 
-
         setupFirebaseAuth();
-
-
-
-
         initImageLoader();
         setupBottomNavigationView();
         setupViewPager();

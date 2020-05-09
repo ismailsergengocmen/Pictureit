@@ -1,4 +1,4 @@
-package com.example.pictureit.Profile.Settings;
+package com.example.pictureit.Profile;
 
 import android.os.Bundle;
 import android.util.Log;
