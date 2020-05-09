@@ -49,8 +49,8 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        firebaseMethods = new FirebaseMethods(mContext);
         mContext = RegisterActivity.this;
+        firebaseMethods = new FirebaseMethods(mContext);
         Log.d(TAG, "onCreate: started.");
 
         initWidgets();
@@ -90,12 +90,12 @@ public class RegisterActivity extends AppCompatActivity {
      */
     private void initWidgets() {
         Log.d(TAG, "initWidgets: Initializing Widgets.");
-        mEmail = (EditText) findViewById(R.id.input_email);
+        mEmail = (EditText) findViewById(R.id.register_email);
         mProgressBar = (ProgressBar) findViewById(R.id.registerRequestLoadingProgressbar);
         mUsername = (EditText) findViewById(R.id.input_username);
         btnRegister = (Button) findViewById(R.id.btn_register);
         loadingPleaseWait = (TextView) findViewById(R.id.loadingPleaseWait);
-        mPassword = (EditText) findViewById(R.id.input_password);
+        mPassword = (EditText) findViewById(R.id.register_password);
         mContext = RegisterActivity.this;
         mProgressBar.setVisibility(View.GONE);
         loadingPleaseWait.setVisibility(View.GONE);

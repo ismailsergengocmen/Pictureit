@@ -69,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
     //-----------------------------------------Firebase-------------------------------------------------
 
     private void init() {
-        //initalize the button for logging in
+        //initialize the button for logging in
         Button btnLogin = (Button) findViewById(R.id.btn_login);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
                 String email = mEmail.getText().toString();
                 String password = mPassword.getText().toString();
 
-                if (isStringNull(email) && isStringNull(password)) {
+                if (isStringNull(email) || isStringNull(password)) {
                     Toast.makeText(mContext, "You must fill out all the fields", Toast.LENGTH_SHORT).show();
                 } else {
                     mProgressBar.setVisibility(View.VISIBLE);
