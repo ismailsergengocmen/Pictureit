@@ -8,4 +8,8 @@
     <string name="sign_out">Sign Out</string>
     <string name="profile_fragment">Profile</string>
 
+    <!--- Firebase massages -->
+    <string name="auth_failed">Failed to Authenticate</string>
+    <string name="auth_success">Authentication Success</string>
+
 </resources>

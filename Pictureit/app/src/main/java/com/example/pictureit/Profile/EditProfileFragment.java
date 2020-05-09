@@ -19,6 +19,7 @@ public class EditProfileFragment extends Fragment {
 
     private static final String TAG = "EditProfileFragment";
 
+    //Widgets
     private ImageView profilePhoto;
 
     @Nullable

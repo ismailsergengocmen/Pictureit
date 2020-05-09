@@ -12,7 +12,7 @@ import java.util.List;
 public class SectionsStatePagerAdapter extends FragmentStatePagerAdapter {
 
     private final List<Fragment> mFragmentList = new ArrayList<>();
-    private final HashMap<Fragment, Integer> mFragments= new HashMap<>();
+    private final HashMap<Fragment, Integer> mFragments = new HashMap<>();
     private final HashMap<String, Integer> mFragmentNumbers = new HashMap<>();
     private final HashMap<Integer, String> mFragmentNames = new HashMap<>();
 
@@ -40,40 +40,40 @@ public class SectionsStatePagerAdapter extends FragmentStatePagerAdapter {
 
     /**
      * returns the fragment with the name @param
+     *
      * @param fragmentName
      * @return number of the fragment
      */
-    public  Integer getFragmentNumber(String fragmentName) {
+    public Integer getFragmentNumber(String fragmentName) {
         if (mFragmentNumbers.containsKey(fragmentName)) {
             return mFragmentNumbers.get(fragmentName);
-        }
-        else
+        } else
             return null;
     }
 
     /**
      * returns the fragment with the fragment @param
+     *
      * @param fragment
      * @return number of the fragment
      */
     public Integer getFragmentNumber(Fragment fragment) {
         if (mFragmentNumbers.containsKey(fragment)) {
             return mFragmentNumbers.get(fragment);
-        }
-        else
+        } else
             return null;
     }
 
     /**
      * returns the fragment with the name @param
+     *
      * @param fragmentNumber
      * @return name of the fragment
      */
     public String getFragmentName(Integer fragmentNumber) {
         if (mFragmentNames.containsKey(fragmentNumber)) {
             return mFragmentNames.get(fragmentNumber);
-        }
-        else
+        } else
             return null;
     }
 }

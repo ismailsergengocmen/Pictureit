@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.pictureit.R;
 
 public class HomeFragment extends Fragment {
+
     private static final String TAG = "HomeFragment";
 
     @Nullable

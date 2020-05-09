@@ -8,7 +8,6 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 
 import com.example.pictureit.Home.HomeActivity;
-import com.example.pictureit.Profile.AccountSettingsActivity;
 import com.example.pictureit.Profile.ProfileActivity;
 import com.example.pictureit.R;
 import com.example.pictureit.Search.SearchActivity;
@@ -20,7 +19,7 @@ public class BottomNavigationViewHelper {
     private static final String TAG = "BottomNavigationViewHel";
 
 
-    public static void setupBottomNavigationView( BottomNavigationViewEx bottomNavigationViewEx) {
+    public static void setupBottomNavigationView(BottomNavigationViewEx bottomNavigationViewEx) {
         Log.d(TAG, "setupBottomNavigationView: setting up BottomNavigationView");
         bottomNavigationViewEx.enableAnimation(false);
         bottomNavigationViewEx.enableItemShiftingMode(false);

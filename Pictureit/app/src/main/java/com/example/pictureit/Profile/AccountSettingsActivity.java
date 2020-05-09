@@ -1,7 +1,6 @@
 package com.example.pictureit.Profile;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -15,7 +14,6 @@ import android.widget.RelativeLayout;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.pictureit.R;
@@ -30,8 +28,9 @@ public class AccountSettingsActivity extends AppCompatActivity {
     private static final String TAG = "AccountSettingsActivity";
 
     private Context mContext;
-
     private SectionsStatePagerAdapter pagerAdapter;
+
+    //Widgets
     private ViewPager mViewPager;
     private RelativeLayout mRelativeLayout;
 
@@ -88,7 +87,7 @@ public class AccountSettingsActivity extends AppCompatActivity {
         Log.d(TAG, "setupSettingsList: initializing 'account settings' list");
         ListView listView = findViewById(R.id.lVAccountSettings);
 
-        ArrayList<String> options = new ArrayList<String >();
+        ArrayList<String> options = new ArrayList<String>();
         options.add(getString(R.string.edit_profile)); //fragment 0
         options.add(getString(R.string.help)); //fragment 1
         options.add(getString(R.string.sign_out)); //fragment 2

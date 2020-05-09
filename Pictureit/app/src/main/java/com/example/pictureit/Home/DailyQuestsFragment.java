@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import com.example.pictureit.R;
 
 public class DailyQuestsFragment extends Fragment {
+
     private static final String TAG = "DailyQuestsFragment";
 
     @Nullable

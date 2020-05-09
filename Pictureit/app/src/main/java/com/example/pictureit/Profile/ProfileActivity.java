@@ -25,9 +25,11 @@ import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 public class ProfileActivity extends AppCompatActivity {
 
     private static final String TAG = "ProfileActivity";
-    private static final int ACTIVITY_NUMBER = 2;
 
+    private static final int ACTIVITY_NUMBER = 2;
     private Context mContext = ProfileActivity.this;
+
+    //Widgets
     private ProgressBar mProgressBar;
     private ImageView profileImage;
 
