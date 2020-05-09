@@ -70,18 +70,19 @@
     </LinearLayout>
 
     <ProgressBar
-        android:id="@+id/loginRequestLoadingProgressbar"
+        android:id="@+id/progressBar"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_centerInParent="true"/>
 
     <TextView
+        android:id="@+id/pleaseWait"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/loginRequestLoadingProgressbar"
-        android:layout_alignLeft="@id/loginRequestLoadingProgressbar"
-        android:layout_alignRight="@id/loginRequestLoadingProgressbar"
-        android:layout_alignBottom="@+id/loginRequestLoadingProgressbar"
+        android:layout_below="@id/progressBar"
+        android:layout_alignLeft="@id/progressBar"
+        android:layout_alignRight="@id/progressBar"
+        android:layout_alignBottom="@+id/progressBar"
         android:layout_marginTop="40dp"
         android:layout_marginBottom="-91dp"
         android:text="Please wait..."
