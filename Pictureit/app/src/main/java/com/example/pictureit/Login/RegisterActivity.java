@@ -80,7 +80,7 @@ public class RegisterActivity extends AppCompatActivity {
     private void initWidgets(){
         Log.d(TAG, "initWidgets: Initializing Widgets.");
         mEmail = (EditText) findViewById(R.id.input_email);
-        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
+        mProgressBar = (ProgressBar) findViewById(R.id.registerRequestLoadingProgressbar);
         mUsername = (EditText) findViewById(R.id.input_username);
         btnRegister=(Button) findViewById(R.id.btn_register);
         loadingPleaseWait = (TextView) findViewById(R.id.loadingPleaseWait);
