@@ -38,9 +38,9 @@ public class FirebaseMethods {
      *
      * @param email
      * @param password
-     * @param Username
+     * @param username
      */
-    public void registerNewEmail(final String email, String password, final String Username) {
+    public void registerNewEmail(final String email, String password, final String username) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -55,7 +55,7 @@ public class FirebaseMethods {
                                     Toast.LENGTH_SHORT).show();
                         } else if (task.isSuccessful()) {
                             userID = mAuth.getCurrentUser().getUid();
-                            Log.d(TAG, "onConplete: Authstate changed:" + userID);
+                            Log.d(TAG, "onComplete: Authstate changed:" + userID);
                         }
                     }
                 });
