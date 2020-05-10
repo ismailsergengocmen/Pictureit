@@ -1,26 +1,39 @@
-# CS102 ~ Group Meetings Log page ~
+# CS102 ~ Group 2I Meetings Log page ~
 
 Below is a record of our project group meetings. This page will be submitted together with the rest of the repository, in partial fulfillment of the CS102 course requirements.
 
-****
-### Meeting ~ (date, duration)
-****
-**Present:** x, y, z...   _**Absent:**_  a, b.
-
+### Meeting ~ (19/04/2020, 30min)
+**Present:** Everyone
 **Discussion:** 
-We reviewed progress. Member1 & member2 reported back, explaining that they had discovered rst and demonstrated some useful examples. Member3 had slept and has not yet completed his task, but promised to do so this week! We decided we need to do this, that, and the other, and divided the work between us. Next meeting planned for (date).
+We talked about how we can start learning Android Studio. We recommended different youtube channels and udemy courses to each other. We decided we will be following the channel "Android Developer". We will also decided that we should be ready to start coding until next weeks meeting. Next meeting planned for 26/04/2020.
 
-**ToDo:** x & y will do this by ???, z & a will do that by ???, etc.
+### Meeting ~ (26/04/2020, 30min)
+**Present:** Everyone
+**Discussion:** 
+We were not ready to start coding so we again talked about the different tutorials. We also talked another youtube channel which is called "CodingWithMich" and we discussed that we should also follow this channel. We also thought about UML of our app and possible usefull classes, however since we did not have enough knowledge about android development we could not managed to come up with class ideas. Next meeting planned for 03/04/2020.
 
-****
-### Meeting ~ (date, duration)
-****
-This week I helped abc brainstorm ideas for...
+### Meeting ~ (03/05/2020, 25min)
+**Present:** Everyone
+**Discussion:** 
+We were almost ready to start coding. We talked about different part of our app and how we can code those parts. We talked about how we are going to learn about databases and which database we should use. We decided we should use firebase because of its wide range of applications. Next meeting planned for 07/05/2020.
 
-****
-### Meeting ~ (date, duration)
-****
-blah, blah, blah...
 
-****
-****
+### Meeting ~ (07/05/2020, 1hour)
+**Present:** Everyone
+**Discussion:** 
+We started coding. We discussed task distribution. Next meeting planned for 10/05/2020.
+**ToDo:** 
+-->Sergen will do the authentication part, 
+-->Faruk will do the challanges/tasks part layout and some transition buttons.
+-->Mehmet Ali will do daily quest part layout.
+-->Ahmed Salih will do proggress map layout and custom recyclerView adapter class. 
+
+### Meeting ~ (10/05/2020, 1.5hour)
+**Present:** Everyone
+**Discussion:** 
+We tried to solve authentication problem of Faruk and talked about layouts and code mechanisms of search, task and daily quests parts. We talked about how we can manage to those sections of our app. We talked about new task distribution. Next meeting planned for 13/05/2020.
+**ToDo:** 
+-->Sergen will get user data from the firebase and put those into user profile.
+-->Faruk will work on tasks part. He will work on creating a new layout which will show the imageView, tags and camera button.
+-->Mehmet Ali will complete the layouts and help others with database.
+-->Ahmed Salih will do work related to capturing image and uploading it to firebase + layout which will be created by Faruk.
