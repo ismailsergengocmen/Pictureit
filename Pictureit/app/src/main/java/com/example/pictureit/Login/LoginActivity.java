@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseUser;
 
 import androidx.annotation.NonNull;
@@ -115,7 +116,7 @@ public class LoginActivity extends AppCompatActivity {
                                               mAuth.signOut();
                                           }
                                       } catch (NullPointerException e){
-                                          Log.e(TAG, "onComplete: NullPointerEception: " + e.getMessage());
+                                          Log.e(TAG, "onComplete: NullPointerException: " + e.getMessage());
                                       }
                                     }
                                 }
@@ -136,7 +137,7 @@ public class LoginActivity extends AppCompatActivity {
         /**
          * If user is logged in then navigate to HomeActivity and call 'finish()'
          */
-        if (mAuth.getCurrentUser() != null) {
+        if (mAuth.getCurrentUser() != null && mAuth.getCurrentUser().isEmailVerified()) {
             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
             startActivity(intent);
             finish();
