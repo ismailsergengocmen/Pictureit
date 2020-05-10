@@ -37,7 +37,7 @@ public class SignOutFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_signout, container, false);
         tvSignout = (TextView) view.findViewById(R.id.tvConfirmSignout);
         mProgressBar = (ProgressBar) view.findViewById(R.id.progressBar);
-        tvSigningOut = (TextView) view.findViewById(R.id.btnConfirmSignout);
+        tvSigningOut = (TextView) view.findViewById(R.id.tvSigningOut);
         btnConfirmSignout =  view.findViewById(R.id.btnConfirmSignout);
 
         mProgressBar.setVisibility(View.GONE);
