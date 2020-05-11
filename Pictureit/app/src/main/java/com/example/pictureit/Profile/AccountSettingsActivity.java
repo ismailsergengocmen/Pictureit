@@ -47,13 +47,14 @@ public class AccountSettingsActivity extends AppCompatActivity {
         setupBottomNavigationView();
         setupFragments();
 
-        //setup the backarrow for navigating back to profile activity
+        //setup the back arrow for navigating back to profile activity
         ImageView backArrow = findViewById(R.id.backArrow);
         backArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick: navigating back to profile activity");
                 finish();
+                AccountSettingsActivity.this.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             }
         });
     }
@@ -62,7 +63,7 @@ public class AccountSettingsActivity extends AppCompatActivity {
         Log.d(TAG, "setupBottomNavigationView: setting up BottomNavigationView");
         BottomNavigationViewEx bottomNavigationViewEx = (BottomNavigationViewEx) findViewById(R.id.bottomNavViewBar);
         BottomNavigationViewHelper.setupBottomNavigationView(bottomNavigationViewEx);
-        BottomNavigationViewHelper.enableNavigation(this, bottomNavigationViewEx);
+        BottomNavigationViewHelper.enableNavigation(mContext, this , bottomNavigationViewEx);
 
         Menu menu = bottomNavigationViewEx.getMenu();
         MenuItem menuItem = menu.getItem(2);
