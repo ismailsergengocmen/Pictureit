@@ -17,8 +17,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.LongDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.DialogTitle;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
@@ -39,8 +41,8 @@ public class ViewGridItemFragment extends Fragment {
     private Context mContext;
 
     //Variables
-    public static final int CAMERA_PERMISSION_CODE = 1;
-    public static final int CAMERA_REQUEST_CODE = 2;
+    private static final int CAMERA_PERMISSION_CODE = 1;
+    private static final int CAMERA_REQUEST_CODE = 2;
     private String currentPhotoPath;
 
     //Widgets
@@ -52,6 +54,7 @@ public class ViewGridItemFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_view_griditem, container, false);
+        Log.d(TAG, "onCreateView: starting.");
 
         mContext = getContext();
         image = view.findViewById(R.id.task_photo);
@@ -79,8 +82,7 @@ public class ViewGridItemFragment extends Fragment {
         if (requestCode == CAMERA_PERMISSION_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 dispatchTakePictureIntent();
-            }
-            else {
+            } else {
                 Toast.makeText(getActivity(), "Camera Permission is Required to Use Camera", Toast.LENGTH_SHORT).show();
                 //Maybe check tutorial part 44 in case of need.
             }
