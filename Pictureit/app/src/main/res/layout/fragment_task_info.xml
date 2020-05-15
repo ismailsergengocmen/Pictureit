@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <include layout="@layout/snippet_top_back_toolbar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp">
+
+        <com.example.pictureit.Utils.SquareImageView
+            android:id="@+id/task_photo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop">
+
+        </com.example.pictureit.Utils.SquareImageView>
+
+        <TextView
+            android:id="@+id/task_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/task_photo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:text="Black cat"
+            android:textColor="@color/colorBlack"
+            android:textSize="25sp">
+
+        </TextView>
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_below="@id/task_tag"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:src="@drawable/ic_camera">
+
+        </ImageView>
+
+    </RelativeLayout>
+
+</RelativeLayout>
