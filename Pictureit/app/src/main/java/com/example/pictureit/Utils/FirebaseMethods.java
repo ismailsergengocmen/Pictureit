@@ -1,7 +1,6 @@
 package com.example.pictureit.Utils;
 
 import android.content.Context;
-import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -12,7 +11,6 @@ import com.example.pictureit.models.UserAccountSettings;
 import com.example.pictureit.models.UserSettings;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -21,11 +19,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import androidx.annotation.NonNull;
 
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -80,9 +76,9 @@ public class FirebaseMethods {
     /**
      * Register a new email and password to Firebase Authentication
      *
-     * @param email
-     * @param password
-     * @param username
+     * @param email    user email
+     * @param password user password
+     * @param username user username
      */
     public void registerNewEmail(final String email, String password, final String username) {
         mAuth.createUserWithEmailAndPassword(email, password)
@@ -128,13 +124,17 @@ public class FirebaseMethods {
      * Add information to the users nodes
      * Add information to the user_account_setting node
      *
+
      * @param email
      * @param username
+     * @param profile_photo
+     * @param email         user email
+     * @param username      user username
      * @param description
      * @param website
-     * @param profile_photo
+     * @param profile_photo user profile photo
      */
-    public void addNewUser(String email, String username, String description, String website, String profile_photo) {
+    public void addNewUser(String email, String username, String profile_photo) {
 
         User user = new User(userID, 1, email, StringManipulation.condenseUsername(username));
 
@@ -143,14 +143,11 @@ public class FirebaseMethods {
                 .setValue(user);
 
         UserAccountSettings settings = new UserAccountSettings(
-                description,
                 username,
                 0,
-                0,
-                0,
                 profile_photo,
-                StringManipulation.condenseUsername(username),
-                website
+                StringManipulation.condenseUsername(username)
+
         );
         myRef.child(mContext.getString(R.string.dbname_user_account_settings))
                 .child(userID)
@@ -188,16 +185,7 @@ public class FirebaseMethods {
                                     .getValue(UserAccountSettings.class)
                                     .getUsername()
                     );
-                    settings.setWebsite(
-                            ds.child(userID)
-                                    .getValue(UserAccountSettings.class)
-                                    .getWebsite()
-                    );
-                    settings.setDescription(
-                            ds.child(userID)
-                                    .getValue(UserAccountSettings.class)
-                                    .getDescription()
-                    );
+
                     settings.setProfile_photo(
                             ds.child(userID)
                                     .getValue(UserAccountSettings.class)
@@ -208,16 +196,7 @@ public class FirebaseMethods {
                                     .getValue(UserAccountSettings.class)
                                     .getPosts()
                     );
-                    settings.setFollowing(
-                            ds.child(userID)
-                                    .getValue(UserAccountSettings.class)
-                                    .getFollowing()
-                    );
-                    settings.setFollowers(
-                            ds.child(userID)
-                                    .getValue(UserAccountSettings.class)
-                                    .getFollowers()
-                    );
+
                     Log.d(TAG, "getUserAccountSettings: retrieved user_account_settings information:" + settings.toString());
                 } catch (NullPointerException e) {
                     Log.e(TAG, " getUserAccountSettings : NullPointerException: " + e.getMessage());
@@ -252,27 +231,20 @@ public class FirebaseMethods {
             }
         }
         return new UserSettings(user, settings);
-
     }
 
-    //Upload photo to firebase storage
-    public void uploadNewPhoto(int count, String imgUrl) {
-        Log.d(TAG, "uploadNewPhoto: attempting to upload new photo");
-
-        String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        FilePaths filePaths = new FilePaths();
-        StorageReference storageReference = mStorageReference
-                .child(filePaths.FIREBASE_IMAGE_STORAGE + "/" + user_id + "/photo" + (count + 1));
-    }
-
-    //Upload photo to firebase database
+    /**
+     * A method for adding photo to firebase RealTime Database
+     *
+     * @param url this is the download url of the photo. It shows the location of the photo in the firebase storage
+     */
     public void addPhotoToDatabase(String url) {
         Log.d(TAG, "addPhotoToDatabase: adding photo to database.");
 
         String newPhotoKey = myRef.child(mContext.getString(R.string.dbname_user_photos)).push().getKey();
         Photo photo = new Photo();
         photo.setImage_path(url);
-        photo.setDate_created(getTimestampt());
+        photo.setDate_created(getTimestamp());
         photo.setTags("");
         photo.setUser_id(FirebaseAuth.getInstance().getCurrentUser().getUid());
         photo.setImage_id(newPhotoKey);
@@ -284,10 +256,14 @@ public class FirebaseMethods {
 
     }
 
-    private String getTimestampt() {
+    /**
+     * A method for producing String which is the representation of current date and time
+     *
+     * @return the current time and date
+     */
+    private String getTimestamp() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.CANADA);
         sdf.setTimeZone(TimeZone.getTimeZone("Canada/Pacific"));
         return sdf.format(new Date());
-
     }
 }

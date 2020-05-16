@@ -13,7 +13,6 @@ import androidx.fragment.app.Fragment;
 
 import com.example.pictureit.R;
 import com.example.pictureit.Utils.UniversalImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class EditProfileFragment extends Fragment {
 
