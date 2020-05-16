@@ -128,11 +128,9 @@ public class FirebaseMethods {
      *
      * @param email
      * @param username
-     * @param description
-     * @param website
      * @param profile_photo
      */
-    public void addNewUser(String email, String username, String description, String website, String profile_photo) {
+    public void addNewUser(String email, String username, String profile_photo) {
 
         User user = new User(userID, 1, email, StringManipulation.condenseUsername(username));
 
@@ -141,14 +139,11 @@ public class FirebaseMethods {
                 .setValue(user);
 
         UserAccountSettings settings = new UserAccountSettings(
-                description,
                 username,
                 0,
-                0,
-                0,
                 profile_photo,
-                StringManipulation.condenseUsername(username),
-                website
+                StringManipulation.condenseUsername(username)
+
         );
         myRef.child(mContext.getString(R.string.dbname_user_account_settings))
                 .child(userID)
@@ -186,16 +181,7 @@ public class FirebaseMethods {
                                     .getValue(UserAccountSettings.class)
                                     .getUsername()
                     );
-                    settings.setWebsite(
-                            ds.child(userID)
-                                    .getValue(UserAccountSettings.class)
-                                    .getWebsite()
-                    );
-                    settings.setDescription(
-                            ds.child(userID)
-                                    .getValue(UserAccountSettings.class)
-                                    .getDescription()
-                    );
+
                     settings.setProfile_photo(
                             ds.child(userID)
                                     .getValue(UserAccountSettings.class)
@@ -206,16 +192,7 @@ public class FirebaseMethods {
                                     .getValue(UserAccountSettings.class)
                                     .getPosts()
                     );
-                    settings.setFollowing(
-                            ds.child(userID)
-                                    .getValue(UserAccountSettings.class)
-                                    .getFollowing()
-                    );
-                    settings.setFollowers(
-                            ds.child(userID)
-                                    .getValue(UserAccountSettings.class)
-                                    .getFollowers()
-                    );
+
                     Log.d(TAG, "getUserAccountSettings: retrieved user_account_settings information:" + settings.toString());
                 } catch (NullPointerException e) {
                     Log.e(TAG, " getUserAccountSettings : NullPointerException: " + e.getMessage());
