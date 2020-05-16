@@ -17,10 +17,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.LongDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.DialogTitle;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
@@ -29,9 +27,14 @@ import androidx.fragment.app.Fragment;
 import com.example.pictureit.R;
 import com.example.pictureit.Utils.FirebaseMethods;
 import com.example.pictureit.Utils.SquareImageView;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.io.IOException;
@@ -45,17 +48,14 @@ public class ViewGridItemFragment extends Fragment {
     private Context mContext;
 
     //Firebase
-    private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseMethods firebaseMethods;
-    private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference myRef;
+    private StorageReference mStorageReference;
 
     //Variables
     private static final int CAMERA_PERMISSION_CODE = 1;
     private static final int CAMERA_REQUEST_CODE = 2;
     private String currentPhotoPath;
-    private String imageUrl;
+    private String userID;
 
     //Widgets
     private ImageView camera;
@@ -70,6 +70,8 @@ public class ViewGridItemFragment extends Fragment {
 
         mContext = getContext();
         firebaseMethods = new FirebaseMethods(mContext);
+        mStorageReference = FirebaseStorage.getInstance().getReference();
+        userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         image = view.findViewById(R.id.task_photo);
         tag = view.findViewById(R.id.task_tag);
@@ -98,23 +100,28 @@ public class ViewGridItemFragment extends Fragment {
                 dispatchTakePictureIntent();
             } else {
                 Toast.makeText(getActivity(), "Camera Permission is Required to Use Camera", Toast.LENGTH_SHORT).show();
-                //Maybe check tutorial part 44 in case of need.
             }
         }
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        // Ensure that there's a camera activity to handle the intent
+        if (takePictureIntent.resolveActivity(mContext.getPackageManager()) != null) {
+            // Create the File where the photo should go
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+            } catch (IOException ex) {
 
-        if (requestCode == CAMERA_REQUEST_CODE) {
-//          Bitmap image = (Bitmap) data.getExtras().get("data");
-//          imageView.setImageBitmap(image);
-            if (resultCode == Activity.RESULT_OK) {
-                File f = new File(currentPhotoPath);
-                image.setImageURI(Uri.fromFile(f));
-                Log.d("tag", "Absolute Url of Image: " + Uri.fromFile(f));
-
+            }
+            // Continue only if the File was successfully created
+            if (photoFile != null) {
+                Uri photoURI = FileProvider.getUriForFile(getActivity(),
+                        "com.example.android.fileprovider",
+                        photoFile);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                startActivityForResult(takePictureIntent, CAMERA_REQUEST_CODE);
             }
         }
     }
@@ -135,25 +142,41 @@ public class ViewGridItemFragment extends Fragment {
         return image;
     }
 
-    private void dispatchTakePictureIntent() {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        // Ensure that there's a camera activity to handle the intent
-        if (takePictureIntent.resolveActivity(mContext.getPackageManager()) != null) {
-            // Create the File where the photo should go
-            File photoFile = null;
-            try {
-                photoFile = createImageFile();
-            } catch (IOException ex) {
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-            }
-            // Continue only if the File was successfully created
-            if (photoFile != null) {
-                Uri photoURI = FileProvider.getUriForFile(getActivity(),
-                        "com.example.android.fileprovider",
-                        photoFile);
-                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-                startActivityForResult(takePictureIntent, CAMERA_REQUEST_CODE);
+        if (requestCode == CAMERA_REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                File f = new File(currentPhotoPath);
+                image.setImageURI(Uri.fromFile(f));
+                Log.d("tag", "Absolute Url of Image: " + Uri.fromFile(f));
+
+                uploadImageToFirebase("photo_" + 5, Uri.fromFile(f));
+                firebaseMethods.addPhotoToDatabase(Uri.fromFile(f).toString());
             }
         }
     }
+
+    private void uploadImageToFirebase(String name, Uri uri) {
+        final StorageReference image = mStorageReference.child("images/" + userID + "/" + name);
+        image.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(final UploadTask.TaskSnapshot taskSnapshot) {
+                Toast.makeText(getActivity(), "Upload succeeded", Toast.LENGTH_SHORT).show();
+                image.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Log.d("tag", "onSuccess: Url " + uri.toString());
+                    }
+                });
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getActivity(), "Upload failed", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 }

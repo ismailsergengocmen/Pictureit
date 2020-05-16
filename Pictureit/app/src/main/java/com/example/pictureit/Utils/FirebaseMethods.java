@@ -1,6 +1,7 @@
 package com.example.pictureit.Utils;
 
 import android.content.Context;
+import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import androidx.annotation.NonNull;
 
@@ -60,13 +62,13 @@ public class FirebaseMethods {
 
         User user = new User();
 
-        for (DataSnapshot ds : datasnapshot.child(userID).getChildren()){
+        for (DataSnapshot ds : datasnapshot.child(userID).getChildren()) {
             Log.d(TAG, "checkIfUsernameExists: datasnapshot: " + ds);
 
             user.setUsername(ds.getValue(User.class).getUsername());
             Log.d(TAG, "checkIfUsernameExists: datasnapshot: " + user.getUsername());
 
-            if(StringManipulation.expandUsername(user.getUsername()).equals(username)){
+            if (StringManipulation.expandUsername(user.getUsername()).equals(username)) {
                 Log.d(TAG, "checkIfUsernameExists: FOUND A MATCH" + user.getUsername());
                 return true;
             }
@@ -104,32 +106,34 @@ public class FirebaseMethods {
                 });
     }
 
-    public void sendVerificationEmail(){
+    public void sendVerificationEmail() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        if(user !=null){
+        if (user != null) {
             user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
-                    if(task.isSuccessful()){
+                    if (task.isSuccessful()) {
 
-                    }else{
+                    } else {
                         Toast.makeText(mContext, "couldn't send verification email.", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
         }
     }
+
     /**
      * Add information to the users nodes
      * Add information to the user_account_setting node
+     *
      * @param email
      * @param username
      * @param description
      * @param website
      * @param profile_photo
      */
-    public void  addNewUser(String email, String username, String description, String website, String profile_photo) {
+    public void addNewUser(String email, String username, String description, String website, String profile_photo) {
 
         User user = new User(userID, 1, email, StringManipulation.condenseUsername(username));
 
@@ -153,7 +157,7 @@ public class FirebaseMethods {
     }
 
     //Upload photo to firebase storage
-    public void uploadNewPhoto( int count, String imgUrl) {
+    public void uploadNewPhoto(int count, String imgUrl) {
         Log.d(TAG, "uploadNewPhoto: attempting to upload new photo");
 
         String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -163,7 +167,7 @@ public class FirebaseMethods {
     }
 
     //Upload photo to firebase database
-    public void addPhotoToDatabase( String url) {
+    public void addPhotoToDatabase(String url) {
         Log.d(TAG, "addPhotoToDatabase: adding photo to database.");
 
         String newPhotoKey = myRef.child(mContext.getString(R.string.dbname_user_photos)).push().getKey();
@@ -171,7 +175,7 @@ public class FirebaseMethods {
         photo.setImage_path(url);
         photo.setDate_created(getTimestampt());
         photo.setTags("");
-        photo.setUser_id( FirebaseAuth.getInstance().getCurrentUser().getUid());
+        photo.setUser_id(FirebaseAuth.getInstance().getCurrentUser().getUid());
         photo.setImage_id(newPhotoKey);
 
         //insert into database
