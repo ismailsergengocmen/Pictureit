@@ -1,45 +1,99 @@
 package com.example.pictureit.Utils;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.GridView;
-import android.widget.ImageView;
+import android.widget.ArrayAdapter;
+import android.widget.ProgressBar;
+
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+
+import java.util.ArrayList;
 
 import com.example.pictureit.R;
 
-public class ImageAdapter extends BaseAdapter {
+public class ImageAdapter extends ArrayAdapter<String>{
+
     private Context mContext;
-    public int[] imageArray;
+    private LayoutInflater mInflater;
+    private int layoutResource;
+    private String mAppend;
+    private ArrayList<String> imgURLs;
 
-    public ImageAdapter( Context context, int[] images){
-        this.imageArray = images;
-        this.mContext = context;
+    public ImageAdapter(Context context, int layoutResource, String append, ArrayList<String> imgURLs) {
+        super(context, layoutResource, imgURLs);
+        mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        mContext = context;
+        this.layoutResource = layoutResource;
+        mAppend = append;
+        this.imgURLs = imgURLs;
     }
 
-    @Override
-    public int getCount(){
-        return imageArray.length;
+    private static class ViewHolder{
+        ImageView image;
+        ProgressBar mProgressBar;
     }
 
+    @NonNull
     @Override
-    public Object getItem(int position) {
-        return imageArray[position];
-    }
+    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
-    @Override
-    public long getItemId (int position){
-        return 0;
-    }
+        /*
+        Viewholder build pattern (Similar to recyclerview)
+         */
+        final ViewHolder holder;
+        if(convertView == null){
+            convertView = mInflater.inflate(layoutResource, parent, false);
+            holder = new ViewHolder();
+            holder.mProgressBar = (ProgressBar) convertView.findViewById(R.id.progressBar);
+            holder.image = (ImageView) convertView.findViewById(R.id.gridImageView);
 
-    @Override
-    public View getView (int position, View convertView, ViewGroup parent){
-        ImageView imageView = new ImageView(mContext);
-        imageView.setImageResource(imageArray[position]);
-        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        imageView.setLayoutParams(new GridView.LayoutParams(240, 245));
-        return imageView;
+            convertView.setTag(holder);
+        }
+        else{
+            holder = (ViewHolder) convertView.getTag();
+        }
+
+        String imgURL = getItem(position);
+
+        ImageLoader imageLoader = ImageLoader.getInstance();
+
+        imageLoader.displayImage(mAppend + imgURL, holder.image, new ImageLoadingListener() {
+            @Override
+            public void onLoadingStarted(String imageUri, View view) {
+                if(holder.mProgressBar != null){
+                    holder.mProgressBar.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
+                if(holder.mProgressBar != null){
+                    holder.mProgressBar.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                if(holder.mProgressBar != null){
+                    holder.mProgressBar.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onLoadingCancelled(String imageUri, View view) {
+                if(holder.mProgressBar != null){
+                    holder.mProgressBar.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        return convertView;
     }
 }
