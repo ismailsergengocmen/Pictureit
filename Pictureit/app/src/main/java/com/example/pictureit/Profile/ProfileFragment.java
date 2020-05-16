@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -49,6 +50,7 @@ public class ProfileFragment extends Fragment {
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference myRef;
     private FirebaseMethods mFirebaseMethods;
+
     //Widgets
     private TextView mDisplayName, mUserName, mPhotoNumber;
     private ProgressBar mProgressBar;
@@ -82,14 +84,14 @@ public class ProfileFragment extends Fragment {
         return view;
     }
 
-    private void setProfileWidgets(UserSettings userSettings){
-        Log.d(TAG,"setProfileWidgets: setting widgets with data retrieving from firebase database: " + userSettings.toString());
-        Log.d(TAG,"setProfileWidgets: setting widgets with data retrieving from firebase database: " + userSettings.getSettings().getUsername());
+    private void setProfileWidgets(UserSettings userSettings) {
+        Log.d(TAG, "setProfileWidgets: setting widgets with data retrieving from firebase database: " + userSettings.toString());
+        Log.d(TAG, "setProfileWidgets: setting widgets with data retrieving from firebase database: " + userSettings.getSettings().getUsername());
 
-        User user= userSettings.getUser();
+        User user = userSettings.getUser();
         UserAccountSettings settings = userSettings.getSettings();
 
-        UniversalImageLoader.setImage(settings.getProfile_photo(),mProfilePhoto, null ,"");
+        UniversalImageLoader.setImage(settings.getProfile_photo(), mProfilePhoto, null, "");
 
         mDisplayName.setText(settings.getDisplay_name());
         mUserName.setText(settings.getUsername());
@@ -126,7 +128,6 @@ public class ProfileFragment extends Fragment {
         menuItem.setChecked(true);
     }
 
-
 //-----------------------------------------Firebase-------------------------------------------------
 
     /**
@@ -143,8 +144,6 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-
-
 
                 if (user != null) {
                     //User is signed in
@@ -168,7 +167,7 @@ public class ProfileFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                Toast.makeText(getActivity(), "Cancelled", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -186,5 +185,4 @@ public class ProfileFragment extends Fragment {
             mAuth.removeAuthStateListener(mAuthListener);
         }
     }
-
 }

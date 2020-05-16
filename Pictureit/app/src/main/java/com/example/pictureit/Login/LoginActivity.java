@@ -43,10 +43,10 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
-        mPleaseWait = (TextView) findViewById(R.id.pleaseWait);
-        mEmail = (EditText) findViewById(R.id.input_email);
-        mPassword = (EditText) findViewById(R.id.input_password);
+        mProgressBar = findViewById(R.id.progressBar);
+        mPleaseWait = findViewById(R.id.pleaseWait);
+        mEmail = findViewById(R.id.input_email);
+        mPassword = findViewById(R.id.input_password);
         mContext = LoginActivity.this;
         Log.d(TAG, "onCreate: started.");
 
@@ -55,7 +55,6 @@ public class LoginActivity extends AppCompatActivity {
 
         setupFirebaseAuth();
         init();
-
     }
 
     private boolean isStringNull(String string) {
@@ -71,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void init() {
         //initialize the button for logging in
-        Button btnLogin = (Button) findViewById(R.id.btn_login);
+        Button btnLogin = findViewById(R.id.btn_login);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,21 +102,21 @@ public class LoginActivity extends AppCompatActivity {
                                         mProgressBar.setVisibility(View.GONE);
                                         mPleaseWait.setVisibility(View.GONE);
 
-                                    } else{
-                                      try{
-                                          if(user.isEmailVerified()){
-                                              Log.d(TAG, "onComplete: success. email is verified.");
-                                              Intent intent = new Intent(LoginActivity.this,HomeActivity.class);
-                                              startActivity(intent);
-                                          }else{
-                                              Toast.makeText(mContext, "Email is not verified \n check your email inbox.", Toast.LENGTH_SHORT).show();
-                                              mProgressBar.setVisibility(View.GONE);
-                                              mPleaseWait.setVisibility(View.GONE);
-                                              mAuth.signOut();
-                                          }
-                                      } catch (NullPointerException e){
-                                          Log.e(TAG, "onComplete: NullPointerException: " + e.getMessage());
-                                      }
+                                    } else {
+                                        try {
+                                            if (user.isEmailVerified()) {
+                                                Log.d(TAG, "onComplete: success. email is verified.");
+                                                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                                                startActivity(intent);
+                                            } else {
+                                                Toast.makeText(mContext, "Email is not verified \n check your email inbox.", Toast.LENGTH_SHORT).show();
+                                                mProgressBar.setVisibility(View.GONE);
+                                                mPleaseWait.setVisibility(View.GONE);
+                                                mAuth.signOut();
+                                            }
+                                        } catch (NullPointerException e) {
+                                            Log.e(TAG, "onComplete: NullPointerException: " + e.getMessage());
+                                        }
                                     }
                                 }
                             });
@@ -125,7 +124,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        TextView linkSignUp = (TextView) findViewById(R.id.link_signup);
+        TextView linkSignUp = findViewById(R.id.link_signup);
         linkSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -157,7 +156,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
 
-
                 if (user != null) {
                     //User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in" + user.getUid());
@@ -173,7 +171,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);
-
     }
 
     @Override

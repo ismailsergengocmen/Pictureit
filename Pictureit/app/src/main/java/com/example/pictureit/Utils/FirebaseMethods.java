@@ -11,7 +11,6 @@ import com.example.pictureit.models.UserAccountSettings;
 import com.example.pictureit.models.UserSettings;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -23,7 +22,6 @@ import com.google.firebase.storage.StorageReference;
 
 import androidx.annotation.NonNull;
 
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -78,9 +76,9 @@ public class FirebaseMethods {
     /**
      * Register a new email and password to Firebase Authentication
      *
-     * @param email
-     * @param password
-     * @param username
+     * @param email    user email
+     * @param password user password
+     * @param username user username
      */
     public void registerNewEmail(final String email, String password, final String username) {
         mAuth.createUserWithEmailAndPassword(email, password)
@@ -126,9 +124,15 @@ public class FirebaseMethods {
      * Add information to the users nodes
      * Add information to the user_account_setting node
      *
+
      * @param email
      * @param username
      * @param profile_photo
+     * @param email         user email
+     * @param username      user username
+     * @param description
+     * @param website
+     * @param profile_photo user profile photo
      */
     public void addNewUser(String email, String username, String profile_photo) {
 
@@ -227,27 +231,20 @@ public class FirebaseMethods {
             }
         }
         return new UserSettings(user, settings);
-
     }
 
-    //Upload photo to firebase storage
-    public void uploadNewPhoto(int count, String imgUrl) {
-        Log.d(TAG, "uploadNewPhoto: attempting to upload new photo");
-
-        String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        FilePaths filePaths = new FilePaths();
-        StorageReference storageReference = mStorageReference
-                .child(filePaths.FIREBASE_IMAGE_STORAGE + "/" + user_id + "/photo" + (count + 1));
-    }
-
-    //Upload photo to firebase database
+    /**
+     * A method for adding photo to firebase RealTime Database
+     *
+     * @param url this is the download url of the photo. It shows the location of the photo in the firebase storage
+     */
     public void addPhotoToDatabase(String url) {
         Log.d(TAG, "addPhotoToDatabase: adding photo to database.");
 
         String newPhotoKey = myRef.child(mContext.getString(R.string.dbname_user_photos)).push().getKey();
         Photo photo = new Photo();
         photo.setImage_path(url);
-        photo.setDate_created(getTimestampt());
+        photo.setDate_created(getTimestamp());
         photo.setTags("");
         photo.setUser_id(FirebaseAuth.getInstance().getCurrentUser().getUid());
         photo.setImage_id(newPhotoKey);
@@ -259,10 +256,14 @@ public class FirebaseMethods {
 
     }
 
-    private String getTimestampt() {
+    /**
+     * A method for producing String which is the representation of current date and time
+     *
+     * @return the current time and date
+     */
+    private String getTimestamp() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.CANADA);
         sdf.setTimeZone(TimeZone.getTimeZone("Canada/Pacific"));
         return sdf.format(new Date());
-
     }
 }
