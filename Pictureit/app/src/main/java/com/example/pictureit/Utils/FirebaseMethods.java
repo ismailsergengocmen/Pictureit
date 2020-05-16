@@ -249,10 +249,12 @@ public class FirebaseMethods {
                 Log.d(TAG, "getUserAccountSettings : retrieved users information : " + user.toString());
             }
         }
-        return new UserSettings(user,settings);
+        return new UserSettings(user, settings);
+
+    }
 
     //Upload photo to firebase storage
-    public void uploadNewPhoto( int count, String imgUrl) {
+    public void uploadNewPhoto(int count, String imgUrl) {
         Log.d(TAG, "uploadNewPhoto: attempting to upload new photo");
 
         String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -262,7 +264,7 @@ public class FirebaseMethods {
     }
 
     //Upload photo to firebase database
-    public void addPhotoToDatabase( String url) {
+    public void addPhotoToDatabase(String url) {
         Log.d(TAG, "addPhotoToDatabase: adding photo to database.");
 
         String newPhotoKey = myRef.child(mContext.getString(R.string.dbname_user_photos)).push().getKey();
@@ -270,7 +272,7 @@ public class FirebaseMethods {
         photo.setImage_path(url);
         photo.setDate_created(getTimestampt());
         photo.setTags("");
-        photo.setUser_id( FirebaseAuth.getInstance().getCurrentUser().getUid());
+        photo.setUser_id(FirebaseAuth.getInstance().getCurrentUser().getUid());
         photo.setImage_id(newPhotoKey);
 
         //insert into database
