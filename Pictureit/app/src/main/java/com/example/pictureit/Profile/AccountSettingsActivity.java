@@ -14,6 +14,8 @@ import android.widget.RelativeLayout;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.pictureit.R;
@@ -79,9 +81,16 @@ public class AccountSettingsActivity extends AppCompatActivity {
 
     private void setViewPager(int fragmentNumber) {
         Log.d(TAG, "setViewPager: navigating to fragment #: " + fragmentNumber);
-        mRelativeLayout.setVisibility(View.GONE);
-        mViewPager.setAdapter(pagerAdapter);
-        mViewPager.setCurrentItem(fragmentNumber);
+        if (fragmentNumber == 0){
+            replaceFragment(new EditProfileFragment());
+        }
+        else if (fragmentNumber == 1){
+            replaceFragment(new HelpFragment());
+        }
+        else if (fragmentNumber == 2){
+            replaceFragment(new SignOutFragment());
+        }
+
     }
 
     private void setupSettingsList() {
@@ -103,5 +112,12 @@ public class AccountSettingsActivity extends AppCompatActivity {
                 setViewPager(position);
             }
         });
+    }
+
+    public void replaceFragment(Fragment someFragment) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.relLayout1, someFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }

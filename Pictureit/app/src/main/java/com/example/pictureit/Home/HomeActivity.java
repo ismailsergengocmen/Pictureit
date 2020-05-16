@@ -19,13 +19,14 @@ import com.example.pictureit.R;
 import com.example.pictureit.Utils.BottomNavigationViewHelper;
 import com.example.pictureit.Utils.SectionsPagerAdapter;
 import com.example.pictureit.Utils.UniversalImageLoader;
+import com.example.pictureit.models.Photo;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements EasyGameFragment.OnGridImageSelectedListener {
 
     private static final String TAG = "HomeActivity";
 
@@ -145,6 +146,14 @@ public class HomeActivity extends AppCompatActivity {
         if (mAuthListener != null) {
             mAuth.removeAuthStateListener(mAuthListener);
         }
+    }
+
+    @Override
+    public void onGridImageSelected(Photo photo, Context context) {
+        Log.d(TAG, "onGridImageSelected: selected an image");
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, new ViewGridItemFragment());
+        transaction.commit();
     }
 }
 

@@ -100,6 +100,7 @@ public class Photo implements Parcelable {
     public String toString() {
         return "Photo{" +
                 "date_created='" + date_created + '\'' +
+                ", image_path='" + image_id + '\'' +
                 ", image_path='" + image_path + '\'' +
                 ", user_id='" + user_id + '\'' +
                 ", tags='" + tags +
