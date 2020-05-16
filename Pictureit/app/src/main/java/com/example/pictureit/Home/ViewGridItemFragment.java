@@ -30,8 +30,6 @@ import com.example.pictureit.Utils.SquareImageView;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -113,7 +111,7 @@ public class ViewGridItemFragment extends Fragment {
             try {
                 photoFile = createImageFile();
             } catch (IOException ex) {
-
+                Log.d(TAG, "dispatchTakePictureIntent: IOException: " + ex.getMessage());
             }
             // Continue only if the File was successfully created
             if (photoFile != null) {
@@ -126,6 +124,7 @@ public class ViewGridItemFragment extends Fragment {
         }
     }
 
+
     private File createImageFile() throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
@@ -136,7 +135,6 @@ public class ViewGridItemFragment extends Fragment {
                 ".jpg",         /* suffix */
                 storageDir      /* directory */
         );
-
         // Save a file: path for use with ACTION_VIEW intents
         currentPhotoPath = image.getAbsolutePath();
         return image;
@@ -158,6 +156,11 @@ public class ViewGridItemFragment extends Fragment {
         }
     }
 
+    /**
+     * A method to upload images to the firebase storage
+     * @param name name of the photo
+     * @param uri uri of the taken photo
+     */
     private void uploadImageToFirebase(String name, Uri uri) {
         final StorageReference image = mStorageReference.child("images/" + userID + "/" + name);
         image.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -178,5 +181,4 @@ public class ViewGridItemFragment extends Fragment {
             }
         });
     }
-
 }

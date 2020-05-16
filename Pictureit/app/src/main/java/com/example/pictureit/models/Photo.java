@@ -10,7 +10,7 @@ public class Photo implements Parcelable {
     private String user_id;
     private String tags;
 
-    public Photo(String date_created, String image_path, String image_id, String user_id, String tags){
+    public Photo(String date_created, String image_path, String image_id, String user_id, String tags) {
         this.date_created = date_created;
         this.image_path = image_path;
         this.image_id = image_id;
@@ -96,8 +96,6 @@ public class Photo implements Parcelable {
         this.user_id = user_id;
     }
 
-
-
     @Override
     public String toString() {
         return "Photo{" +
@@ -107,6 +105,4 @@ public class Photo implements Parcelable {
                 ", tags='" + tags +
                 '}';
     }
-
-
 }
