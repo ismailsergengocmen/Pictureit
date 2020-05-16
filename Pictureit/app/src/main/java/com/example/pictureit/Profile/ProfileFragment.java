@@ -18,8 +18,21 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
+import com.example.pictureit.Login.LoginActivity;
 import com.example.pictureit.R;
 import com.example.pictureit.Utils.BottomNavigationViewHelper;
+import com.example.pictureit.Utils.FirebaseMethods;
+import com.example.pictureit.Utils.UniversalImageLoader;
+import com.example.pictureit.models.User;
+import com.example.pictureit.models.UserAccountSettings;
+import com.example.pictureit.models.UserSettings;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -30,6 +43,12 @@ public class ProfileFragment extends Fragment {
 
     private static final int ACTIVITY_NUMBER = 2;
 
+    //Firebase
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference myRef;
+    private FirebaseMethods mFirebaseMethods;
     //Widgets
     private TextView mDisplayName, mUserName, mPhotoNumber;
     private ProgressBar mProgressBar;
@@ -52,14 +71,35 @@ public class ProfileFragment extends Fragment {
         profileMenu = view.findViewById(R.id.profileMenu);
         bottomNavigationViewEx = view.findViewById(R.id.bottomNavViewBar);
         mContext = getActivity();
+        mFirebaseMethods = new FirebaseMethods(getActivity());
 
         Log.d(TAG, "onCreateView: started.");
 
         setupBottomNavigationView();
         setupToolBar();
+
+        setupFirebaseAuth();
         return view;
     }
 
+    private void setProfileWidgets(UserSettings userSettings){
+        Log.d(TAG,"setProfileWidgets: setting widgets with data retrieving from firebase database: " + userSettings.toString());
+        Log.d(TAG,"setProfileWidgets: setting widgets with data retrieving from firebase database: " + userSettings.getSettings().getUsername());
+
+        User user= userSettings.getUser();
+        UserAccountSettings settings = userSettings.getSettings();
+
+        UniversalImageLoader.setImage(settings.getProfile_photo(),mProfilePhoto, null ,"");
+
+        mDisplayName.setText(settings.getDisplay_name());
+        mUserName.setText(settings.getUsername());
+        mProgressBar.setVisibility(View.GONE);
+
+    }
+
+    /**
+     * Responsible for setting up that profile toolbar
+     */
     private void setupToolBar() {
         ((ProfileActivity) getActivity()).setSupportActionBar(toolbar);
 
@@ -84,6 +124,67 @@ public class ProfileFragment extends Fragment {
         Menu menu = bottomNavigationViewEx.getMenu();
         MenuItem menuItem = menu.getItem(ACTIVITY_NUMBER);
         menuItem.setChecked(true);
+    }
+
+
+//-----------------------------------------Firebase-------------------------------------------------
+
+    /**
+     * Setup the firebase auth object
+     */
+    private void setupFirebaseAuth() {
+        Log.d(TAG, "setupFirebaseAuth: setting up firebase auth.");
+
+        mAuth = FirebaseAuth.getInstance();
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        myRef = mFirebaseDatabase.getReference();
+
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+
+
+
+                if (user != null) {
+                    //User is signed in
+                    Log.d(TAG, "onAuthStateChanged:signed_in" + user.getUid());
+                } else {
+                    //User is signed out
+                    Log.d(TAG, "on AuthStateChanged:signed_out");
+                }
+            }
+        };
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                //retrieve user information from the database
+                setProfileWidgets(mFirebaseMethods.getUserSettings(dataSnapshot));
+
+                //retrieve images for the user in question
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
     }
 
 }
