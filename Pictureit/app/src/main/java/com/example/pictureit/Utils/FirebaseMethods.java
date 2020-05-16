@@ -75,7 +75,6 @@ public class FirebaseMethods {
 
     /**
      * Register a new email and password to Firebase Authentication
-     *
      * @param email    user email
      * @param password user password
      * @param username user username
@@ -124,14 +123,11 @@ public class FirebaseMethods {
      * Add information to the users nodes
      * Add information to the user_account_setting node
      *
-
      * @param email
      * @param username
      * @param profile_photo
      * @param email         user email
      * @param username      user username
-     * @param description
-     * @param website
      * @param profile_photo user profile photo
      */
     public void addNewUser(String email, String username, String profile_photo) {
