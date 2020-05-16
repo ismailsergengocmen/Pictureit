@@ -37,7 +37,8 @@
             android:layout_below="@id/task_tag"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="50dp"
-            android:src="@drawable/ic_camera">
+            android:src="@drawable/ic_camera"
+            android:id="@+id/capture">
 
         </ImageView>
 

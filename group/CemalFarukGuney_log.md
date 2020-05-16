@@ -10,5 +10,11 @@ On this page I will keep a weekly record of what I have done for the CS102 group
 I've started studying Android Studio by simply installing it and watching YouTube videos.
 
 ### ~ 27/04/2020 ~
-I've continued my study. Learned how to write simple classes and interfaces with Android Studio. 
+I've continued my study. Learned how to write simple classes and interfaces with Android Studio.
+Started looking and understanding the program Ahmed wrote for a headstart. 
+
+### ~ 04/05/2020 ~
+I made the buttons on the first activity work. The buttons took the user to different fragments.
+Then I designed those fragments and used GridView and ImageAdapter.
+
 ****

@@ -5,6 +5,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.pictureit.R;
+import com.example.pictureit.models.Photo;
 import com.example.pictureit.models.User;
 import com.example.pictureit.models.UserAccountSettings;
 import com.example.pictureit.models.UserSettings;
@@ -17,8 +18,16 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import androidx.annotation.NonNull;
+
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class FirebaseMethods {
 
@@ -31,6 +40,7 @@ public class FirebaseMethods {
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference myRef;
+    private StorageReference mStorageReference;
     private String userID;
 
 
@@ -38,6 +48,7 @@ public class FirebaseMethods {
         mAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = mFirebaseDatabase.getReference();
+        mStorageReference = FirebaseStorage.getInstance().getReference();
         mContext = context;
 
         if (mAuth.getCurrentUser() != null) {
@@ -144,6 +155,7 @@ public class FirebaseMethods {
                 .setValue(settings);
     }
 
+
     /**
      * Retrieves the account settings for tech user currently logged in
      * Database: user_account_settings node
@@ -238,5 +250,40 @@ public class FirebaseMethods {
             }
         }
         return new UserSettings(user,settings);
+
+    //Upload photo to firebase storage
+    public void uploadNewPhoto( int count, String imgUrl) {
+        Log.d(TAG, "uploadNewPhoto: attempting to upload new photo");
+
+        String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        FilePaths filePaths = new FilePaths();
+        StorageReference storageReference = mStorageReference
+                .child(filePaths.FIREBASE_IMAGE_STORAGE + "/" + user_id + "/photo" + (count + 1));
+    }
+
+    //Upload photo to firebase database
+    public void addPhotoToDatabase( String url) {
+        Log.d(TAG, "addPhotoToDatabase: adding photo to database.");
+
+        String newPhotoKey = myRef.child(mContext.getString(R.string.dbname_user_photos)).push().getKey();
+        Photo photo = new Photo();
+        photo.setImage_path(url);
+        photo.setDate_created(getTimestampt());
+        photo.setTags("");
+        photo.setUser_id( FirebaseAuth.getInstance().getCurrentUser().getUid());
+        photo.setImage_id(newPhotoKey);
+
+        //insert into database
+        myRef.child(mContext.getString(R.string.dbname_user_photos))
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .child(newPhotoKey).setValue(photo);
+
+    }
+
+    private String getTimestampt() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.CANADA);
+        sdf.setTimeZone(TimeZone.getTimeZone("Canada/Pacific"));
+        return sdf.format(new Date());
+
     }
 }
