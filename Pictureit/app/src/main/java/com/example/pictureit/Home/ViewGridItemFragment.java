@@ -27,7 +27,11 @@ import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
 import com.example.pictureit.R;
+import com.example.pictureit.Utils.FirebaseMethods;
 import com.example.pictureit.Utils.SquareImageView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.File;
 import java.io.IOException;
@@ -40,10 +44,18 @@ public class ViewGridItemFragment extends Fragment {
 
     private Context mContext;
 
+    //Firebase
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    private FirebaseMethods firebaseMethods;
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference myRef;
+
     //Variables
     private static final int CAMERA_PERMISSION_CODE = 1;
     private static final int CAMERA_REQUEST_CODE = 2;
     private String currentPhotoPath;
+    private String imageUrl;
 
     //Widgets
     private ImageView camera;
@@ -57,6 +69,8 @@ public class ViewGridItemFragment extends Fragment {
         Log.d(TAG, "onCreateView: starting.");
 
         mContext = getContext();
+        firebaseMethods = new FirebaseMethods(mContext);
+
         image = view.findViewById(R.id.task_photo);
         tag = view.findViewById(R.id.task_tag);
         camera = view.findViewById(R.id.capture);

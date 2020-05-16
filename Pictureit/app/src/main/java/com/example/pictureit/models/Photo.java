@@ -6,12 +6,14 @@ import android.os.Parcelable;
 public class Photo implements Parcelable {
     private String date_created;
     private String image_path;
+    private String image_id;
     private String user_id;
     private String tags;
 
-    public Photo(String date_created, String image_path, String user_id, String tags ){
+    public Photo(String date_created, String image_path, String image_id, String user_id, String tags){
         this.date_created = date_created;
         this.image_path = image_path;
+        this.image_id = image_id;
         this.tags = tags;
         this.user_id = user_id;
     }
@@ -19,8 +21,13 @@ public class Photo implements Parcelable {
     protected Photo(Parcel in) {
         date_created = in.readString();
         image_path = in.readString();
+        image_id = in.readString();
         user_id = in.readString();
         tags = in.readString();
+    }
+
+    public Photo() {
+
     }
 
     @Override
@@ -32,6 +39,7 @@ public class Photo implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(date_created);
         dest.writeString(image_path);
+        dest.writeString(image_id);
         dest.writeString(user_id);
         dest.writeString(tags);
     }
@@ -52,6 +60,10 @@ public class Photo implements Parcelable {
         return image_path;
     }
 
+    public String getImage_id() {
+        return image_id;
+    }
+
     public String getDate_created() {
         return date_created;
     }
@@ -68,6 +80,10 @@ public class Photo implements Parcelable {
         this.image_path = image_path;
     }
 
+    public void setImage_id(String image_id) {
+        this.image_id = image_id;
+    }
+
     public void setDate_created(String date_created) {
         this.date_created = date_created;
     }
@@ -79,6 +95,8 @@ public class Photo implements Parcelable {
     public void setUser_id(String user_id) {
         this.user_id = user_id;
     }
+
+
 
     @Override
     public String toString() {
