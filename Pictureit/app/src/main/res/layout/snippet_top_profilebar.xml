@@ -21,7 +21,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="15dp"
-                    android:text="asalihcezayir"
+                    android:text=""
                     android:textColor="@color/colorBlack"
                     android:textSize="20dp" />
 

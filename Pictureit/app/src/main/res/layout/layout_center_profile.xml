@@ -54,7 +54,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:text="asalihcezayir"
+                    android:text=""
                     android:textAllCaps="true"
                     android:textColor="@color/colorBlack"
                     android:textStyle="bold" />
@@ -64,7 +64,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:text="20 photograohs are taken"
+                    android:text=""
                     android:textColor="@color/colorBlack"
                     android:textStyle="italic" />
 
