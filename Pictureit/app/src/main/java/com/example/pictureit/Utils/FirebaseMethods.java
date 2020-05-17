@@ -54,24 +54,32 @@ public class FirebaseMethods {
         }
     }
 
-    public boolean checkIfUsernameExists(String username, DataSnapshot datasnapshot) {
-        Log.d(TAG, "checkIfUsernameExists: checking if " + username + " already exists.");
+    public void updateUsername(String username){
+        Log.d(TAG, "updateUsername: updating username to: " + username);
 
-        User user = new User();
+        myRef.child(mContext.getString(R.string.dbname_users)).child(userID).child(mContext.getString(R.string.field_username)).setValue(username);
 
-        for (DataSnapshot ds : datasnapshot.child(userID).getChildren()) {
-            Log.d(TAG, "checkIfUsernameExists: datasnapshot: " + ds);
-
-            user.setUsername(ds.getValue(User.class).getUsername());
-            Log.d(TAG, "checkIfUsernameExists: datasnapshot: " + user.getUsername());
-
-            if (StringManipulation.expandUsername(user.getUsername()).equals(username)) {
-                Log.d(TAG, "checkIfUsernameExists: FOUND A MATCH" + user.getUsername());
-                return true;
-            }
-        }
-        return false;
+        myRef.child(mContext.getString(R.string.dbname_user_account_settings)).child(userID).child(mContext.getString(R.string.field_username)).setValue(username);
     }
+
+   // public boolean checkIfUsernameExists(String username, DataSnapshot datasnapshot) {
+       // Log.d(TAG, "checkIfUsernameExists: checking if " + username + " already exists.");
+
+       // User user = new User();
+
+      //  for (DataSnapshot ds : datasnapshot.child(userID).getChildren()) {
+         //   Log.d(TAG, "checkIfUsernameExists: datasnapshot: " + ds);
+
+        //    user.setUsername(ds.getValue(User.class).getUsername());
+        //    Log.d(TAG, "checkIfUsernameExists: datasnapshot: " + user.getUsername());
+
+         //   if (StringManipulation.expandUsername(user.getUsername()).equals(username)) {
+          //      Log.d(TAG, "checkIfUsernameExists: FOUND A MATCH" + user.getUsername());
+          ///      return true;
+         //   }
+     //   }
+      //  return false;
+   // }
 
     /**
      * Register a new email and password to Firebase Authentication
@@ -123,12 +131,9 @@ public class FirebaseMethods {
     /**
      * Add information to the users nodes
      * Add information to the user_account_setting node
-     *
-     * @param profile_photo
+     * 
      * @param email         user email
      * @param username      user username
-     * @param description
-     * @param website
      * @param profile_photo user profile photo
      */
     public void addNewUser(String email, String username, String profile_photo) {
