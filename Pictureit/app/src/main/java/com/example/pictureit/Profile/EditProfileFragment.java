@@ -69,7 +69,7 @@ public class EditProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick: navigating back to profile activity");
-                getActivity().finish();
+                backToActivity();
             }
         });
 
@@ -228,4 +228,7 @@ public class EditProfileFragment extends Fragment {
         }
     }
 
+    public void backToActivity() {
+        getFragmentManager().popBackStack();
+    }
 }
