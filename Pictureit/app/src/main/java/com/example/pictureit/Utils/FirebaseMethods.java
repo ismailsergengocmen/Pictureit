@@ -131,6 +131,7 @@ public class FirebaseMethods {
     /**
      * Add information to the users nodes
      * Add information to the user_account_setting node
+     *
      * @param email         user email
      * @param username      user username
      * @param profile_photo user profile photo
@@ -249,7 +250,26 @@ public class FirebaseMethods {
         Photo photo = new Photo();
         photo.setImage_path(url);
         photo.setDate_created(getTimestamp());
-        photo.setTags("");
+        photo.setTag1("");
+        photo.setTag2("");
+        photo.setUser_id(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        photo.setImage_id(newPhotoKey);
+
+        //insert into database
+        myRef.child(mContext.getString(R.string.dbname_user_photos))
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .child(newPhotoKey).setValue(photo);
+    }
+
+    public void addPhotoToDatabase(String url, String tag1, String tag2) {
+        Log.d(TAG, "addPhotoToDatabase: adding photo to database.");
+
+        String newPhotoKey = myRef.child(mContext.getString(R.string.dbname_user_photos)).push().getKey();
+        Photo photo = new Photo();
+        photo.setImage_path(url);
+        photo.setDate_created(getTimestamp());
+        photo.setTag1(tag1);
+        photo.setTag2(tag2);
         photo.setUser_id(FirebaseAuth.getInstance().getCurrentUser().getUid());
         photo.setImage_id(newPhotoKey);
 
@@ -258,6 +278,17 @@ public class FirebaseMethods {
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .child(newPhotoKey).setValue(photo);
 
+        //adds the photo to the tags_and_name node (under tag1 branch)
+        myRef.child(mContext.getString(R.string.dbname_tags_and_photos))
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .child(tag1)
+                .child(newPhotoKey).setValue(photo);
+
+        //adds the photo to the tags_and_name node (under tag2 branch)
+        myRef.child(mContext.getString(R.string.dbname_tags_and_photos))
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .child(tag2)
+                .child(newPhotoKey).setValue(photo);
     }
 
 

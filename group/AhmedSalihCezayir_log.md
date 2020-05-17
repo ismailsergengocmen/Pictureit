@@ -18,3 +18,6 @@ I created home, search and profile menu layout and added some basic functionalit
 
 ### ~ 10/05/2020 ~
 This week I worked with photoes. I learned how to get camera permission, how to capture images and how to upload those images to firebase storage. I also worked with progress map section and created some basic layout for that section. I created a custom adapter and custom recyclerView and those will be added to the project when everyhing is ready. Also this week Sergen and I worked worked together to solve some problems related to authentication and sign in / sign out part. I also tidied up code layouts to make them more readible and nicer looking. Next week I will work on implementing those ideas/knowledge into our project.
+
+### ~ 16/05/2020 ~
+This week I added the camera functionality to our app. I also worked with firebase database and firebase storage. I added the functionality that now our app can store the captured image and its url in the firebase. I also added camera and write/read external data permissions in order for our app to work. Now we need to combine this part and Faruk's part in order to complete the tasks page.-
