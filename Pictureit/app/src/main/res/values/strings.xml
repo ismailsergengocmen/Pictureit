@@ -16,6 +16,7 @@
     <string name="dbname_users">users</string>
     <string name="dbname_user_photos">user_photos</string>
     <string name="dbname_user_account_settings">user_account_settings</string>
+    <string name="dbname_tags_and_photos">tags_and_photos</string>
     <string name="field_username">username</string>
     <string name="field_email">email</string>
     <string name="field_display_name">display_name</string>
@@ -26,7 +27,8 @@
     <string name="field_caption">caption</string>
     <string name="field_date_created">date_created</string>
     <string name="field_photo_id">photo_id</string>
-    <string name="field_tags">tags</string>
+    <string name="field_tag1">tag1</string>
+    <string name="field_tag2">tag2</string>
     <string name="field_image_path">image_path</string>
     <string name="field_image_uri">image_uri</string>
     <string name="field_profile_photo">profile_photo</string>

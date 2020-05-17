@@ -17,6 +17,7 @@ import com.example.pictureit.R;
 import com.example.pictureit.Utils.ImageAdapter;
 
 import android.content.Context;
+
 import com.example.pictureit.models.Photo;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -36,9 +37,10 @@ public class EasyGameFragment extends Fragment {
 
     private static final String TAG = "EasyGameFragment";
 
-    public interface OnGridImageSelectedListener{
+    public interface OnGridImageSelectedListener {
         void onGridImageSelected(Photo photo, Context context);
     }
+
     OnGridImageSelectedListener mOnGridImageSelectedListener;
 
     GridView gridView;
@@ -64,10 +66,10 @@ public class EasyGameFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Context context){
-        try{
+    public void onAttach(Context context) {
+        try {
             mOnGridImageSelectedListener = (OnGridImageSelectedListener) getActivity();
-        }catch(ClassCastException e){
+        } catch (ClassCastException e) {
             Log.e(TAG, "onAttach: ClassCastException:  " + e.getMessage());
         }
         super.onAttach(context);
@@ -75,7 +77,7 @@ public class EasyGameFragment extends Fragment {
 
     private static final int NUM_GRID_COLUMNS = 3;
 
-    private void setupGridView(){
+    private void setupGridView() {
         Log.d(TAG, "setupGridView: Setting up image grid.");
 
         final ArrayList<Photo> photos = new ArrayList<>();
@@ -86,30 +88,31 @@ public class EasyGameFragment extends Fragment {
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for ( DataSnapshot singleSnapshot :  dataSnapshot.getChildren()){
+                for (DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
 
                     Photo photo = new Photo();
                     Map<String, Object> objectMap = (HashMap<String, Object>) singleSnapshot.getValue();
 
                     try {
-                        photo.setTags(objectMap.get(getString(R.string.field_tags)).toString());
+                        photo.setTag1(objectMap.get(getString(R.string.field_tag1)).toString());
+                        photo.setTag2(objectMap.get(getString(R.string.field_tag2)).toString());
                         photo.setUser_id(objectMap.get(getString(R.string.field_user_id)).toString());
                         photo.setDate_created(objectMap.get(getString(R.string.field_date_created)).toString());
                         photo.setImage_path(objectMap.get(getString(R.string.field_image_path)).toString());
 
                         photos.add(photo);
-                    }catch(NullPointerException e){
-                        Log.e(TAG, "onDataChange: NullPointerException: " + e.getMessage() );
+                    } catch (NullPointerException e) {
+                        Log.e(TAG, "onDataChange: NullPointerException: " + e.getMessage());
                     }
                 }
 
                 //setup our image grid
                 int gridWidth = getResources().getDisplayMetrics().widthPixels;
-                int imageWidth = gridWidth/NUM_GRID_COLUMNS;
+                int imageWidth = gridWidth / NUM_GRID_COLUMNS;
                 gridView.setColumnWidth(imageWidth);
 
                 ArrayList<String> imgUrls = new ArrayList<String>();
-                for(int i = 0; i < photos.size(); i++){
+                for (int i = 0; i < photos.size(); i++) {
                     imgUrls.add(photos.get(i).getImage_path());
                 }
                 ImageAdapter adapter = new ImageAdapter(getActivity(), R.layout.layout_grid_imageview,
