@@ -23,6 +23,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.pictureit.R;
 import com.example.pictureit.Utils.FirebaseMethods;
@@ -68,6 +69,7 @@ public class ViewGridItemFragment extends Fragment {
     private ImageView camera;
     private SquareImageView image;
     private TextView tag;
+    private ImageView backArrow;
 
     public ViewGridItemFragment(){
         super();
@@ -92,6 +94,14 @@ public class ViewGridItemFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 askCameraPermission();
+            }
+        });
+        backArrow = view.findViewById(R.id.backArrow);
+        backArrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick: navigating back to home activity");
+                backToActivity();
             }
         });
         return view;
@@ -202,32 +212,6 @@ public class ViewGridItemFragment extends Fragment {
             UniversalImageLoader.setImage(getPhotoFromBundle().getImage_path(), image, null, "");
             String photo_id = getPhotoFromBundle().getImage_id();
 
-            Query query = FirebaseDatabase.getInstance().getReference()
-                    .child(getString(R.string.dbname_user_photos))
-                    .orderByChild(getString(R.string.field_photo_id))
-                    .equalTo(photo_id);
-            query.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    for ( DataSnapshot singleSnapshot :  dataSnapshot.getChildren()){
-                        Photo newPhoto = new Photo();
-                        Map<String, Object> objectMap = (HashMap<String, Object>) singleSnapshot.getValue();
-
-                        newPhoto.setTag1(objectMap.get(getString(R.string.field_tag1)).toString());
-                        newPhoto.setTag2(objectMap.get(getString(R.string.field_tag2)).toString());
-                        newPhoto.setUser_id(objectMap.get(getString(R.string.field_user_id)).toString());
-                        newPhoto.setDate_created(objectMap.get(getString(R.string.field_date_created)).toString());
-                        newPhoto.setImage_path(objectMap.get(getString(R.string.field_image_path)).toString());
-                    }
-
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    Log.d(TAG, "onCancelled: query cancelled.");
-                }
-            });
-
         }catch (NullPointerException e){
             Log.e(TAG, "onCreateView: NullPointerException: " + e.getMessage() );
         }
@@ -254,5 +238,9 @@ public class ViewGridItemFragment extends Fragment {
         }else{
             return null;
         }
+    }
+
+    public void backToActivity() {
+        getFragmentManager().popBackStack();
     }
 }

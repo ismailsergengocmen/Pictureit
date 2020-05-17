@@ -158,6 +158,7 @@ public class HomeActivity extends AppCompatActivity implements EasyGameFragment.
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, fragment);
+        transaction.addToBackStack(null);
         transaction.commit();
     }
 }

@@ -58,7 +58,7 @@ public class EasyGameFragment extends Fragment {
         backArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick: navigating back to profile activity");
+                Log.d(TAG, "onClick: navigating back to home activity");
                 backToActivity();
             }
         });

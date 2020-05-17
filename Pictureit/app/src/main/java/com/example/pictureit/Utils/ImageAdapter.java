@@ -45,7 +45,7 @@ public class ImageAdapter extends ArrayAdapter<String>{
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
         /*
-        Viewholder build pattern (Similar to recyclerview)
+        ViewHolder build pattern (Similar to recyclerview)
          */
         final ViewHolder holder;
         if(convertView == null){
