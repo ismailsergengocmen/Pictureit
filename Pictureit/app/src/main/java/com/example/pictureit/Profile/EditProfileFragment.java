@@ -35,7 +35,7 @@ public class EditProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick: navigating back to profile activity");
-                getActivity().finish();
+                backToActivity();
             }
         });
         return view;
@@ -46,5 +46,9 @@ public class EditProfileFragment extends Fragment {
         Log.d(TAG, "setProfileImage: setting profile image");
         String imgURL = "cdn.webrazzi.com/uploads/2013/06/android-malware.jpg";
         UniversalImageLoader.setImage(imgURL, profilePhoto, null, "https://");
+    }
+
+    public void backToActivity() {
+        getFragmentManager().popBackStack();
     }
 }
