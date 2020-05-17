@@ -153,6 +153,9 @@ public class FirebaseMethods {
         myRef.child(mContext.getString(R.string.dbname_user_account_settings))
                 .child(userID)
                 .setValue(settings);
+        addPhotoToDatabase("https://firebasestorage.googleapis.com/v0/b/pictureit-7d068.appspot.com/o/EasyGamePhotos%2Fphoto0.png?alt=media&token=7bad77d7-7ca4-4aa4-bd53-0a03feca2a13", "Black Cat");
+        addPhotoToDatabase("https://firebasestorage.googleapis.com/v0/b/pictureit-7d068.appspot.com/o/EasyGamePhotos%2Fphoto1.png?alt=media&token=e4e9d72c-798a-481b-93aa-ffd29dd84861", "Yellow Dog");
+        addPhotoToDatabase("https://firebasestorage.googleapis.com/v0/b/pictureit-7d068.appspot.com/o/EasyGamePhotos%2Fphoto2.png?alt=media&token=b45637ac-7a43-40a8-b38f-10fd9a562f3f","Orange Fish");
     }
 
 
@@ -247,6 +250,30 @@ public class FirebaseMethods {
         photo.setImage_path(url);
         photo.setDate_created(getTimestamp());
         photo.setTags("");
+        photo.setUser_id(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        photo.setImage_id(newPhotoKey);
+
+        //insert into database
+        myRef.child(mContext.getString(R.string.dbname_user_photos))
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .child(newPhotoKey).setValue(photo);
+
+    }
+
+
+    /**
+     * A method for adding photo with tag to firebase RealTime Database
+     *
+     * @param url this is the download url of the photo. It shows the location of the photo in the firebase storage
+     */
+    public void addPhotoToDatabase(String url, String tag) {
+        Log.d(TAG, "addPhotoToDatabase: adding photo to database.");
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
+        String newPhotoKey = myRef.child(mContext.getString(R.string.dbname_user_photos)).push().getKey();
+        Photo photo = new Photo();
+        photo.setImage_path(url);
+        photo.setDate_created(getTimestamp());
+        photo.setTags(tag);
         photo.setUser_id(FirebaseAuth.getInstance().getCurrentUser().getUid());
         photo.setImage_id(newPhotoKey);
 
