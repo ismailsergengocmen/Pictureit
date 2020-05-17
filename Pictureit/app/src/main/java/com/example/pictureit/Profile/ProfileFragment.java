@@ -71,6 +71,7 @@ public class ProfileFragment extends Fragment {
         mProgressBar = view.findViewById(R.id.profileProgressBar);
         toolbar = view.findViewById(R.id.profileBar);
         profileMenu = view.findViewById(R.id.profileMenu);
+        mPhotoNumber = view.findViewById(R.id.displayPhotoCount);
         bottomNavigationViewEx = view.findViewById(R.id.bottomNavViewBar);
         mContext = getActivity();
         mFirebaseMethods = new FirebaseMethods(getActivity());
@@ -95,8 +96,8 @@ public class ProfileFragment extends Fragment {
 
         mDisplayName.setText(settings.getDisplay_name());
         mUserName.setText(settings.getUsername());
+        mPhotoNumber.setText("You have taken " + settings.getPosts() + " photos");
         mProgressBar.setVisibility(View.GONE);
-
     }
 
     /**
