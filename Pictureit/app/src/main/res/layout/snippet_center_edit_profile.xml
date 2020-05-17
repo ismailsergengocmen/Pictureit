@@ -43,7 +43,7 @@
                 android:background="@drawable/grey_border_bottom">
 
                 <TextView
-                    android:id="@+id/nameText"
+                    android:id="@+id/ProfileNameText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Profile Name"
@@ -55,7 +55,7 @@
                     android:id="@+id/editTextProfileName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/nameText"
+                    android:layout_below="@id/ProfileNameText"
                     android:background="@android:color/transparent"
                     android:inputType="textNoSuggestions">
 
@@ -63,12 +63,42 @@
 
             </RelativeLayout>
 
-            <!--  Email Address  -->
+            <!---  Username  -->
             <RelativeLayout
                 android:id="@+id/relLayout2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/relLayout1"
+                android:layout_below="@+id/relLayout1"
+                android:layout_marginTop="35dp"
+                android:background="@drawable/grey_border_bottom">
+
+                <TextView
+                    android:id="@+id/UserNameText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Username"
+                    android:textColor="@color/colorGrey">
+
+                </TextView>
+
+            <EditText
+                android:id="@+id/editTextUserName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/UserNameText"
+                android:background="@android:color/transparent"
+                android:inputType="textNoSuggestions">
+
+                </EditText>
+
+            </RelativeLayout>
+
+            <!--  Email Address  -->
+            <RelativeLayout
+                android:id="@+id/relLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/relLayout2"
                 android:layout_marginTop="35dp"
                 android:background="@drawable/grey_border_bottom">
 
@@ -96,9 +126,10 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/relLayout2">
+                android:layout_below="@id/relLayout3">
 
                 <TextView
+                    android:id="@+id/saveChanges"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"

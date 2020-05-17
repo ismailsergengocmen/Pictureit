@@ -47,24 +47,25 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/linLayout"
                 android:orientation="vertical"
-                android:padding="15dp">
+                android:padding="10dp">
 
                 <TextView
                     android:id="@+id/displayName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:text="asalihcezayir"
-                    android:textAllCaps="true"
+                    android:text=""
                     android:textColor="@color/colorBlack"
-                    android:textStyle="bold" />
+                    android:textStyle="normal"
+                    android:textSize="20sp"/>
 
                 <TextView
                     android:id="@+id/displayPhotoCount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:text="20 photograohs are taken"
+                    android:layout_marginTop="10dp"
+                    android:text=""
                     android:textColor="@color/colorBlack"
                     android:textStyle="italic" />
 
