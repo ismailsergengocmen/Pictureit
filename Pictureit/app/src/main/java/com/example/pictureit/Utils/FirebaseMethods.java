@@ -239,8 +239,7 @@ public class FirebaseMethods {
     }
 
     /**
-     * A method for adding photo to firebase RealTime Database
-     *
+     * A method for adding photo to "user photos" node of the firebase database
      * @param url this is the download url of the photo. It shows the location of the photo in the firebase storage
      */
     public void addPhotoToDatabase(String url) {
@@ -261,6 +260,12 @@ public class FirebaseMethods {
                 .child(newPhotoKey).setValue(photo);
     }
 
+    /**
+     * A method for adding photo to "user photos" , "tags and photos" nodes of the firebase database
+     * @param url this is the download url of the photo. It shows the location of the photo in the firebase storage
+     * @param tag1 tag1 of the photo
+     * @param tag2 tag2 of the photo
+     */
     public void addPhotoToDatabase(String url, String tag1, String tag2) {
         Log.d(TAG, "addPhotoToDatabase: adding photo to database.");
 
@@ -295,7 +300,6 @@ public class FirebaseMethods {
 
     /**
      * A method for producing String which is the representation of current date and time
-     *
      * @return the current time and date
      */
     private String getTimestamp() {
