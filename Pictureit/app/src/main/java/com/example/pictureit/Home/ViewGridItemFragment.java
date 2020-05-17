@@ -27,9 +27,16 @@ import androidx.fragment.app.Fragment;
 import com.example.pictureit.R;
 import com.example.pictureit.Utils.FirebaseMethods;
 import com.example.pictureit.Utils.SquareImageView;
+import com.example.pictureit.Utils.UniversalImageLoader;
+import com.example.pictureit.models.Photo;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -38,6 +45,8 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ViewGridItemFragment extends Fragment {
 
@@ -59,6 +68,11 @@ public class ViewGridItemFragment extends Fragment {
     private ImageView camera;
     private SquareImageView image;
     private TextView tag;
+
+    public ViewGridItemFragment(){
+        super();
+        setArguments(new Bundle());
+    }
 
     @Nullable
     @Override
@@ -180,5 +194,65 @@ public class ViewGridItemFragment extends Fragment {
                 Toast.makeText(getActivity(), "Upload failed", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void init(){
+        try{
+            //mPhoto = getPhotoFromBundle();
+            UniversalImageLoader.setImage(getPhotoFromBundle().getImage_path(), image, null, "");
+            String photo_id = getPhotoFromBundle().getImage_id();
+
+            Query query = FirebaseDatabase.getInstance().getReference()
+                    .child(getString(R.string.dbname_user_photos))
+                    .orderByChild(getString(R.string.field_photo_id))
+                    .equalTo(photo_id);
+            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for ( DataSnapshot singleSnapshot :  dataSnapshot.getChildren()){
+                        Photo newPhoto = new Photo();
+                        Map<String, Object> objectMap = (HashMap<String, Object>) singleSnapshot.getValue();
+
+                        newPhoto.setTag1(objectMap.get(getString(R.string.field_tag1)).toString());
+                        newPhoto.setTag2(objectMap.get(getString(R.string.field_tag2)).toString());
+                        newPhoto.setUser_id(objectMap.get(getString(R.string.field_user_id)).toString());
+                        newPhoto.setDate_created(objectMap.get(getString(R.string.field_date_created)).toString());
+                        newPhoto.setImage_path(objectMap.get(getString(R.string.field_image_path)).toString());
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Log.d(TAG, "onCancelled: query cancelled.");
+                }
+            });
+
+        }catch (NullPointerException e){
+            Log.e(TAG, "onCreateView: NullPointerException: " + e.getMessage() );
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(isAdded()){
+            init();
+        }
+    }
+
+    /**
+     * retrieve the photo from the incoming bundle from profileActivity interface
+     * @return
+     */
+    private Photo getPhotoFromBundle(){
+        Log.d(TAG, "getPhotoFromBundle: arguments: " + getArguments());
+
+        Bundle bundle = this.getArguments();
+        if(bundle != null) {
+            return bundle.getParcelable("PHOTO");
+        }else{
+            return null;
+        }
     }
 }

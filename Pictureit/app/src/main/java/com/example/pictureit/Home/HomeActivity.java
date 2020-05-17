@@ -151,8 +151,13 @@ public class HomeActivity extends AppCompatActivity implements EasyGameFragment.
     @Override
     public void onGridImageSelected(Photo photo, Context context) {
         Log.d(TAG, "onGridImageSelected: selected an image");
+        ViewGridItemFragment fragment = new ViewGridItemFragment();
+        Bundle args = new Bundle();
+        args.putParcelable("PHOTO", photo);
+        fragment.setArguments(args);
+
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, new ViewGridItemFragment());
+        transaction.replace(R.id.fragment_container, fragment);
         transaction.commit();
     }
 }
