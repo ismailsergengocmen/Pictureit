@@ -147,7 +147,7 @@ public class ViewGridItemFragment extends Fragment {
         if (requestCode == CAMERA_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
                 File f = new File(currentPhotoPath);
-                image.setImageURI(Uri.fromFile(f));
+                //image.setImageURI(Uri.fromFile(f));
                 Log.d("tag", "Absolute Url of Image: " + Uri.fromFile(f));
 
                 uploadImageToFirebase("photo_" + 5, Uri.fromFile(f));

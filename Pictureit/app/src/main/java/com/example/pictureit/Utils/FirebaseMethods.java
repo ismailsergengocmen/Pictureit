@@ -124,9 +124,6 @@ public class FirebaseMethods {
      * Add information to the users nodes
      * Add information to the user_account_setting node
      *
-
-     * @param email
-     * @param username
      * @param profile_photo
      * @param email         user email
      * @param username      user username
@@ -253,7 +250,6 @@ public class FirebaseMethods {
         myRef.child(mContext.getString(R.string.dbname_user_photos))
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .child(newPhotoKey).setValue(photo);
-
     }
 
     /**
