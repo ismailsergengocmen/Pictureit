@@ -17,7 +17,6 @@ We were not ready to start coding so we again talked about the different tutoria
 **Discussion:** 
 We were almost ready to start coding. We talked about different part of our app and how we can code those parts. We talked about how we are going to learn about databases and which database we should use. We decided we should use firebase because of its wide range of applications. Next meeting planned for 07/05/2020.
 
-
 ### Meeting ~ (07/05/2020, 1hour)
 **Present:** Everyone
 **Discussion:** 
@@ -37,3 +36,25 @@ We tried to solve authentication problem of Faruk and talked about layouts and c
 -->Faruk will work on tasks part. He will work on creating a new layout which will show the imageView, tags and camera button.
 -->Mehmet Ali will complete the layouts and help others with database.
 -->Ahmed Salih will do work related to capturing image and uploading it to firebase + layout which will be created by Faruk.
+
+### Meeting ~ (13/05/2020, 2hour)
+**Present:** Everyone
+**Discussion:** 
+We completed the UML and Detailed Design Report
+
+### Meeting ~ (16/05/2020, 1hour)
+**Present:** Everyone
+**Discussion:** 
+We just talked about currently what we are doing and we talked about the future tasks and how we can manage to achieve them. We also tried to solve some problem related to Firebase realtime database.
+**ToDo:** 
+Everyone will continue their tasks. There is no new tasks given.
+
+### Meeting ~ (17/05/2020, 1.5hour)
+**Present:** Everyone
+**Discussion:** 
+Faruk and Ahmed talked about their codes(EasyGameFragment/ Photo capture part). Then we talked about the future works. We talked about what we need to do. We talked about how we can do some parts of our app. We distributed new tasks to everyone.
+**ToDo:** 
+-->Sergen will work with profile info changes.
+-->Faruk will work on combining Ahmed's part and his part.(So that task part will be completed)
+-->Mehmet Ali will work on changing user profile photo.
+-->Ahmed Salih will work on Search activity and tag system. 
