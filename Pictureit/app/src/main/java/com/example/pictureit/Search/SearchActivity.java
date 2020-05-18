@@ -7,15 +7,19 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.pictureit.Home.EasyGameFragment;
+import com.example.pictureit.Home.ViewGridItemFragment;
 import com.example.pictureit.R;
 import com.example.pictureit.Utils.BottomNavigationViewHelper;
 import com.example.pictureit.Utils.ImageAdapter;
@@ -34,7 +38,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity  {
 
     private static final String TAG = "SearchActivity";
 
@@ -113,6 +117,12 @@ public class SearchActivity extends AppCompatActivity {
                         photo.setTag2(ds.child(getString(R.string.field_tag2)).getValue().toString());
 
                         photoList.add(photo);
+                        mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                gridFragmentInit(photoList.get(position));
+                            }
+                        });
                     }
 
                     //setup our image grid
@@ -139,7 +149,6 @@ public class SearchActivity extends AppCompatActivity {
                 }
             });
 
-
         }
 
     }
@@ -157,4 +166,20 @@ public class SearchActivity extends AppCompatActivity {
         MenuItem menuItem = menu.getItem(ACTIVITY_NUMBER);
         menuItem.setChecked(true);
     }
+
+    private void gridFragmentInit(Photo photo) {
+        ViewGridItemFragment fragment = new ViewGridItemFragment();
+        Bundle args = new Bundle();
+        args.putParcelable("PHOTO", photo);
+        args.putString("tag1", photo.getTag1());
+        args.putString("tag2", photo.getTag2());
+        fragment.setArguments(args);
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+
 }
