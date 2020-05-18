@@ -21,3 +21,9 @@ This week I worked with photoes. I learned how to get camera permission, how to 
 
 ### ~ 16/05/2020 ~
 This week I added the camera functionality to our app. I also worked with firebase database and firebase storage. I added the functionality that now our app can store the captured image and its url in the firebase. I also added camera and write/read external data permissions in order for our app to work. Now we need to combine this part and Faruk's part in order to complete the tasks page.-
+
+### ~ 17/05/2020 ~
+Today I completed the progressmap. I added CardRecyclerViewAdapter class(Custon adapter class for recylerview), layaout_cardview (xml) and fragment_progressmap(xml). Then I filled the progressMap fragment by using those (I used the firebase in order to get the photos). Now we can see the photos taken and their date
+
+### ~ 18/05/2020 ~
+Today I created the search activity. I added activity_search(xml) and snippet_searchbar(xml). Then I filled the search activity.(I used the firebase in order to get the related photos) Now user can enter a tag and search for related photos.
