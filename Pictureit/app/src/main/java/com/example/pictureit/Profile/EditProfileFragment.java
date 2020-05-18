@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import com.example.pictureit.R;
 import com.example.pictureit.Utils.FirebaseMethods;
 import com.example.pictureit.Utils.UniversalImageLoader;
+import com.example.pictureit.dialogs.ConfirmPasswordDialog;
 import com.example.pictureit.models.User;
 import com.example.pictureit.models.UserAccountSettings;
 import com.example.pictureit.models.UserSettings;
@@ -54,13 +55,13 @@ public class EditProfileFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_edit_profile, container, false);
         mProfilePhoto = view.findViewById(R.id.profilePhoto);
-        mDisplayName =(EditText) view.findViewById(R.id.editTextProfileName);
-        mUserName= (EditText) view.findViewById(R.id.editTextUserName);
+        mDisplayName = (EditText) view.findViewById(R.id.editTextProfileName);
+        mUserName = (EditText) view.findViewById(R.id.editTextUserName);
         mEmail = (EditText) view.findViewById(R.id.editTextEmailAddress);
-        mChangeProfilePhoto= (TextView) view.findViewById(R.id.changeProfilePhoto);
+        mChangeProfilePhoto = (TextView) view.findViewById(R.id.changeProfilePhoto);
         mFirebaseMethods = new FirebaseMethods(getActivity());
 
-       // setProfileImage();
+        // setProfileImage();
         setupFirebaseAuth();
 
         //setup the back arrow for navigating back to profile activity
@@ -91,37 +92,36 @@ public class EditProfileFragment extends Fragment {
      * Retrieves the data contined in the widgets and submits it to the database
      * Before doing so it checks to make sure the username chosen is unique
      */
-    private void saveProfileSettings(){
+    private void saveProfileSettings() {
         final String displayName = mDisplayName.getText().toString();
         final String username = mUserName.getText().toString();
         final String email = mEmail.getText().toString();
 
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                //case1: The user did not change their username
-                if (!mUserSettings.getUser().getUsername().equals(username)){
+        //case1: If the user made a change to their username
+        if (!mUserSettings.getUser().getUsername().equals(username)) {
 
-                    checkIfUsernameExists(username);
+            checkIfUsernameExists(username);
+        }
+        //case2: If the user made a change to their mail
+        if (!mUserSettings.getUser().getEmail().equals(email)) {
 
-                }
-                //case2: The user changed their username therefore we need to check for uniqueness
-                else{
+            //step 1)Reauthenticate
+            //       - Confirm the password and email
+            ConfirmPasswordDialog dialog = new ConfirmPasswordDialog();
+            dialog.show(getFragmentManager(), getString(R.string.confirm_password_dialog));
 
-                }
-            }
+            //step 2)Check if the email is already registered
+            //       - 'fetchProvidersForEmail(String email)'
+            //step 3)Change the email
+            //       - submit the new email to the database and authentication
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
+        }
     }
 
     /**
      * Check if @param username already exists in teh database
+     *
      * @param username
      */
     private void checkIfUsernameExists(final String username) {
@@ -133,15 +133,15 @@ public class EditProfileFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                if(!dataSnapshot.exists()){
+                if (!dataSnapshot.exists()) {
                     //add the username
                     mFirebaseMethods.updateUsername(username);
-                            Toast.makeText(getActivity(),"saved username.",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "saved username.", Toast.LENGTH_SHORT).show();
                 }
-                for (DataSnapshot singleSnapshot: dataSnapshot.getChildren()){
-                    if (singleSnapshot.exists()){
+                for (DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
+                    if (singleSnapshot.exists()) {
                         Log.d(TAG, "checkIfUsernameExists: FOUND A MATCH: " + singleSnapshot.getValue(User.class).getUsername());
-                        Toast.makeText(getActivity(),"That username already exists.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "That username already exists.", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -202,7 +202,7 @@ public class EditProfileFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 //retrieve user information from the database
-                 setProfileWidgets(mFirebaseMethods.getUserSettings(dataSnapshot));
+                setProfileWidgets(mFirebaseMethods.getUserSettings(dataSnapshot));
 
                 //retrieve images for the user in question
             }
