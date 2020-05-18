@@ -1,6 +1,7 @@
 package com.example.pictureit.Utils;
 
 import android.content.Context;
+import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -10,6 +11,8 @@ import com.example.pictureit.models.User;
 import com.example.pictureit.models.UserAccountSettings;
 import com.example.pictureit.models.UserSettings;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -19,6 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import androidx.annotation.NonNull;
 
@@ -54,36 +58,39 @@ public class FirebaseMethods {
         }
     }
 
-    public void updateUsername(String username){
-        Log.d(TAG, "updateUsername: updating username to: " + username);
-
-        myRef.child(mContext.getString(R.string.dbname_users)).child(userID).child(mContext.getString(R.string.field_username)).setValue(username);
-
-        myRef.child(mContext.getString(R.string.dbname_user_account_settings)).child(userID).child(mContext.getString(R.string.field_username)).setValue(username);
+    public void updateDisplayName(String displayName){
+        if(displayName !=null) {
+            Log.d(TAG, "updating display name to:" + displayName);
+            myRef.child(mContext.getString(R.string.dbname_user_account_settings)).child(userID).child(mContext.getString(R.string.field_display_name)).setValue(displayName);
+        }
     }
 
-   // public boolean checkIfUsernameExists(String username, DataSnapshot datasnapshot) {
-       // Log.d(TAG, "checkIfUsernameExists: checking if " + username + " already exists.");
+    /**
+     * update username in the 'users' node and 'user_account_settings' node
+     * @param username
+     */
+    public void updateUsername(String username){
+        if(username !=null) {
+            Log.d(TAG, "updateUsername: updating username to: " + username);
+            myRef.child(mContext.getString(R.string.dbname_users)).child(userID).child(mContext.getString(R.string.field_username)).setValue(username);
+            myRef.child(mContext.getString(R.string.dbname_user_account_settings)).child(userID).child(mContext.getString(R.string.field_username)).setValue(username);
+        }
+        if (username==null){
+            Log.d(TAG, "please enter username");
+        }
+    }
 
-       // User user = new User();
-
-      //  for (DataSnapshot ds : datasnapshot.child(userID).getChildren()) {
-         //   Log.d(TAG, "checkIfUsernameExists: datasnapshot: " + ds);
-
-        //    user.setUsername(ds.getValue(User.class).getUsername());
-        //    Log.d(TAG, "checkIfUsernameExists: datasnapshot: " + user.getUsername());
-
-         //   if (StringManipulation.expandUsername(user.getUsername()).equals(username)) {
-          //      Log.d(TAG, "checkIfUsernameExists: FOUND A MATCH" + user.getUsername());
-          ///      return true;
-         //   }
-     //   }
-      //  return false;
-   // }
+    /**
+     * update the email in the 'users' node
+     * @param email
+     */
+    public void updateEmail(String email){
+        Log.d(TAG, "updateUsername: updating email to: " + email);
+        myRef.child(mContext.getString(R.string.dbname_users)).child(userID).child(mContext.getString(R.string.field_email)).setValue(email);
+    }
 
     /**
      * Register a new email and password to Firebase Authentication
-     *
      * @param email    user email
      * @param password user password
      * @param username user username
@@ -138,7 +145,7 @@ public class FirebaseMethods {
      */
     public void addNewUser(String email, String username, String profile_photo) {
 
-        User user = new User(userID, 1, email, StringManipulation.condenseUsername(username));
+        User user = new User(userID,email, StringManipulation.condenseUsername(username));
 
         myRef.child(mContext.getString(R.string.dbname_users))
                 .child(userID)
@@ -222,11 +229,6 @@ public class FirebaseMethods {
                                 .getValue(User.class)
                                 .getEmail()
                 );
-                user.setPhone_number(
-                        ds.child(userID)
-                                .getValue(User.class)
-                                .getPhone_number()
-                );
                 user.setUser_id(
                         ds.child(userID)
                                 .getValue(User.class)
@@ -286,17 +288,46 @@ public class FirebaseMethods {
         //adds the photo to the tags_and_name node (under tag1 branch)
         myRef.child(mContext.getString(R.string.dbname_tags_and_photos))
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                .child(tag1)
+                .child(tag1.toLowerCase())
                 .child(newPhotoKey).setValue(photo);
 
         //adds the photo to the tags_and_name node (under tag2 branch)
         myRef.child(mContext.getString(R.string.dbname_tags_and_photos))
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                .child(tag2)
+                .child(tag2.toLowerCase())
                 .child(newPhotoKey).setValue(photo);
     }
 
+    /**
+     * A method to upload images to the firebase storage
+     * @param name name of the photo
+     * @param uri uri of the taken photo
+     * @param node the desired place to upload the photo
+     */
+    public void uploadImageToStorage(String name, Uri uri, String node) {
+        final StorageReference reference = mStorageReference
+                .child(node)
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .child(name);
 
+        reference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(final UploadTask.TaskSnapshot taskSnapshot) {
+                Toast.makeText(mContext, "Upload succeeded", Toast.LENGTH_SHORT).show();
+                reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Log.d("tag", "onSuccess: Url " + uri.toString());
+                    }
+                });
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(mContext, "Upload failed", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
     /**
      * A method for producing String which is the representation of current date and time
@@ -307,5 +338,4 @@ public class FirebaseMethods {
         sdf.setTimeZone(TimeZone.getTimeZone("Canada/Pacific"));
         return sdf.format(new Date());
     }
-
 }

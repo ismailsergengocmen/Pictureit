@@ -22,7 +22,7 @@
                 app:civ_border_color="@color/colorBlack"
                 app:civ_border_width="2dp" />
 
-            <TextView
+            <Button
                 android:id="@+id/changeProfilePhoto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -31,6 +31,7 @@
                 android:layout_marginTop="20dp"
                 android:text="Change Profile Photo"
                 android:textColor="@color/colorLinkBlue"
+                android:background="@android:color/transparent"
                 android:textSize="16dp" />
 
             <!---  Profile Name  -->
@@ -128,7 +129,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/relLayout3">
 
-                <TextView
+                <Button
                     android:id="@+id/saveChanges"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -136,9 +137,10 @@
                     android:layout_marginTop="30dp"
                     android:text="Save Changes"
                     android:textColor="@color/colorLinkBlue"
+                    android:background="@android:color/transparent"
                     android:textSize="16dp">
 
-                </TextView>
+                </Button>
 
             </RelativeLayout>
 
