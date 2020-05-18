@@ -8,6 +8,9 @@
     <string name="sign_out">Sign Out</string>
     <string name="profile_fragment">Profile</string>
 
+    <!-- Dialog names -->
+    <string name="confirm_password_dialog">ConfirmPasswordDialog</string>
+
     <!--- Firebase massages -->
     <string name="auth_failed">Failed to Authenticate</string>
     <string name="auth_success">Authentication Success</string>
@@ -17,6 +20,7 @@
     <string name="dbname_user_photos">user_photos</string>
     <string name="dbname_user_account_settings">user_account_settings</string>
     <string name="dbname_tags_and_photos">tags_and_photos</string>
+    <string name="dbname_captured_photos">captured_photos</string>
     <string name="field_username">username</string>
     <string name="field_email">email</string>
     <string name="field_display_name">display_name</string>
