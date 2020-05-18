@@ -338,5 +338,4 @@ public class FirebaseMethods {
         sdf.setTimeZone(TimeZone.getTimeZone("Canada/Pacific"));
         return sdf.format(new Date());
     }
-
 }
