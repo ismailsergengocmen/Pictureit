@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.pictureit.Home.EasyGameFragment;
 import com.example.pictureit.R;
 import com.example.pictureit.Utils.BottomNavigationViewHelper;
 import com.example.pictureit.Utils.ImageAdapter;
@@ -37,9 +38,10 @@ public class SearchActivity extends AppCompatActivity {
 
     private static final String TAG = "SearchActivity";
 
+    //Constant
     private static final int ACTIVITY_NUMBER = 1;
-
-    private Context mContext = SearchActivity.this;
+    private static final int NUM_GRID_COLUMNS = 3;
+    private final Context mContext = SearchActivity.this;
 
     //Widgets
     private EditText mSearchBar;
@@ -47,8 +49,6 @@ public class SearchActivity extends AppCompatActivity {
 
     //Variables
     private List<Photo> photoList;
-    private static final int NUM_GRID_COLUMNS = 3;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -86,7 +86,7 @@ public class SearchActivity extends AppCompatActivity {
         });
     }
 
-    private void searchForMatch( final String keyword) {
+    private void searchForMatch(final String keyword) {
         Log.d(TAG, "searchForMatch: searching for string: " + keyword);
         photoList.clear();
         if (keyword.length() == 0) {
@@ -103,7 +103,7 @@ public class SearchActivity extends AppCompatActivity {
                     final StringManipulation stringManipulation;
                     stringManipulation = new StringManipulation();
 
-                    for (DataSnapshot ds: dataSnapshot.getChildren()) {
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         Photo photo = new Photo();
                         photo.setUser_id(ds.child(getString(R.string.field_user_id)).getValue().toString());
                         photo.setDate_created(stringManipulation.timeStampConverter(ds.child(getString(R.string.field_date_created)).getValue().toString()));
@@ -143,7 +143,7 @@ public class SearchActivity extends AppCompatActivity {
         }
 
     }
-    
+
     /**
      * BottomNavigationView setup
      */

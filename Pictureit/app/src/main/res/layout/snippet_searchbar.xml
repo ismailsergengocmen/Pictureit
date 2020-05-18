@@ -15,18 +15,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/ic_search"
-                    android:id="@+id/search_icon"
+<!--                <ImageView-->
+<!--                    android:layout_width="30dp"-->
+<!--                    android:layout_height="30dp"-->
+<!--                    android:src="@drawable/ic_search"-->
+<!--                    android:id="@+id/search_icon"-->
+<!--                    android:layout_centerVertical="true">-->
+
+<!--                </ImageView>-->
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="22sp"
+                    android:textColor="@color/colorGrey"
+                    android:id="@+id/symbol"
+                    android:text="#"
                     android:layout_centerVertical="true">
 
-                </ImageView>
+                </TextView>
 
                 <EditText
                     android:id="@+id/searchbar"
-                    android:layout_toRightOf="@id/search_icon"
+                    android:layout_toRightOf="@id/symbol"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
