@@ -23,7 +23,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.example.pictureit.R;
 import com.example.pictureit.Utils.FirebaseMethods;
@@ -52,9 +51,9 @@ import java.util.Map;
 
 public class ViewGridItemFragment extends Fragment {
 
+    //Constants
     private static final String TAG = "ViewGridItemFragment";
-
-    private Context mContext;
+    private final Context mContext = getContext();
 
     //Firebase
     private FirebaseMethods firebaseMethods;
@@ -88,7 +87,6 @@ public class ViewGridItemFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_view_griditem, container, false);
         Log.d(TAG, "onCreateView: starting.");
 
-        mContext = getContext();
         firebaseMethods = new FirebaseMethods(mContext);
         mStorageReference = FirebaseStorage.getInstance().getReference();
         mRef = FirebaseDatabase.getInstance().getReference();
@@ -203,7 +201,7 @@ public class ViewGridItemFragment extends Fragment {
                 try {
                     Toast.makeText(getActivity(), "Upload succeeded", Toast.LENGTH_SHORT).show();
                 } catch (NullPointerException e) {
-
+                    Log.d(TAG, "onSuccess: NullPointerException:" + e.getMessage());
                 }
                 image.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
@@ -244,7 +242,7 @@ public class ViewGridItemFragment extends Fragment {
                 try {
                     Toast.makeText(getActivity(), "Upload succeeded", Toast.LENGTH_SHORT).show();
                 } catch (NullPointerException e) {
-
+                    Log.d(TAG, "onSuccess: NullPointerException:" + e.getMessage());
                 }
                 all.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
@@ -252,7 +250,7 @@ public class ViewGridItemFragment extends Fragment {
                         try {
                             firebaseMethods.addPhotoToDatabase(name, uri.toString(), currentTag1, currentTag2, getActivity().getString(R.string.dbname_all_photos));
                         } catch (NullPointerException e) {
-
+                            Log.d(TAG, "onSuccess: NullPointerException:" + e.getMessage());
                         }
                     }
                 });
@@ -329,9 +327,9 @@ public class ViewGridItemFragment extends Fragment {
     }
 
     /**
-     * retrieve the photo from the incoming bundle from profileActivity interface
+     * Retrieve the photo from the incoming bundle from profileActivity interface
      *
-     * @return
+     * @return Photo which comes with the bundle
      */
     private Photo getPhotoFromBundle() {
         Log.d(TAG, "getPhotoFromBundle: arguments: " + getArguments());

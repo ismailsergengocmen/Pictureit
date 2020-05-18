@@ -11,9 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -22,36 +20,30 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.pictureit.R;
 import com.example.pictureit.Utils.BottomNavigationViewHelper;
-import com.example.pictureit.Utils.FirebaseMethods;
 import com.example.pictureit.Utils.SectionsStatePagerAdapter;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import java.util.ArrayList;
 
 public class AccountSettingsActivity extends AppCompatActivity {
 
+    //Constants
     private static final String TAG = "AccountSettingsActivity";
-
-    private Context mContext;
-    private SectionsStatePagerAdapter pagerAdapter;
+    private final Context mContext = AccountSettingsActivity.this;
 
     //Widgets
     private ViewPager mViewPager;
     private RelativeLayout mRelativeLayout;
+
+    //Adapter
+    private SectionsStatePagerAdapter pagerAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_settings);
         Log.d(TAG, "onCreate: started.");
-        mContext = AccountSettingsActivity.this;
+
         mViewPager = findViewById(R.id.container);
         mRelativeLayout = findViewById(R.id.relLayout1);
 
@@ -75,7 +67,7 @@ public class AccountSettingsActivity extends AppCompatActivity {
         Log.d(TAG, "setupBottomNavigationView: setting up BottomNavigationView");
         BottomNavigationViewEx bottomNavigationViewEx = (BottomNavigationViewEx) findViewById(R.id.bottomNavViewBar);
         BottomNavigationViewHelper.setupBottomNavigationView(bottomNavigationViewEx);
-        BottomNavigationViewHelper.enableNavigation(mContext, this , bottomNavigationViewEx);
+        BottomNavigationViewHelper.enableNavigation(mContext, this, bottomNavigationViewEx);
 
         Menu menu = bottomNavigationViewEx.getMenu();
         MenuItem menuItem = menu.getItem(2);
@@ -91,13 +83,11 @@ public class AccountSettingsActivity extends AppCompatActivity {
 
     private void setViewPager(int fragmentNumber) {
         Log.d(TAG, "setViewPager: navigating to fragment #: " + fragmentNumber);
-        if (fragmentNumber == 0){
+        if (fragmentNumber == 0) {
             replaceFragment(new EditProfileFragment());
-        }
-        else if (fragmentNumber == 1){
+        } else if (fragmentNumber == 1) {
             replaceFragment(new HelpFragment());
-        }
-        else if (fragmentNumber == 2){
+        } else if (fragmentNumber == 2) {
             replaceFragment(new SignOutFragment());
         }
 

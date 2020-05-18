@@ -1,6 +1,7 @@
 package com.example.pictureit.Home;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,13 +16,21 @@ import com.example.pictureit.R;
 
 public class HomeFragment extends Fragment {
 
+    //Constants
     private static final String TAG = "HomeFragment";
+
+    //Widgets
+    private Button buttonEasy;
+    private Button buttonMedium;
+    private Button buttonHard;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Log.d(TAG, "onCreateView: starting.");
+
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        Button buttonEasy = (Button) view.findViewById(R.id.buttonEasy);
+        buttonEasy = view.findViewById(R.id.buttonEasy);
         buttonEasy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -29,7 +38,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        Button buttonMedium = (Button) view.findViewById(R.id.buttonMedium);
+        buttonMedium = view.findViewById(R.id.buttonMedium);
         buttonMedium.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,7 +46,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        Button buttonHard = (Button) view.findViewById(R.id.buttonHard);
+        buttonHard = view.findViewById(R.id.buttonHard);
         buttonHard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
