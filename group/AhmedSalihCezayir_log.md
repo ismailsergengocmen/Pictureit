@@ -26,4 +26,5 @@ This week I added the camera functionality to our app. I also worked with fireba
 Today I completed the progressmap. I added CardRecyclerViewAdapter class(Custon adapter class for recylerview), layaout_cardview (xml) and fragment_progressmap(xml). Then I filled the progressMap fragment by using those (I used the firebase in order to get the photos). Now we can see the photos taken and their date
 
 ### ~ 18/05/2020 ~
-Today I created the search activity. I added activity_search(xml) and snippet_searchbar(xml). Then I filled the search activity.(I used the firebase in order to get the related photos) Now user can enter a tag and search for related photos.
+Today I created the search activity. I added activity_search(xml) and snippet_searchbar(xml). Then I filled the search activity.(I used the firebase in order to get the related photos) Now user can enter a tag and search for related photos.Then, I organized our database and storage. With my group we decided the basic structure of the database. Then I made it. I added 2 new nodes(all_photos and tags_and_photos). I also organized the storage. Now storage have 2 folders(images and all_images). Then I organized and added the related methods to add photo to storage and realtime database(Those methods are uploading photos into correct folders/nodes). Then I tidied some parts of the project. 
+

@@ -37,6 +37,7 @@ We tried to solve authentication problem of Faruk and talked about layouts and c
 -->Mehmet Ali will complete the layouts and help others with database.
 -->Ahmed Salih will do work related to capturing image and uploading it to firebase + layout which will be created by Faruk.
 
+
 ### Meeting ~ (13/05/2020, 2hour)
 **Present:** Everyone
 **Discussion:** 
@@ -58,3 +59,13 @@ Faruk and Ahmed talked about their codes(EasyGameFragment/ Photo capture part). 
 -->Faruk will work on combining Ahmed's part and his part.(So that task part will be completed)
 -->Mehmet Ali will work on changing user profile photo.
 -->Ahmed Salih will work on Search activity and tag system. 
+
+### Meeting ~ (18/05/2020, 1.5hour)
+**Present:** Mehmet Ali was missing
+**Discussion:** 
+We talked about the general structure of the database and how we should create it so that we can achieve our goals. Then we talked about the last remaining tasks of our app.
+**ToDo:** 
+-->Sergen will work with help fragment.
+-->Faruk will work with onclick method of the gridview which is in the search activity
+-->Mehmet Ali was missing.
+-->Ahmed Salih will work on general structure of the database/storage and its methods.  
