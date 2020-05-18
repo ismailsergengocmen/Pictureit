@@ -44,6 +44,7 @@ public class EasyGameFragment extends Fragment {
     OnGridImageSelectedListener mOnGridImageSelectedListener;
 
     GridView gridView;
+    private static final int NUM_GRID_COLUMNS = 3;
 
 
     @Nullable
@@ -74,8 +75,6 @@ public class EasyGameFragment extends Fragment {
         }
         super.onAttach(context);
     }
-
-    private static final int NUM_GRID_COLUMNS = 3;
 
     private void setupGridView() {
         Log.d(TAG, "setupGridView: Setting up image grid.");
