@@ -28,7 +28,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".Search.SearchActivity"></activity>
+        <activity
+            android:name=".Search.SearchActivity"
+            android:windowSoftInputMode="stateHidden"></activity>
         <activity android:name=".Profile.ProfileActivity"></activity>
         <activity android:name=".Profile.AccountSettingsActivity"></activity>
         <activity android:name=".Login.RegisterActivity"></activity>

@@ -18,8 +18,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
-import com.example.pictureit.Login.LoginActivity;
 import com.example.pictureit.R;
 import com.example.pictureit.Utils.BottomNavigationViewHelper;
 import com.example.pictureit.Utils.FirebaseMethods;
@@ -57,6 +57,7 @@ public class ProfileFragment extends Fragment {
     private CircleImageView mProfilePhoto;
     private Toolbar toolbar;
     private ImageView profileMenu;
+    private ImageView progressMap;
     private BottomNavigationViewEx bottomNavigationViewEx;
 
     private Context mContext;
@@ -75,6 +76,13 @@ public class ProfileFragment extends Fragment {
         bottomNavigationViewEx = view.findViewById(R.id.bottomNavViewBar);
         mContext = getActivity();
         mFirebaseMethods = new FirebaseMethods(getActivity());
+        progressMap = view.findViewById(R.id.imageViewEarth);
+        progressMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                replaceFragment(new ProgressMapFragment());
+            }
+        });
 
         Log.d(TAG, "onCreateView: started.");
 
@@ -185,5 +193,12 @@ public class ProfileFragment extends Fragment {
         if (mAuthListener != null) {
             mAuth.removeAuthStateListener(mAuthListener);
         }
+    }
+
+    public void replaceFragment(Fragment someFragment) {
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.outerRelLay, someFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }
