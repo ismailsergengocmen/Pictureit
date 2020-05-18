@@ -154,6 +154,8 @@ public class HomeActivity extends AppCompatActivity implements EasyGameFragment.
         ViewGridItemFragment fragment = new ViewGridItemFragment();
         Bundle args = new Bundle();
         args.putParcelable("PHOTO", photo);
+        args.putString("tag1", photo.getTag1());
+        args.putString("tag2", photo.getTag2());
         fragment.setArguments(args);
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

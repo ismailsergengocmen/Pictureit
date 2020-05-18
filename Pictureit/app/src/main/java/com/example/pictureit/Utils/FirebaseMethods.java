@@ -302,7 +302,7 @@ public class FirebaseMethods {
      * A method for producing String which is the representation of current date and time
      * @return the current time and date
      */
-    private String getTimestamp() {
+    public String getTimestamp() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.CANADA);
         sdf.setTimeZone(TimeZone.getTimeZone("Canada/Pacific"));
         return sdf.format(new Date());
