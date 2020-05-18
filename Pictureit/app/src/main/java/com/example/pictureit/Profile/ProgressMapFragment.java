@@ -30,14 +30,15 @@ import java.util.Objects;
 
 public class ProgressMapFragment extends Fragment {
 
+    //Constants
     private static final String TAG = "ProgressMapFragment";
-
+    private final Context mContext = getContext();
     //Firebase
     private DatabaseReference reference;
 
     //Variables
     private List<Photo> photoList;
-    private Context mContext;
+
 
     //Widgets
     private RecyclerView recyclerView;
@@ -48,9 +49,9 @@ public class ProgressMapFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_progress_map, container, false);
 
-        photoList = new ArrayList<Photo>();
-        mContext = getContext();
+        photoList = new ArrayList<>();
         reference = FirebaseDatabase.getInstance().getReference();
+
         setPhotos();
         recyclerView = view.findViewById(R.id.recyclerView);
         adapter = new CardRecyclerViewAdapter(mContext, photoList);
@@ -98,7 +99,5 @@ public class ProgressMapFragment extends Fragment {
 
                     }
                 });
-
     }
-
 }

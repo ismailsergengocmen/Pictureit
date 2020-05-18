@@ -6,9 +6,9 @@
         android:background="@drawable/white_grey_border_bottom">
 
         <androidx.appcompat.widget.Toolbar
+            android:id="@+id/profileToolBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/profileToolBar"
             android:theme="@style/menuStyle">
 
             <RelativeLayout
@@ -16,21 +16,21 @@
                 android:layout_height="match_parent">
 
                 <ImageView
+                    android:id="@+id/backArrow"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginEnd="20dp"
                     android:layout_centerVertical="true"
-                    android:id="@+id/backArrow"
-                    android:src="@drawable/ic_backarrow"/>
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/ic_backarrow" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/backArrow"
                     android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/backArrow"
                     android:text="Medium Game"
-                    android:textSize="20dp"
-                    android:textColor="@color/colorBlack"/>
+                    android:textColor="@color/colorBlack"
+                    android:textSize="20dp" />
 
             </RelativeLayout>
 

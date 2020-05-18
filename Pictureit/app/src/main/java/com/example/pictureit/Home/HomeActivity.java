@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 
 import com.example.pictureit.Login.LoginActivity;
@@ -28,10 +27,10 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class HomeActivity extends AppCompatActivity implements EasyGameFragment.OnGridImageSelectedListener {
 
+    //Constants
     private static final String TAG = "HomeActivity";
-
     private static final int ACTIVITY_NUMBER = 0;
-    private Context mContext = HomeActivity.this;
+    private final Context mContext = HomeActivity.this;
 
     //Firebase
     private FirebaseAuth mAuth;
@@ -41,7 +40,6 @@ public class HomeActivity extends AppCompatActivity implements EasyGameFragment.
     private Button buttonEasy;
     private Button buttonMedium;
     private Button buttonHard;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +51,6 @@ public class HomeActivity extends AppCompatActivity implements EasyGameFragment.
         initImageLoader();
         setupBottomNavigationView();
         setupViewPager();
-
     }
 
     private void initImageLoader() {
@@ -85,7 +82,7 @@ public class HomeActivity extends AppCompatActivity implements EasyGameFragment.
         Log.d(TAG, "setupBottomNavigationView: setting up BottomNavigationView");
         BottomNavigationViewEx bottomNavigationViewEx = (BottomNavigationViewEx) findViewById(R.id.bottomNavViewBar);
         BottomNavigationViewHelper.setupBottomNavigationView(bottomNavigationViewEx);
-        BottomNavigationViewHelper.enableNavigation(mContext, this , bottomNavigationViewEx);
+        BottomNavigationViewHelper.enableNavigation(mContext, this, bottomNavigationViewEx);
 
         Menu menu = bottomNavigationViewEx.getMenu();
         MenuItem menuItem = menu.getItem(ACTIVITY_NUMBER);
@@ -93,6 +90,7 @@ public class HomeActivity extends AppCompatActivity implements EasyGameFragment.
     }
 
 //-----------------------------------------Firebase-------------------------------------------------
+
     /**
      * check to see if the user is logged in
      *

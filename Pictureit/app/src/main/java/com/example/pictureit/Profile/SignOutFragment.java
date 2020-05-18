@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class SignOutFragment extends Fragment {
 
+    //Constants
     private static final String TAG = "SignOutFragment";
 
     //Firebase

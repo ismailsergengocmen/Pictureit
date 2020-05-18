@@ -2,6 +2,7 @@ package com.example.pictureit.models;
 
 public class User {
 
+    //Properties
     private String user_id;
     private String email;
     private String username;

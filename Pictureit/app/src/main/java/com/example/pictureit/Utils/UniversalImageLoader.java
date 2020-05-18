@@ -2,7 +2,6 @@ package com.example.pictureit.Utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -19,7 +18,10 @@ import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 public class UniversalImageLoader {
 
+    //Constants
     private static final int DEFAULT_IMAGE = R.drawable.ic_android;
+
+    //Variables
     private Context mContext;
 
     public UniversalImageLoader(Context context) {

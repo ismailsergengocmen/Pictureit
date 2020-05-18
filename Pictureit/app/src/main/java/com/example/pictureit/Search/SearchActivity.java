@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -18,7 +17,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.pictureit.Home.EasyGameFragment;
 import com.example.pictureit.Home.ViewGridItemFragment;
 import com.example.pictureit.R;
 import com.example.pictureit.Utils.BottomNavigationViewHelper;
@@ -30,7 +28,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
@@ -38,11 +35,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class SearchActivity extends AppCompatActivity  {
+public class SearchActivity extends AppCompatActivity {
 
+    //Constants
     private static final String TAG = "SearchActivity";
-
-    //Constant
     private static final int ACTIVITY_NUMBER = 1;
     private static final int NUM_GRID_COLUMNS = 3;
     private final Context mContext = SearchActivity.this;
@@ -148,9 +144,7 @@ public class SearchActivity extends AppCompatActivity  {
                     Log.d(TAG, "onCancelled: cancelled.");
                 }
             });
-
         }
-
     }
 
     /**
@@ -180,6 +174,4 @@ public class SearchActivity extends AppCompatActivity  {
         transaction.addToBackStack(null);
         transaction.commit();
     }
-
-
 }

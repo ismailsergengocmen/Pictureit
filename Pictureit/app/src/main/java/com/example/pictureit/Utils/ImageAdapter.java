@@ -2,8 +2,10 @@ package com.example.pictureit.Utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +20,9 @@ import java.util.ArrayList;
 
 import com.example.pictureit.R;
 
-public class ImageAdapter extends ArrayAdapter<String>{
+public class ImageAdapter extends ArrayAdapter<String> {
 
+    //Variables
     private Context mContext;
     private LayoutInflater mInflater;
     private int layoutResource;
@@ -35,7 +38,7 @@ public class ImageAdapter extends ArrayAdapter<String>{
         this.imgURLs = imgURLs;
     }
 
-    private static class ViewHolder{
+    private static class ViewHolder {
         SquareImageView image;
         ProgressBar mProgressBar;
     }
@@ -48,15 +51,14 @@ public class ImageAdapter extends ArrayAdapter<String>{
         ViewHolder build pattern (Similar to recyclerview)
          */
         final ViewHolder holder;
-        if(convertView == null){
+        if (convertView == null) {
             convertView = mInflater.inflate(layoutResource, parent, false);
             holder = new ViewHolder();
             holder.mProgressBar = (ProgressBar) convertView.findViewById(R.id.gridImageProgressbar);
             holder.image = (SquareImageView) convertView.findViewById(R.id.gridImageView);
 
             convertView.setTag(holder);
-        }
-        else{
+        } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
@@ -67,28 +69,28 @@ public class ImageAdapter extends ArrayAdapter<String>{
         imageLoader.displayImage(mAppend + imgURL, holder.image, new ImageLoadingListener() {
             @Override
             public void onLoadingStarted(String imageUri, View view) {
-                if(holder.mProgressBar != null){
+                if (holder.mProgressBar != null) {
                     holder.mProgressBar.setVisibility(View.VISIBLE);
                 }
             }
 
             @Override
             public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
-                if(holder.mProgressBar != null){
+                if (holder.mProgressBar != null) {
                     holder.mProgressBar.setVisibility(View.GONE);
                 }
             }
 
             @Override
             public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                if(holder.mProgressBar != null){
+                if (holder.mProgressBar != null) {
                     holder.mProgressBar.setVisibility(View.GONE);
                 }
             }
 
             @Override
             public void onLoadingCancelled(String imageUri, View view) {
-                if(holder.mProgressBar != null){
+                if (holder.mProgressBar != null) {
                     holder.mProgressBar.setVisibility(View.GONE);
                 }
             }

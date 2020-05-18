@@ -15,33 +15,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-<!--                <ImageView-->
-<!--                    android:layout_width="30dp"-->
-<!--                    android:layout_height="30dp"-->
-<!--                    android:src="@drawable/ic_search"-->
-<!--                    android:id="@+id/search_icon"-->
-<!--                    android:layout_centerVertical="true">-->
-
-<!--                </ImageView>-->
-
                 <TextView
+                    android:id="@+id/symbol"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="22sp"
-                    android:textColor="@color/colorGrey"
-                    android:id="@+id/symbol"
+                    android:layout_centerVertical="true"
                     android:text="#"
-                    android:layout_centerVertical="true">
+                    android:textColor="@color/colorGrey"
+                    android:textSize="22sp">
 
                 </TextView>
 
                 <EditText
                     android:id="@+id/searchbar"
-                    android:layout_toRightOf="@id/symbol"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="5dp"
+                    android:layout_toRightOf="@id/symbol"
                     android:background="@android:color/transparent"
                     android:hint="Search tag"
                     android:textColor="@color/colorBlack"
