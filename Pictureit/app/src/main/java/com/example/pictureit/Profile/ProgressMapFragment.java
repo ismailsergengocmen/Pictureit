@@ -2,6 +2,7 @@ package com.example.pictureit.Profile;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ProgressMapFragment extends Fragment {
 
@@ -61,29 +63,32 @@ public class ProgressMapFragment extends Fragment {
 
     private void setPhotos() {
         //change the node!!
-        final StringManipulation stringManipulation;
-        stringManipulation = new StringManipulation();
+        final StringManipulation stringManipulation = new StringManipulation();
 
-        reference.child(getString(R.string.dbname_user_photos))
+        reference.child(getString(R.string.dbname_all_photos))
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         photoList.clear();
-                        for (DataSnapshot ds: dataSnapshot.getChildren()) {
+                        for (DataSnapshot ds : dataSnapshot.getChildren()) {
                             Photo photo = new Photo();
-                            photo.setUser_id(ds.child(getString(R.string.field_user_id)).getValue().toString());
-                            photo.setDate_created(stringManipulation.timeStampConverter(ds.child(getString(R.string.field_date_created)).getValue().toString()));
-                            photo.setImage_path(ds.child(getString(R.string.field_image_path)).getValue().toString());
-                            photo.setImage_id(ds.child(getString(R.string.field_user_id)).getValue().toString());
-                            photo.setTag1(ds.child(getString(R.string.field_tag1)).getValue().toString());
-                            photo.setTag2(ds.child(getString(R.string.field_tag2)).getValue().toString());
+                            try {
+                                photo.setUser_id(ds.child(getActivity().getString(R.string.field_user_id)).getValue().toString());
+                                photo.setDate_created(StringManipulation.timeStampConverter(ds.child(getActivity().getString(R.string.field_date_created)).getValue().toString()));
+                                photo.setImage_path(ds.child(getActivity().getString(R.string.field_image_path)).getValue().toString());
+                                photo.setImage_id(ds.child(getActivity().getString(R.string.field_user_id)).getValue().toString());
+                                photo.setTag1(ds.child(getActivity().getString(R.string.field_tag1)).getValue().toString());
+                                photo.setTag2(ds.child(getActivity().getString(R.string.field_tag2)).getValue().toString());
 
-                            photoList.add(photo);
+                                photoList.add(photo);
+                            } catch (NullPointerException e) {
+                                Log.d(TAG, "onDataChange: NullPointerException: " + e.getMessage());
+                            }
                         }
                         recyclerView.setAdapter(adapter);
                         recyclerView.getAdapter().notifyDataSetChanged();
-                        reference.child(getString(R.string.dbname_user_photos))
+                        reference.child(Objects.requireNonNull(getActivity()).getString(R.string.dbname_user_photos))
                                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                 .removeEventListener(this);
                     }

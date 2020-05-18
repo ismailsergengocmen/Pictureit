@@ -58,8 +58,8 @@ public class FirebaseMethods {
         }
     }
 
-    public void updateDisplayName(String displayName){
-        if(displayName !=null) {
+    public void updateDisplayName(String displayName) {
+        if (displayName != null) {
             Log.d(TAG, "updating display name to:" + displayName);
             myRef.child(mContext.getString(R.string.dbname_user_account_settings)).child(userID).child(mContext.getString(R.string.field_display_name)).setValue(displayName);
         }
@@ -67,30 +67,33 @@ public class FirebaseMethods {
 
     /**
      * update username in the 'users' node and 'user_account_settings' node
+     *
      * @param username
      */
-    public void updateUsername(String username){
-        if(username !=null) {
+    public void updateUsername(String username) {
+        if (username != null) {
             Log.d(TAG, "updateUsername: updating username to: " + username);
             myRef.child(mContext.getString(R.string.dbname_users)).child(userID).child(mContext.getString(R.string.field_username)).setValue(username);
             myRef.child(mContext.getString(R.string.dbname_user_account_settings)).child(userID).child(mContext.getString(R.string.field_username)).setValue(username);
         }
-        if (username==null){
+        if (username == null) {
             Log.d(TAG, "please enter username");
         }
     }
 
     /**
      * update the email in the 'users' node
+     *
      * @param email
      */
-    public void updateEmail(String email){
+    public void updateEmail(String email) {
         Log.d(TAG, "updateUsername: updating email to: " + email);
         myRef.child(mContext.getString(R.string.dbname_users)).child(userID).child(mContext.getString(R.string.field_email)).setValue(email);
     }
 
     /**
      * Register a new email and password to Firebase Authentication
+     *
      * @param email    user email
      * @param password user password
      * @param username user username
@@ -145,7 +148,7 @@ public class FirebaseMethods {
      */
     public void addNewUser(String email, String username, String profile_photo) {
 
-        User user = new User(userID,email, StringManipulation.condenseUsername(username));
+        User user = new User(userID, email, StringManipulation.condenseUsername(username));
 
         myRef.child(mContext.getString(R.string.dbname_users))
                 .child(userID)
@@ -161,9 +164,9 @@ public class FirebaseMethods {
         myRef.child(mContext.getString(R.string.dbname_user_account_settings))
                 .child(userID)
                 .setValue(settings);
-        addPhotoToDatabase("https://firebasestorage.googleapis.com/v0/b/pictureit-7d068.appspot.com/o/EasyGamePhotos%2Fphoto0.png?alt=media&token=7bad77d7-7ca4-4aa4-bd53-0a03feca2a13", "Black","Cat");
-        addPhotoToDatabase("https://firebasestorage.googleapis.com/v0/b/pictureit-7d068.appspot.com/o/EasyGamePhotos%2Fphoto1.png?alt=media&token=e4e9d72c-798a-481b-93aa-ffd29dd84861", "Yellow","Dog");
-        addPhotoToDatabase("https://firebasestorage.googleapis.com/v0/b/pictureit-7d068.appspot.com/o/EasyGamePhotos%2Fphoto2.png?alt=media&token=b45637ac-7a43-40a8-b38f-10fd9a562f3f","Orange", "Fish");
+        addPhotoToDatabase("photo_0", "https://firebasestorage.googleapis.com/v0/b/pictureit-7d068.appspot.com/o/EasyGamePhotos%2Fphoto0.png?alt=media&token=7bad77d7-7ca4-4aa4-bd53-0a03feca2a13", "Black", "Cat");
+        addPhotoToDatabase("photo_1", "https://firebasestorage.googleapis.com/v0/b/pictureit-7d068.appspot.com/o/EasyGamePhotos%2Fphoto1.png?alt=media&token=e4e9d72c-798a-481b-93aa-ffd29dd84861", "Yellow", "Dog");
+        addPhotoToDatabase("photo_2", "https://firebasestorage.googleapis.com/v0/b/pictureit-7d068.appspot.com/o/EasyGamePhotos%2Fphoto2.png?alt=media&token=b45637ac-7a43-40a8-b38f-10fd9a562f3f", "Orange", "Fish");
     }
 
 
@@ -242,6 +245,7 @@ public class FirebaseMethods {
 
     /**
      * A method for adding photo to "user photos" node of the firebase database
+     *
      * @param url this is the download url of the photo. It shows the location of the photo in the firebase storage
      */
     public void addPhotoToDatabase(String url) {
@@ -264,11 +268,12 @@ public class FirebaseMethods {
 
     /**
      * A method for adding photo to "user photos" , "tags and photos" nodes of the firebase database
-     * @param url this is the download url of the photo. It shows the location of the photo in the firebase storage
+     *
+     * @param url  this is the download url of the photo. It shows the location of the photo in the firebase storage
      * @param tag1 tag1 of the photo
      * @param tag2 tag2 of the photo
      */
-    public void addPhotoToDatabase(String url, String tag1, String tag2) {
+    public void addPhotoToDatabase(String image_id, String url, String tag1, String tag2) {
         Log.d(TAG, "addPhotoToDatabase: adding photo to database.");
 
         String newPhotoKey = myRef.child(mContext.getString(R.string.dbname_user_photos)).push().getKey();
@@ -278,59 +283,52 @@ public class FirebaseMethods {
         photo.setTag1(tag1);
         photo.setTag2(tag2);
         photo.setUser_id(FirebaseAuth.getInstance().getCurrentUser().getUid());
-        photo.setImage_id(newPhotoKey);
+        photo.setImage_id(image_id);
 
-        //insert into database
+        //insert into database's user_photos node
         myRef.child(mContext.getString(R.string.dbname_user_photos))
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                .child(newPhotoKey).setValue(photo);
+                .child(image_id).setValue(photo);
+
+//        //insert into database's all_photos node
+//        myRef.child(mContext.getString(R.string.dbname_all_photos))
+//                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+//                .child(newPhotoKey).setValue(photo);
 
         //adds the photo to the tags_and_name node (under tag1 branch)
         myRef.child(mContext.getString(R.string.dbname_tags_and_photos))
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .child(tag1.toLowerCase())
-                .child(newPhotoKey).setValue(photo);
+                .child(image_id).setValue(photo);
 
         //adds the photo to the tags_and_name node (under tag2 branch)
         myRef.child(mContext.getString(R.string.dbname_tags_and_photos))
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .child(tag2.toLowerCase())
+                .child(image_id).setValue(photo);
+    }
+
+    public void addPhotoToDatabase(String image_id, String url, String tag1, String tag2, String node) {
+        Log.d(TAG, "addPhotoToDatabase: adding photo to database.");
+
+        String newPhotoKey = myRef.child(mContext.getString(R.string.dbname_all_photos)).push().getKey();
+        Photo photo = new Photo();
+        photo.setImage_path(url);
+        photo.setDate_created(getTimestamp());
+        photo.setTag1(tag1);
+        photo.setTag2(tag2);
+        photo.setUser_id(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        photo.setImage_id(image_id);
+
+        //insert into database's all_photos node
+        myRef.child(node)
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .child(newPhotoKey).setValue(photo);
     }
 
     /**
-     * A method to upload images to the firebase storage
-     * @param name name of the photo
-     * @param uri uri of the taken photo
-     * @param node the desired place to upload the photo
-     */
-    public void uploadImageToStorage(String name, Uri uri, String node) {
-        final StorageReference reference = mStorageReference
-                .child(node)
-                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                .child(name);
-
-        reference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(final UploadTask.TaskSnapshot taskSnapshot) {
-                Toast.makeText(mContext, "Upload succeeded", Toast.LENGTH_SHORT).show();
-                reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        Log.d("tag", "onSuccess: Url " + uri.toString());
-                    }
-                });
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(mContext, "Upload failed", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    /**
      * A method for producing String which is the representation of current date and time
+     *
      * @return the current time and date
      */
     public String getTimestamp() {

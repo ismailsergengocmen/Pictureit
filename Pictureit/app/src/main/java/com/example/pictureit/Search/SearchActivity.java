@@ -84,7 +84,7 @@ public class SearchActivity extends AppCompatActivity  {
 
             @Override
             public void afterTextChanged(Editable s) {
-                String text = mSearchBar.getText().toString();
+                String text = mSearchBar.getText().toString().toLowerCase();
                 searchForMatch(text);
             }
         });
