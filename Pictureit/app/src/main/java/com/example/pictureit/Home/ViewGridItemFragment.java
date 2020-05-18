@@ -68,8 +68,10 @@ public class ViewGridItemFragment extends Fragment {
     //Widgets
     private ImageView camera;
     private SquareImageView image;
-    private TextView tag;
+    private TextView tag1;
+    private TextView tag2;
     private ImageView backArrow;
+    private Photo mPhoto;
 
     public ViewGridItemFragment(){
         super();
@@ -88,7 +90,8 @@ public class ViewGridItemFragment extends Fragment {
         userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         image = view.findViewById(R.id.task_photo);
-        tag = view.findViewById(R.id.task_tag);
+        tag1 = view.findViewById(R.id.task_tag1);
+        tag2 = view.findViewById(R.id.task_tag2);
         camera = view.findViewById(R.id.capture);
         camera.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -208,10 +211,38 @@ public class ViewGridItemFragment extends Fragment {
 
     private void init(){
         try{
-            //mPhoto = getPhotoFromBundle();
+            mPhoto = getPhotoFromBundle();
             UniversalImageLoader.setImage(getPhotoFromBundle().getImage_path(), image, null, "");
-            String photo_id = getPhotoFromBundle().getImage_id();
+            tag1.setText(mPhoto.getTag1());
+            tag2.setText(mPhoto.getTag2());
+            String photo_id = mPhoto.getImage_id();
 
+            Query query = FirebaseDatabase.getInstance().getReference()
+                    .child(getString(R.string.dbname_user_photos))
+                    .orderByChild(getString(R.string.field_photo_id))
+                    .equalTo(photo_id);
+            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
+                        Photo newPhoto = new Photo();
+                        Map<String, Object> objectMap = (HashMap<String, Object>) singleSnapshot.getValue();
+
+//                        newPhoto.setTag1(mPhoto.getTag1());
+//                        newPhoto.setTag2(mPhoto.getTag2());
+//                        newPhoto.setImage_id(mPhoto.getImage_id());
+//                        newPhoto.setUser_id(mPhoto.getUser_id());
+//                        newPhoto.setDate_created(firebaseMethods.getTimestamp());
+//                        newPhoto.setImage_path("file:///storage/emulated/0/Android/data/com.example.pictureit/files/Pictures/JPEG_20200518_111007_8855921001812468337.jpg");
+//                        UniversalImageLoader.setImage(newPhoto.getImage_path(), image, null, "");
+                    }
+
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Log.d(TAG, "onCancelled: query cancelled.");
+                }
+            });
         }catch (NullPointerException e){
             Log.e(TAG, "onCreateView: NullPointerException: " + e.getMessage() );
         }
