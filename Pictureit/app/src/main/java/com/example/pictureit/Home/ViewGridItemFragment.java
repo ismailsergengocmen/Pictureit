@@ -193,7 +193,7 @@ public class ViewGridItemFragment extends Fragment {
 
             Query query = FirebaseDatabase.getInstance().getReference()
                     .child(getString(R.string.dbname_user_photos))
-                    .orderByChild(getString(R.string.field_photo_id))
+                    .orderByChild(getString(R.string.field_image_id))
                     .equalTo(photo_id);
             query.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
