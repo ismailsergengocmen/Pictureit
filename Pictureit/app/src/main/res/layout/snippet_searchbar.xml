@@ -15,15 +15,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_search"
+                    android:id="@+id/search_icon"
+                    android:layout_centerVertical="true">
+
+                </ImageView>
+
                 <EditText
                     android:id="@+id/search"
+                    android:layout_toRightOf="@id/search_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="5dp"
-                    android:textColorHint="@color/colorGrey"
-                    android:hint="Search tag..."
+                    android:background="@android:color/transparent"
+                    android:hint="Search tag"
                     android:textColor="@color/colorBlack"
+                    android:textColorHint="@color/colorGrey"
                     android:textSize="20sp">
 
                 </EditText>
