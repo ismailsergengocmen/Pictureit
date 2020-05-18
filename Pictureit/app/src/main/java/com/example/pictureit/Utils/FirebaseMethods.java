@@ -1,7 +1,6 @@
 package com.example.pictureit.Utils;
 
 import android.content.Context;
-import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -11,8 +10,6 @@ import com.example.pictureit.models.User;
 import com.example.pictureit.models.UserAccountSettings;
 import com.example.pictureit.models.UserSettings;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,7 +19,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import androidx.annotation.NonNull;
 
@@ -298,36 +294,7 @@ public class FirebaseMethods {
                 .child(newPhotoKey).setValue(photo);
     }
 
-    /**
-     * A method to upload images to the firebase storage
-     * @param name name of the photo
-     * @param uri uri of the taken photo
-     * @param node the desired place to upload the photo
-     */
-    public void uploadImageToStorage(String name, Uri uri, String node) {
-        final StorageReference reference = mStorageReference
-                .child(node)
-                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                .child(name);
 
-        reference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(final UploadTask.TaskSnapshot taskSnapshot) {
-                Toast.makeText(mContext, "Upload succeeded", Toast.LENGTH_SHORT).show();
-                reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        Log.d("tag", "onSuccess: Url " + uri.toString());
-                    }
-                });
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(mContext, "Upload failed", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
 
     /**
      * A method for producing String which is the representation of current date and time

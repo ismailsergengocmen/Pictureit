@@ -177,10 +177,36 @@ public class ViewGridItemFragment extends Fragment {
                 //image.setImageURI(Uri.fromFile(f));
                 Log.d("tag", "Absolute Url of Image: " + Uri.fromFile(f));
 
-                firebaseMethods.uploadImageToStorage("photo_5", Uri.fromFile(f), "all_images");
+                uploadImageToFirebase("photo_" + 5, Uri.fromFile(f));
                 firebaseMethods.addPhotoToDatabase(Uri.fromFile(f).toString());
             }
         }
+    }
+
+    /**
+     * A method to upload images to the firebase storage
+     * @param name name of the photo
+     * @param uri uri of the taken photo
+     */
+    private void uploadImageToFirebase(String name, Uri uri) {
+        final StorageReference image = mStorageReference.child("images/" + userID + "/" + name);
+        image.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(final UploadTask.TaskSnapshot taskSnapshot) {
+                Toast.makeText(getActivity(), "Upload succeeded", Toast.LENGTH_SHORT).show();
+                image.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Log.d("tag", "onSuccess: Url " + uri.toString());
+                    }
+                });
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getActivity(), "Upload failed", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void init(){
