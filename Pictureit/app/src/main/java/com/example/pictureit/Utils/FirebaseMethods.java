@@ -284,13 +284,13 @@ public class FirebaseMethods {
         //adds the photo to the tags_and_name node (under tag1 branch)
         myRef.child(mContext.getString(R.string.dbname_tags_and_photos))
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                .child(tag1)
+                .child(tag1.toLowerCase())
                 .child(newPhotoKey).setValue(photo);
 
         //adds the photo to the tags_and_name node (under tag2 branch)
         myRef.child(mContext.getString(R.string.dbname_tags_and_photos))
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                .child(tag2)
+                .child(tag2.toLowerCase())
                 .child(newPhotoKey).setValue(photo);
     }
 
@@ -300,7 +300,7 @@ public class FirebaseMethods {
      * A method for producing String which is the representation of current date and time
      * @return the current time and date
      */
-    private String getTimestamp() {
+    public String getTimestamp() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.CANADA);
         sdf.setTimeZone(TimeZone.getTimeZone("Canada/Pacific"));
         return sdf.format(new Date());

@@ -20,13 +20,25 @@
         </com.example.pictureit.Utils.SquareImageView>
 
         <TextView
-            android:id="@+id/task_tag"
+            android:id="@+id/task_tag1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/task_photo"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
-            android:text="Black cat"
+            android:textColor="@color/colorBlack"
+            android:textSize="25sp">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/task_tag2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/task_photo"
+            android:layout_toRightOf="@id/task_tag1"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="10dp"
             android:textColor="@color/colorBlack"
             android:textSize="25sp">
 
@@ -36,7 +48,7 @@
             android:id="@+id/capture"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_below="@id/task_tag"
+            android:layout_below="@id/task_tag2"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="50dp"
             android:src="@drawable/ic_camera">
