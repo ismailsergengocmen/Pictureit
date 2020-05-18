@@ -54,36 +54,39 @@ public class FirebaseMethods {
         }
     }
 
-    public void updateUsername(String username){
-        Log.d(TAG, "updateUsername: updating username to: " + username);
-
-        myRef.child(mContext.getString(R.string.dbname_users)).child(userID).child(mContext.getString(R.string.field_username)).setValue(username);
-
-        myRef.child(mContext.getString(R.string.dbname_user_account_settings)).child(userID).child(mContext.getString(R.string.field_username)).setValue(username);
+    public void updateDisplayName(String displayName){
+        if(displayName !=null) {
+            Log.d(TAG, "updating display name to:" + displayName);
+            myRef.child(mContext.getString(R.string.dbname_user_account_settings)).child(userID).child(mContext.getString(R.string.field_display_name)).setValue(displayName);
+        }
     }
 
-   // public boolean checkIfUsernameExists(String username, DataSnapshot datasnapshot) {
-       // Log.d(TAG, "checkIfUsernameExists: checking if " + username + " already exists.");
+    /**
+     * update username in the 'users' node and 'user_account_settings' node
+     * @param username
+     */
+    public void updateUsername(String username){
+        if(username !=null) {
+            Log.d(TAG, "updateUsername: updating username to: " + username);
+            myRef.child(mContext.getString(R.string.dbname_users)).child(userID).child(mContext.getString(R.string.field_username)).setValue(username);
+            myRef.child(mContext.getString(R.string.dbname_user_account_settings)).child(userID).child(mContext.getString(R.string.field_username)).setValue(username);
+        }
+        if (username==null){
+            Log.d(TAG, "please enter username");
+        }
+    }
 
-       // User user = new User();
-
-      //  for (DataSnapshot ds : datasnapshot.child(userID).getChildren()) {
-         //   Log.d(TAG, "checkIfUsernameExists: datasnapshot: " + ds);
-
-        //    user.setUsername(ds.getValue(User.class).getUsername());
-        //    Log.d(TAG, "checkIfUsernameExists: datasnapshot: " + user.getUsername());
-
-         //   if (StringManipulation.expandUsername(user.getUsername()).equals(username)) {
-          //      Log.d(TAG, "checkIfUsernameExists: FOUND A MATCH" + user.getUsername());
-          ///      return true;
-         //   }
-     //   }
-      //  return false;
-   // }
+    /**
+     * update the email in the 'users' node
+     * @param email
+     */
+    public void updateEmail(String email){
+        Log.d(TAG, "updateUsername: updating email to: " + email);
+        myRef.child(mContext.getString(R.string.dbname_users)).child(userID).child(mContext.getString(R.string.field_email)).setValue(email);
+    }
 
     /**
      * Register a new email and password to Firebase Authentication
-     *
      * @param email    user email
      * @param password user password
      * @param username user username
@@ -138,7 +141,7 @@ public class FirebaseMethods {
      */
     public void addNewUser(String email, String username, String profile_photo) {
 
-        User user = new User(userID, 1, email, StringManipulation.condenseUsername(username));
+        User user = new User(userID,email, StringManipulation.condenseUsername(username));
 
         myRef.child(mContext.getString(R.string.dbname_users))
                 .child(userID)
@@ -221,11 +224,6 @@ public class FirebaseMethods {
                         ds.child(userID)
                                 .getValue(User.class)
                                 .getEmail()
-                );
-                user.setPhone_number(
-                        ds.child(userID)
-                                .getValue(User.class)
-                                .getPhone_number()
                 );
                 user.setUser_id(
                         ds.child(userID)
