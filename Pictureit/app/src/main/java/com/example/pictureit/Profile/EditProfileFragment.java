@@ -135,7 +135,7 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
     //Widgets
     private EditText mDisplayName, mEmail, mUserName;
     private Button mChangeProfilePhoto, mChangePasswordButton, mDeleteAccountButton;
-    private CircleImageView mProfilePhoto;
+    private ImageView mProfilePhoto;
 
 
     //Variables
