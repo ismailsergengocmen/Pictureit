@@ -29,6 +29,8 @@ public class BadgeFragment extends Fragment {
 
     private static final String TAG = "BadgeFragment";
     private Context mContext;
+    private int count1 = 0;
+    private int count2 = 0;
 
     private List<String> mImageUrls;
     private List<String> mTask;
@@ -95,9 +97,10 @@ public class BadgeFragment extends Fragment {
         redRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                count = 0;
+                count1 = 0;
                 for (DataSnapshot ds: dataSnapshot.getChildren()) {
-                    count++;
+                    count1++;
+                    Log.d(TAG, "onDataChange: " + count1);
                 }
             }
 
@@ -106,7 +109,7 @@ public class BadgeFragment extends Fragment {
 
             }
         });
-        mProgress.set(0, count);
+        mProgress.set(0, count1);
 
         DatabaseReference catRef = mRef
                 .child(getString(R.string.dbname_tags_and_photos))
@@ -115,9 +118,9 @@ public class BadgeFragment extends Fragment {
         catRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                count = 0;
+                count2 = 0;
                 for (DataSnapshot ds: dataSnapshot.getChildren()) {
-                    count++;
+                    count2++;
                 }
             }
 
@@ -126,7 +129,7 @@ public class BadgeFragment extends Fragment {
 
             }
         });
-        mProgress.set(1, count);
+        mProgress.set(1, count2);
     }
 
 }

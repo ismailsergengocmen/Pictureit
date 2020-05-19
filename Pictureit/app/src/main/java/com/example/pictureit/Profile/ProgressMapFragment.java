@@ -89,9 +89,9 @@ public class ProgressMapFragment extends Fragment {
                         }
                         recyclerView.setAdapter(adapter);
                         recyclerView.getAdapter().notifyDataSetChanged();
-                        reference.child(Objects.requireNonNull(getActivity()).getString(R.string.dbname_user_photos))
-                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                .removeEventListener(this);
+//                        reference.child(getActivity().getString(R.string.dbname_user_photos))
+//                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+//                                .removeEventListener(this);
                     }
 
                     @Override
