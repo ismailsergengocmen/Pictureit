@@ -134,7 +134,7 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
 
     //Widgets
     private EditText mDisplayName, mEmail, mUserName;
-    private Button mChangeProfilePhoto,mChangePasswordButton,mDeleteAccountButton;
+    private Button mChangeProfilePhoto, mChangePasswordButton, mDeleteAccountButton;
     private CircleImageView mProfilePhoto;
 
 
@@ -161,8 +161,6 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
         mStorageReference = FirebaseStorage.getInstance().getReference();
         userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-
-        // setProfileImage();
         setupFirebaseAuth();
 
         //setup the back arrow for navigating back to profile activity
@@ -183,7 +181,6 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
                 saveProfileSettings();
             }
         });
-
 
         mChangePasswordButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -231,19 +228,19 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
                 final AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
                 dialog.setTitle("Are you sure?");
                 dialog.setMessage("Deleting this account will result in completely removing your "
-                + "account from the system and you won't be able to access your profile");
+                        + "account from the system and you won't be able to access your profile");
                 dialog.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         mAuth.getCurrentUser().delete().addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                if(task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     Toast.makeText(getActivity(), "Account Deleted", Toast.LENGTH_LONG).show();
                                     Intent intent = new Intent(getActivity(), LoginActivity.class);
                                     startActivity(intent);
-                                }else{
-                                    Toast.makeText(getActivity(),task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                } else {
+                                    Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
                                 }
                             }
                         });
@@ -367,7 +364,6 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
         });
     }
 
-
     /**
      * Retrieves the data contained in the widgets and submits it to the database
      * Before doing so it checks to make sure the username chosen is unique
@@ -442,7 +438,7 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
         Log.d(TAG, "setProfileWidgets: setting widgets with data retrieving from firebase database: " + userSettings.getUser().getEmail());
 
         mUserSettings = userSettings;
-        
+
         UserAccountSettings settings = userSettings.getSettings();
 
         UniversalImageLoader.setImage(settings.getProfile_photo(), mProfilePhoto, null, "");
