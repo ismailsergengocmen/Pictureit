@@ -2,9 +2,13 @@ package com.example.pictureit.Profile;
 
 import android.media.Image;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,26 +17,44 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.pictureit.R;
+import com.example.pictureit.Utils.BottomNavigationViewHelper;
+import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 public class HelpFragment extends Fragment {
 
     private static final String TAG = "HelpFragment";
 
     //Variables
-    private TextView FirstP,SecondP,ThirdP,FourthP,FifthP;
-    private ImageView Questionmark;
+    private TextView firstP, secondP, thirdP, fourthP, fifthP;
+    private ImageView questionmark, backButton;
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_help, container, false);
-        FirstP = view.findViewById(R.id.FirstP);
-        SecondP = view.findViewById(R.id.SecondP);
-        ThirdP = view.findViewById(R.id.ThirdP);
-        FourthP = view.findViewById(R.id.FourthP);
-        FifthP = view.findViewById(R.id.FifthP);
-        Questionmark = view.findViewById(R.id.QuestionEmoji);
+        firstP = view.findViewById(R.id.FirstP);
+        secondP = view.findViewById(R.id.SecondP);
+        thirdP = view.findViewById(R.id.ThirdP);
+        fourthP = view.findViewById(R.id.FourthP);
+        fifthP = view.findViewById(R.id.FifthP);
+        questionmark = view.findViewById(R.id.QuestionEmoji);
+        backButton = view.findViewById(R.id.HelpbackArrow);
 
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "onClick: navigating back to profile activity");
+                backToActivity();
+            }
+        });
         return view;
     }
+
+    public void backToActivity() {
+        getFragmentManager().popBackStack();
+    }
+
 }
+
+

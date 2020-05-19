@@ -298,5 +298,4 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
         getFragmentManager().popBackStack();
     }
 
-
 }
