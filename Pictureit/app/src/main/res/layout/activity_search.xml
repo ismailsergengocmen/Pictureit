@@ -3,8 +3,13 @@
     android:id="@+id/fragment_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+<<<<<<< HEAD
     android:background="@color/colorWhite">
 
+=======
+    android:id="@+id/fragment_container"
+    android:background="@color/colorWhite">
+>>>>>>> parent of d46a81a... Little visual changes
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -30,8 +35,7 @@
             android:horizontalSpacing="1dp"
             android:numColumns="4"
             android:stretchMode="none"
-            android:verticalSpacing="1dp"
-            android:background="@color/colorPastelBlue">
+            android:verticalSpacing="1dp">
 
         </GridView>
 

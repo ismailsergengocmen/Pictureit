@@ -13,7 +13,11 @@
             android:id="@id/relLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
             android:background="@color/colorWhite">
+=======
+            android:background="@drawable/white_grey_border_bottom">
+>>>>>>> parent of d46a81a... Little visual changes
 
             <LinearLayout
                 android:id="@+id/linLayout"
