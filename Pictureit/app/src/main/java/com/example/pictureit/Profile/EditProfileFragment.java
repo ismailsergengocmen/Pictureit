@@ -144,7 +144,6 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
     private static final int CAMERA_REQUEST_CODE = 2;
     private String currentPhotoPath;
     private String userID;
-    private UniversalImageLoader downloader;
 
     @Nullable
     @Override
@@ -158,10 +157,9 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
         mChangePasswordButton = (Button) view.findViewById(R.id.changePasswordButton);
         mDeleteAccountButton = view.findViewById(R.id.deleteAccountButton);
         mFirebaseMethods = new FirebaseMethods(getActivity());
-        myRef = mFirebaseDatabase.getReference();
+        myRef = FirebaseDatabase.getInstance().getReference();
         mStorageReference = FirebaseStorage.getInstance().getReference();
         userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        downloader = new UniversalImageLoader(getContext());
 
 
         // setProfileImage();
@@ -492,8 +490,6 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
 
                 //retrieve user information from the database
                 setProfileWidgets(mFirebaseMethods.getUserSettings(dataSnapshot));
-
-                //retrieve images for the user in question
             }
 
             @Override
@@ -516,6 +512,4 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
             mAuth.removeAuthStateListener(mAuthListener);
         }
     }
-
-
 }
