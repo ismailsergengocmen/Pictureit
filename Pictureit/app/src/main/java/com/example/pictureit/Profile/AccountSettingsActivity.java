@@ -29,7 +29,7 @@ public class AccountSettingsActivity extends AppCompatActivity {
 
     //Constants
     private static final String TAG = "AccountSettingsActivity";
-    private final Context mContext = AccountSettingsActivity.this;
+    private Context mContext ;
 
     //Widgets
     private ViewPager mViewPager;
@@ -43,6 +43,7 @@ public class AccountSettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_settings);
         Log.d(TAG, "onCreate: started.");
+        mContext =  AccountSettingsActivity.this;
 
         mViewPager = findViewById(R.id.container);
         mRelativeLayout = findViewById(R.id.relLayout1);
