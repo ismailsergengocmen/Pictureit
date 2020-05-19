@@ -8,6 +8,7 @@
     <include layout="@layout/snippet_top_help" />
 
     <ImageView
+        android:id="@+id/QuestionEmoji"
         android:layout_width="137dp"
         android:layout_height="101dp"
         android:layout_below="@+id/FifthP"
