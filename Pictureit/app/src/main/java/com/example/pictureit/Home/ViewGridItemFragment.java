@@ -76,6 +76,7 @@ public class ViewGridItemFragment extends Fragment {
     private TextView tag2;
     private ImageView backArrow;
     private Photo mPhoto;
+    private int position;
 
     public ViewGridItemFragment() {
         super();
@@ -93,6 +94,8 @@ public class ViewGridItemFragment extends Fragment {
         mStorageReference = FirebaseStorage.getInstance().getReference();
         mRef = FirebaseDatabase.getInstance().getReference();
         userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        position = this.getArguments().getInt("position");
 
         image = view.findViewById(R.id.task_photo);
         tag1 = view.findViewById(R.id.task_tag1);
@@ -182,7 +185,7 @@ public class ViewGridItemFragment extends Fragment {
                 Log.d("tag", "Absolute Url of Image: " + Uri.fromFile(f));
 
                 setCurrentPhoto();
-                uploadImageToStorage("photo_" + 0, Uri.fromFile(f));
+                uploadImageToStorage("photo_" + position, Uri.fromFile(f));
             }
         }
     }

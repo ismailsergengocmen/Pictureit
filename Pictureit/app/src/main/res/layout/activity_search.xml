@@ -30,7 +30,8 @@
             android:horizontalSpacing="1dp"
             android:numColumns="4"
             android:stretchMode="none"
-            android:verticalSpacing="1dp">
+            android:verticalSpacing="1dp"
+            android:background="@color/colorPastelYellow">
 
         </GridView>
 
