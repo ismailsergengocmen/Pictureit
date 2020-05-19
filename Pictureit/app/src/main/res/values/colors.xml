@@ -9,17 +9,19 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorGrey">#839192</color>
     <color name="colorBlack">#000</color>
-
-
-    <color name="colorRed" >#D00E0E</color>
-    <color name="colorLinkBlue" >#0293D7</color>
-    <color name="colorBeige" >#d6d6c2</color>
-
-
+    <color name="colorRed">#D00E0E</color>
+    <color name="colorLinkBlue">#0293D7</color>
+    <color name="colorBeige">#d6d6c2</color>
     <color name="colorPastelRed">#CD9393</color>
     <color name="colorPastelYellow">#B1985E</color>
     <color name="colorPastelGreen">#99BF6E</color>
     <color name="colorPastelBlue">#F07CAFB5</color>
     <color name="colorPastelGrey">#423D3D</color>
+
+    <!-- General App Theme -->
+    <color name="colorTurquoise">#86BFB9</color>
+    <color name="colorLightTurquoise">#05E8D1</color>
+    <color name="colorDarkTurquoise">#02695E</color>
+    <color name="colorLikeTurquoise">#04C2AF</color>
 
 </resources>

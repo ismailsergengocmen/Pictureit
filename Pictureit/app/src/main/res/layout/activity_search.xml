@@ -31,7 +31,7 @@
             android:numColumns="4"
             android:stretchMode="none"
             android:verticalSpacing="1dp"
-            android:background="@color/colorPastelYellow">
+            android:background="@color/colorTurquoise">
 
         </GridView>
 

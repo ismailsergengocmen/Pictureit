@@ -267,6 +267,21 @@ public class FirebaseMethods {
     }
 
     /**
+     *  Uploads images to firebase database
+     * @param url url of the image
+     * @param node node of the database that you want to upload the photo
+     */
+
+    public void addPhotoToDatabase(String url, String node) {
+        Log.d(TAG, "addPhotoToDatabase: adding photo to database.");
+
+        //insert into database
+        myRef.child(node)
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .child("profile_photo").setValue(url);
+    }
+
+    /**
      * A method for adding photo to "user photos" , "tags and photos" nodes of the firebase database
      *
      * @param url  this is the download url of the photo. It shows the location of the photo in the firebase storage
