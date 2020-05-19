@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.pictureit.Home.HomeActivity;
 import com.example.pictureit.R;
 import com.example.pictureit.Utils.BadgeCardRecyclerViewAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -56,11 +57,11 @@ public class BadgeFragment extends Fragment {
         count1 = 0;
         count2 = 0;
         mContext = getContext();
-        mImageUrls =  new ArrayList<String>(Arrays.asList("", "", "", "", ""));
-        mTask =  new ArrayList<String>(Arrays.asList("", "", "", "", ""));
-        mProgress =  new ArrayList<Integer>(Arrays.asList(0, 0, 0, 0, 0));
-        mProgress =  new ArrayList<Integer>(Arrays.asList(0, 0, 0, 0, 0));
-        mStatus =   new ArrayList<Integer>(Arrays.asList(0, 0, 0, 0, 0));
+        mImageUrls = new ArrayList<String>(Arrays.asList("", "", "", "", ""));
+        mTask = new ArrayList<String>(Arrays.asList("", "", "", "", ""));
+        mProgress = new ArrayList<Integer>(Arrays.asList(0, 0, 0, 0, 0));
+        mProgress = new ArrayList<Integer>(Arrays.asList(0, 0, 0, 0, 0));
+        mStatus = new ArrayList<Integer>(Arrays.asList(0, 0, 0, 0, 0));
         mRef = FirebaseDatabase.getInstance().getReference();
         backArrow = view.findViewById(R.id.backArrow);
 
@@ -173,13 +174,20 @@ public class BadgeFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 count = 0;
-                for (DataSnapshot ds : dataSnapshot
-                        .child(getContext().getString(R.string.dbname_all_photos))
-                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                        .getChildren()) {
-                    count++;
+
+                try {
+                    for (DataSnapshot ds : dataSnapshot
+                            .child(getString(R.string.dbname_all_photos))
+                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                            .getChildren()) {
+                        count++;
+                    }
+                    mProgress.set(3, count);
+
+                } catch (IllegalStateException s) {
+
                 }
-                mProgress.set(3, count);
+
                 if (count >= 10) {
                     mStatus.set(3, 1);
                 }
@@ -196,13 +204,18 @@ public class BadgeFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 count = 0;
-                for (DataSnapshot ds : dataSnapshot
-                        .child(getString(R.string.dbname_all_photos))
-                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                        .getChildren()) {
-                    count++;
+                try {
+                    for (DataSnapshot ds : dataSnapshot
+                            .child(getString(R.string.dbname_all_photos))
+                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                            .getChildren()) {
+                        count++;
+                    }
+                    mProgress.set(4, count);
+                }catch (IllegalStateException s) {
+
                 }
-                mProgress.set(4, count);
+
                 if (count >= 20) {
                     mStatus.set(4, 1);
                 }
