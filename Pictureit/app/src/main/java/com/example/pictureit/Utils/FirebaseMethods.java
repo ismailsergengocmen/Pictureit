@@ -276,6 +276,21 @@ public class FirebaseMethods {
     }
 
     /**
+     *  Uploads images to firebase database
+     * @param url url of the image
+     * @param node node of the database that you want to upload the photo
+     */
+
+    public void addPhotoToDatabase(String url, String node) {
+        Log.d(TAG, "addPhotoToDatabase: adding photo to database.");
+
+        //insert into database
+        myRef.child(node)
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .child("profile_photo").setValue(url);
+    }
+
+    /**
      * A method for adding photo to "user photos" , "tags and photos" nodes of the firebase database
      *
      * @param url  this is the download url of the photo. It shows the location of the photo in the firebase storage
@@ -321,6 +336,7 @@ public class FirebaseMethods {
         Log.d(TAG, "addPhotoToDatabase: adding photo to database.");
 
         String newPhotoKey = myRef.child(mContext.getString(R.string.dbname_all_photos)).push().getKey();
+
         Photo photo = new Photo();
         photo.setImage_path(url);
         photo.setDate_created(getTimestamp());
@@ -329,10 +345,38 @@ public class FirebaseMethods {
         photo.setUser_id(FirebaseAuth.getInstance().getCurrentUser().getUid());
         photo.setImage_id(image_id);
 
-        //insert into database's all_photos node
-        myRef.child(node)
+        if (node == mContext.getString(R.string.dbname_all_photos)) {
+            //insert into database's all_photos node
+            myRef.child(node)
+                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                    .child(newPhotoKey).setValue(photo);
+
+        } else if (node == mContext.getString(R.string.dbname_all_photos_and_tags)) {
+            //insert into database's all_photos_and_tags node(for tag1)
+            myRef.child(node)
+                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                    .child(tag1.toLowerCase())
+                    .child(newPhotoKey)
+                    .setValue(photo);
+
+            //insert into database's all_photos_and_tags node(for tag2)
+            myRef.child(node)
+                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                    .child(tag2.toLowerCase())
+                    .child(newPhotoKey)
+                    .setValue(photo);
+        }
+    }
+
+    public int getImageCount(DataSnapshot dataSnapshot) {
+        int count = 0;
+        for (DataSnapshot ds : dataSnapshot
+                .child(mContext.getString(R.string.dbname_all_photos))
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                .child(newPhotoKey).setValue(photo);
+                .getChildren()) {
+            count++;
+        }
+        return count;
     }
 
     /**

@@ -19,4 +19,7 @@ This week I studied how can we take data from firebase database so that users ca
 
 ### ~ 18/05/2020 ~
 Today, I added necessary methods to change account's username, displayname and email.To prevent same email usage between different profiles, I added methods to check that the newly entered email is not used in another account. Also, I added password confirm system for changing email to prevent user-based mistakes. Plus, I made some visual changes.
+
+###~ 19/05/2020 ~
+Today, I create help fragment which contains informations about how users can use application. I changed menu icon of the app. Also, I worked with Ahmed to solve a problem related to profile activity.Plus, I added delete account operation which lets users to delete their account. Then I added password change option to let users change their passwords from edit account settings menu.
 ****

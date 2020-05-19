@@ -3,7 +3,7 @@
     android:id="@+id/easy_game_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/homepage_background">
+    android:background="@color/colorTurquoise">
 
     <RelativeLayout
         android:id="@+id/relLayout1"

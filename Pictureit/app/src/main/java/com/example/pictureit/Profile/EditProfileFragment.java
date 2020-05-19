@@ -1,7 +1,18 @@
 package com.example.pictureit.Profile;
 
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.Manifest;
+import android.app.Activity;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.ContactsContract;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,16 +25,23 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
+import com.example.pictureit.Login.LoginActivity;
 import com.example.pictureit.R;
 import com.example.pictureit.Utils.FirebaseMethods;
+import com.example.pictureit.Utils.SquareImageView;
 import com.example.pictureit.Utils.UniversalImageLoader;
 import com.example.pictureit.dialogs.ConfirmPasswordDialog;
 import com.example.pictureit.models.User;
 import com.example.pictureit.models.UserAccountSettings;
 import com.example.pictureit.models.UserSettings;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthCredential;
@@ -37,6 +55,16 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class EditProfileFragment extends Fragment implements ConfirmPasswordDialog.OnConfirmPasswordListener {
 
@@ -45,8 +73,7 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
         Log.d(TAG, "onConfirmPassword: got the password: " + password);
 
 
-        //Get auth credentials from the user for re-authentication. The example below shows email and password
-        //credentials but there are multiple possible providers,such as GoogleAuthProvider or FacebookAuthProvider.
+        //Get auth credentials from the user for re-authentication
         AuthCredential credential = EmailAuthProvider.getCredential(mAuth.getCurrentUser().getEmail(), password);
 
         //Prompt the user to re-provide their sign-in credentials
@@ -103,27 +130,37 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference myRef;
     private FirebaseMethods mFirebaseMethods;
+    private StorageReference mStorageReference;
 
     //Widgets
     private EditText mDisplayName, mEmail, mUserName;
+    private Button mChangeProfilePhoto, mChangePasswordButton, mDeleteAccountButton;
     private ImageView mProfilePhoto;
-    private Button mChangeProfilePhoto;
+
 
     //Variables
     private UserSettings mUserSettings;
+    private static final int CAMERA_PERMISSION_CODE = 1;
+    private static final int CAMERA_REQUEST_CODE = 2;
+    private String currentPhotoPath;
+    private String userID;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_edit_profile, container, false);
-        mProfilePhoto = view.findViewById(R.id.profilePhoto);
+        mProfilePhoto = view.findViewById(R.id.profile_image);
         mDisplayName = (EditText) view.findViewById(R.id.editTextProfileName);
         mUserName = (EditText) view.findViewById(R.id.editTextUserName);
         mEmail = (EditText) view.findViewById(R.id.editTextEmailAddress);
         mChangeProfilePhoto = (Button) view.findViewById(R.id.changeProfilePhoto);
+        mChangePasswordButton = (Button) view.findViewById(R.id.changePasswordButton);
+        mDeleteAccountButton = view.findViewById(R.id.deleteAccountButton);
         mFirebaseMethods = new FirebaseMethods(getActivity());
+        myRef = FirebaseDatabase.getInstance().getReference();
+        mStorageReference = FirebaseStorage.getInstance().getReference();
+        userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        // setProfileImage();
         setupFirebaseAuth();
 
         //setup the back arrow for navigating back to profile activity
@@ -145,10 +182,187 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
             }
         });
 
+        mChangePasswordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "onClick: changing password");
+
+                final EditText resetPassword = new EditText(view.getContext());
+                final AlertDialog.Builder passwordResetDialog = new AlertDialog.Builder(view.getContext());
+                passwordResetDialog.setTitle("Do you want to reset your password ?");
+                passwordResetDialog.setMessage(" Enter new password at least 6 characters long");
+                passwordResetDialog.setView(resetPassword);
+
+                passwordResetDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        //extract the email and send reset link
+                        String newPassword = resetPassword.getText().toString();
+                        mAuth.getCurrentUser().updatePassword(newPassword).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(getActivity(), "Password Reset Successfully", Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getActivity(), "Password Reset Failed.", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
+
+                passwordResetDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        //close
+                    }
+                });
+                passwordResetDialog.create().show();
+            }
+        });
+
+        mDeleteAccountButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+                dialog.setTitle("Are you sure?");
+                dialog.setMessage("Deleting this account will result in completely removing your "
+                        + "account from the system and you won't be able to access your profile");
+                dialog.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        mAuth.getCurrentUser().delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(getActivity(), "Account Deleted", Toast.LENGTH_LONG).show();
+                                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+                                    startActivity(intent);
+                                } else {
+                                    Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        });
+                    }
+                });
+                dialog.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+
+                AlertDialog alertDialog = dialog.create();
+                alertDialog.show();
+            }
+        });
+        mChangeProfilePhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                askCameraPermission();
+            }
+        });
         return view;
     }
 
-    // String imgURL = "cdn.webrazzi.com/uploads/2013/06/android-malware.jpg";
+    private void askCameraPermission() {
+        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
+        } else {
+            dispatchTakePictureIntent();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == CAMERA_PERMISSION_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                dispatchTakePictureIntent();
+            } else {
+                Toast.makeText(getActivity(), "Camera Permission is Required to Use Camera", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        // Ensure that there's a camera activity to handle the intent
+        if (takePictureIntent.resolveActivity(getContext().getPackageManager()) != null) {
+            // Create the File where the photo should go
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+            } catch (IOException ex) {
+                Log.d(TAG, "dispatchTakePictureIntent: IOException: " + ex.getMessage());
+            }
+            // Continue only if the File was successfully created
+            if (photoFile != null) {
+                Uri photoURI = FileProvider.getUriForFile(getActivity(),
+                        "com.example.android.fileprovider",
+                        photoFile);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                startActivityForResult(takePictureIntent, CAMERA_REQUEST_CODE);
+            }
+        }
+    }
+
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = getContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+        // Save a file: path for use with ACTION_VIEW intents
+        currentPhotoPath = image.getAbsolutePath();
+        return image;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == CAMERA_REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                File f = new File(currentPhotoPath);
+                //image.setImageURI(Uri.fromFile(f));
+                Log.d("tag", "Absolute Url of Image: " + Uri.fromFile(f));
+
+                uploadImageToStorage("profile_photo", Uri.fromFile(f));
+            }
+        }
+    }
+
+    private void uploadImageToStorage(final String name, Uri uri) {
+        final StorageReference ref = mStorageReference.child("profile_images/" + userID + "/" + name);
+        ref.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(final UploadTask.TaskSnapshot taskSnapshot) {
+                try {
+                    Toast.makeText(getActivity(), "Upload succeeded", Toast.LENGTH_SHORT).show();
+                } catch (NullPointerException e) {
+
+                }
+                ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        mFirebaseMethods.addPhotoToDatabase(uri.toString(), getString(R.string.dbname_user_account_settings));
+                        Log.d(TAG, "onSuccess: Url " + uri.toString());
+                    }
+                });
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getActivity(), "Upload failed", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
     /**
      * Retrieves the data contained in the widgets and submits it to the database
@@ -179,7 +393,7 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
             //step 3)Change the email
             //       - submit the new email to the database and authentication
         }
-        if (!mUserSettings.getSettings().getDisplay_name().equals(displayName)){
+        if (!mUserSettings.getSettings().getDisplay_name().equals(displayName)) {
             //update displayname
             mFirebaseMethods.updateDisplayName(displayName);
         }
@@ -219,13 +433,12 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
         });
     }
 
-
     private void setProfileWidgets(UserSettings userSettings) {
         Log.d(TAG, "setProfileWidgets: setting widgets with data retrieving from firebase database: " + userSettings.toString());
         Log.d(TAG, "setProfileWidgets: setting widgets with data retrieving from firebase database: " + userSettings.getUser().getEmail());
 
         mUserSettings = userSettings;
-        //User user = userSettings.getUser();
+
         UserAccountSettings settings = userSettings.getSettings();
 
         UniversalImageLoader.setImage(settings.getProfile_photo(), mProfilePhoto, null, "");
@@ -234,6 +447,10 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
         mUserName.setText(settings.getUsername());
         mEmail.setText(userSettings.getUser().getEmail());
 
+    }
+
+    public void backToActivity() {
+        getFragmentManager().popBackStack();
     }
 
     //-----------------------------------------Firebase-------------------------------------------------
@@ -269,8 +486,6 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
 
                 //retrieve user information from the database
                 setProfileWidgets(mFirebaseMethods.getUserSettings(dataSnapshot));
-
-                //retrieve images for the user in question
             }
 
             @Override
@@ -293,9 +508,4 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
             mAuth.removeAuthStateListener(mAuthListener);
         }
     }
-
-    public void backToActivity() {
-        getFragmentManager().popBackStack();
-    }
-
 }

@@ -1,6 +1,7 @@
 package com.example.pictureit.Utils;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,16 +25,16 @@ public class BadgeCardRecyclerViewAdapter extends RecyclerView.Adapter<BadgeCard
     private List<String> mTask;
     private List<Integer> mProgress;
     private List<String> mImageUrls;
-    private List<Integer> mIcons;
+    private List<Integer> mStatus;
     private Context mContext;
     private UniversalImageLoader universalImageLoader;
 
-    public BadgeCardRecyclerViewAdapter( Context mContext, List<String> mTask, List<Integer> mProgress, List<String> mImageUrls, List<Integer> mIcons) {
+    public BadgeCardRecyclerViewAdapter( Context mContext, List<String> mTask, List<Integer> mProgress, List<String> mImageUrls, List<Integer> mStatus) {
         this.mTask = mTask;
         this.mProgress = mProgress;
         this.mImageUrls = mImageUrls;
         this.mContext = mContext;
-        this.mIcons = mIcons;
+        this.mStatus = mStatus;
         universalImageLoader = new UniversalImageLoader(mContext);
     }
 
@@ -50,8 +51,15 @@ public class BadgeCardRecyclerViewAdapter extends RecyclerView.Adapter<BadgeCard
 
         universalImageLoader.setImage(mImageUrls.get(position), holder.image, null, "");
         holder.task.setText(mTask.get(position));
-        holder.notOk.setImageResource(mIcons.get(position));
         holder.progress.setText(mProgress.get(position) + " photos are taken");
+
+        if(mStatus.get(position) == 0) {
+            holder.status.setImageResource(R.drawable.ic_not_ok);
+        }
+        else {
+            holder.status.setImageResource(R.drawable.ic_ok);
+            holder.progress.setTextColor(Color.parseColor("#36BA0B"));
+        }
     }
 
     @Override
@@ -61,7 +69,7 @@ public class BadgeCardRecyclerViewAdapter extends RecyclerView.Adapter<BadgeCard
 
     public class BadgeViewHolder extends RecyclerView.ViewHolder {
         ImageView image;
-        ImageView notOk;
+        ImageView status;
         TextView task;
         TextView progress;
 
@@ -70,7 +78,7 @@ public class BadgeCardRecyclerViewAdapter extends RecyclerView.Adapter<BadgeCard
             image = itemView.findViewById(R.id.badgeImageView);
             task = itemView.findViewById(R.id.task);
             progress = itemView.findViewById(R.id.progress);
-            notOk = itemView.findViewById(R.id.notOk);
+            status = itemView.findViewById(R.id.status);
         }
     }
 }

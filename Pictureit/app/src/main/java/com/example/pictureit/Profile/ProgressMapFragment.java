@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -43,6 +44,7 @@ public class ProgressMapFragment extends Fragment {
     //Widgets
     private RecyclerView recyclerView;
     private CardRecyclerViewAdapter adapter;
+    private ImageView backArrow;
 
     @Nullable
     @Override
@@ -53,11 +55,20 @@ public class ProgressMapFragment extends Fragment {
         mContext = getContext();
         reference = FirebaseDatabase.getInstance().getReference();
         setPhotos();
+        backArrow = view.findViewById(R.id.backArrow);
         recyclerView = view.findViewById(R.id.recyclerView);
         adapter = new CardRecyclerViewAdapter(mContext, photoList);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
         recyclerView.setLayoutManager(layoutManager);
+
+        backArrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "onClick: navigating back to profile activity");
+                backToActivity();
+            }
+        });
 
         return view;
     }
@@ -102,4 +113,7 @@ public class ProgressMapFragment extends Fragment {
 
     }
 
+    public void backToActivity() {
+        getFragmentManager().popBackStack();
+    }
 }
