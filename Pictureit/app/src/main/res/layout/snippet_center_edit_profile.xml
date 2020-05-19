@@ -13,15 +13,6 @@
             android:background="@color/colorWhite"
             android:padding="20dp">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profilePhoto"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
-                app:civ_border_color="@color/colorBlack"
-                app:civ_border_width="2dp" />
-
             <Button
                 android:id="@+id/changeProfilePhoto"
                 android:layout_width="wrap_content"
@@ -29,12 +20,11 @@
                 android:layout_below="@+id/profilePhoto"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
+                android:background="@android:color/transparent"
                 android:text="Change Profile Photo"
                 android:textColor="@color/colorLinkBlue"
-                android:background="@android:color/transparent"
                 android:textSize="16dp" />
 
-            <!---  Profile Name  -->
             <RelativeLayout
                 android:id="@+id/relLayout1"
                 android:layout_width="match_parent"
@@ -42,15 +32,6 @@
                 android:layout_below="@id/changeProfilePhoto"
                 android:layout_marginTop="35dp"
                 android:background="@drawable/grey_border_bottom">
-
-                <TextView
-                    android:id="@+id/ProfileNameText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Profile Name"
-                    android:textColor="@color/colorGrey">
-
-                </TextView>
 
                 <EditText
                     android:id="@+id/editTextProfileName"
@@ -62,9 +43,18 @@
 
                 </EditText>
 
+                <TextView
+                    android:id="@+id/ProfileNameText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Profile Name"
+                    android:textColor="@color/colorGrey">
+
+                </TextView>
+
             </RelativeLayout>
 
-            <!---  Username  -->
+            <!---  Profile Name  -->
             <RelativeLayout
                 android:id="@+id/relLayout2"
                 android:layout_width="match_parent"
@@ -72,6 +62,16 @@
                 android:layout_below="@+id/relLayout1"
                 android:layout_marginTop="35dp"
                 android:background="@drawable/grey_border_bottom">
+
+                <EditText
+                    android:id="@+id/editTextUserName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/UserNameText"
+                    android:background="@android:color/transparent"
+                    android:inputType="textNoSuggestions">
+
+                </EditText>
 
                 <TextView
                     android:id="@+id/UserNameText"
@@ -82,19 +82,9 @@
 
                 </TextView>
 
-            <EditText
-                android:id="@+id/editTextUserName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/UserNameText"
-                android:background="@android:color/transparent"
-                android:inputType="textNoSuggestions">
-
-                </EditText>
-
             </RelativeLayout>
 
-            <!--  Email Address  -->
+            <!---  Username  -->
             <RelativeLayout
                 android:id="@+id/relLayout3"
                 android:layout_width="match_parent"
@@ -102,15 +92,6 @@
                 android:layout_below="@id/relLayout2"
                 android:layout_marginTop="35dp"
                 android:background="@drawable/grey_border_bottom">
-
-                <TextView
-                    android:id="@+id/mailText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="E-mail Address"
-                    android:textColor="@color/colorGrey">
-
-                </TextView>
 
                 <EditText
                     android:id="@+id/editTextEmailAddress"
@@ -122,8 +103,18 @@
 
                 </EditText>
 
+                <TextView
+                    android:id="@+id/mailText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="E-mail Address"
+                    android:textColor="@color/colorGrey">
+
+                </TextView>
+
             </RelativeLayout>
 
+            <!--  Email Address  -->
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -135,14 +126,38 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="30dp"
+                    android:background="@android:color/transparent"
                     android:text="Save Changes"
                     android:textColor="@color/colorLinkBlue"
-                    android:background="@android:color/transparent"
                     android:textSize="16dp">
 
                 </Button>
 
+                <Button
+                    android:id="@+id/ChangePasswordButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/saveChanges"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="30dp"
+                    android:background="@android:color/transparent"
+                    android:text="Change Password"
+                    android:textColor="@color/colorLinkBlue"
+                    android:textSize="16dp">
+
+                </Button>
+
+
             </RelativeLayout>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profilePhoto"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                app:civ_border_color="@color/colorBlack"
+                app:civ_border_width="2dp" />
 
         </RelativeLayout>
 
