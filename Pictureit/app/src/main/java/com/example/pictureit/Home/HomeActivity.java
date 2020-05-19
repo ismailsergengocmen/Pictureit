@@ -48,7 +48,6 @@ public class HomeActivity extends AppCompatActivity implements PlayGameFragment.
         initImageLoader();
         setupBottomNavigationView();
         setupViewPager();
-
     }
 
     private void initImageLoader() {
@@ -61,16 +60,9 @@ public class HomeActivity extends AppCompatActivity implements PlayGameFragment.
      */
     private void setupViewPager() {
         SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new DailyQuestsFragment());
         adapter.addFragment(new HomeFragment());
-        ViewPager viewPager = (ViewPager) findViewById(R.id.container);
+        ViewPager viewPager = findViewById(R.id.container);
         viewPager.setAdapter(adapter);
-
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(viewPager);
-        tabLayout.getTabAt(0).setIcon(R.drawable.ic_daily_quests);
-        tabLayout.getTabAt(1).setIcon(R.drawable.ic_camera);
-        viewPager.setCurrentItem(1);
     }
 
     /**
