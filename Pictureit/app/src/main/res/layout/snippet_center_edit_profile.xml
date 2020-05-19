@@ -29,9 +29,9 @@
                 android:layout_below="@+id/profilePhoto"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
-                android:background="@android:color/transparent"
                 android:text="Change Profile Photo"
                 android:textColor="@color/colorLinkBlue"
+                android:background="@android:color/transparent"
                 android:textSize="16dp" />
 
             <!---  Profile Name  -->
@@ -82,13 +82,13 @@
 
                 </TextView>
 
-                <EditText
-                    android:id="@+id/editTextUserName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/UserNameText"
-                    android:background="@android:color/transparent"
-                    android:inputType="textNoSuggestions">
+            <EditText
+                android:id="@+id/editTextUserName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/UserNameText"
+                android:background="@android:color/transparent"
+                android:inputType="textNoSuggestions">
 
                 </EditText>
 
@@ -135,9 +135,9 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="30dp"
-                    android:background="@android:color/transparent"
                     android:text="Save Changes"
                     android:textColor="@color/colorLinkBlue"
+                    android:background="@android:color/transparent"
                     android:textSize="16dp">
 
                 </Button>

@@ -34,26 +34,24 @@ import java.util.Map;
 
 public class MediumGameFragment extends Fragment {
 
-    //Constants
     private static final String TAG = "EasyGameFragment";
-    private static final int NUM_GRID_COLUMNS = 3;
-
-    //Widgets
-    private GridView gridView;
-
-    //Interface
-    private OnGridImageSelectedListener mOnGridImageSelectedListener;
 
     public interface OnGridImageSelectedListener {
         void onGridImageSelected(Photo photo, Context context);
     }
 
+    OnGridImageSelectedListener mOnGridImageSelectedListener;
+
+    GridView gridView;
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_medium_game, container, false);
-        gridView = view.findViewById(R.id.grid_view);
+        gridView = (GridView) view.findViewById(R.id.grid_view);
         setupGridView();
+
 
         ImageView backArrow = view.findViewById(R.id.backArrow);
         backArrow.setOnClickListener(new View.OnClickListener() {
@@ -75,6 +73,8 @@ public class MediumGameFragment extends Fragment {
         }
         super.onAttach(context);
     }
+
+    private static final int NUM_GRID_COLUMNS = 3;
 
     private void setupGridView() {
         Log.d(TAG, "setupGridView: Setting up image grid.");

@@ -11,7 +11,6 @@ import java.util.List;
 
 public class SectionsStatePagerAdapter extends FragmentStatePagerAdapter {
 
-    //Constants
     private final List<Fragment> mFragmentList = new ArrayList<>();
     private final HashMap<Fragment, Integer> mFragments = new HashMap<>();
     private final HashMap<String, Integer> mFragmentNumbers = new HashMap<>();

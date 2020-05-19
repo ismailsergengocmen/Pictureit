@@ -2,11 +2,11 @@ package com.example.pictureit.models;
 
 public class UserAccountSettings {
 
-    //Properties
     private String display_name;
     private long posts;
     private String profile_photo;
     private String username;
+
 
     public UserAccountSettings(String display_name,  long posts, String profile_photo, String username) {
         this.display_name = display_name;

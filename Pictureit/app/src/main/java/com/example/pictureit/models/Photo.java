@@ -4,8 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Photo implements Parcelable {
-
-    //Properties
     private String date_created;
     private String image_path;
     private String image_id;

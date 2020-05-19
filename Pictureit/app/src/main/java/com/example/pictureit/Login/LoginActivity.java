@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseUser;
 
 import androidx.annotation.NonNull;
@@ -25,9 +26,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
-    //Constants
     private static final String TAG = "LoginActivity";
-    private final Context mContext = LoginActivity.this;
+
+    private Context mContext;
 
     //Firebase
     private FirebaseAuth mAuth;
@@ -42,12 +43,12 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        Log.d(TAG, "onCreate: started.");
-
         mProgressBar = findViewById(R.id.progressBar);
         mPleaseWait = findViewById(R.id.pleaseWait);
         mEmail = findViewById(R.id.input_email);
         mPassword = findViewById(R.id.input_password);
+        mContext = LoginActivity.this;
+        Log.d(TAG, "onCreate: started.");
 
         mPleaseWait.setVisibility(View.GONE);
         mProgressBar.setVisibility(View.GONE);
