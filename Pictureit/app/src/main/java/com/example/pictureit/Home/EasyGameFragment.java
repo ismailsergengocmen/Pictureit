@@ -38,7 +38,7 @@ public class EasyGameFragment extends Fragment {
     private static final String TAG = "EasyGameFragment";
 
     public interface OnGridImageSelectedListener {
-        void onGridImageSelected(Photo photo, Context context);
+        void onGridImageSelected(Photo photo, int position, Context context);
     }
 
     OnGridImageSelectedListener mOnGridImageSelectedListener;
@@ -121,7 +121,7 @@ public class EasyGameFragment extends Fragment {
                 gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        mOnGridImageSelectedListener.onGridImageSelected(photos.get(position), getActivity());
+                        mOnGridImageSelectedListener.onGridImageSelected(photos.get(position), position, getActivity());
                     }
                 });
             }
