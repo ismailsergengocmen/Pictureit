@@ -254,6 +254,7 @@ public class ViewGridItemFragment extends Fragment {
                     public void onSuccess(Uri uri) {
                         try {
                             firebaseMethods.addPhotoToDatabase(name, uri.toString(), currentTag1, currentTag2, getActivity().getString(R.string.dbname_all_photos));
+                            firebaseMethods.addPhotoToDatabase(name, uri.toString(), currentTag1, currentTag2, getActivity().getString(R.string.dbname_all_photos_and_tags));
                         } catch (NullPointerException e) {
 
                         }
