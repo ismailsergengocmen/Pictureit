@@ -1,4 +1,4 @@
-package com.example.pictureit.Home;
+package com.example.pictureit.Utils;
 
 import android.Manifest;
 import android.app.Activity;
