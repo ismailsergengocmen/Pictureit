@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -45,6 +46,7 @@ public class BadgeFragment extends Fragment {
     //Widgets
     private RecyclerView recyclerView;
     private BadgeCardRecyclerViewAdapter adapter;
+    private ImageView backArrow;
 
     @Nullable
     @Override
@@ -60,6 +62,7 @@ public class BadgeFragment extends Fragment {
         mProgress =  new ArrayList<Integer>(Arrays.asList(0, 0, 0, 0, 0));
         mStatus =   new ArrayList<Integer>(Arrays.asList(0, 0, 0, 0, 0));
         mRef = FirebaseDatabase.getInstance().getReference();
+        backArrow = view.findViewById(R.id.backArrow);
 
         initImageBitmaps();
         recyclerView = view.findViewById(R.id.badgeRecyclerView);
@@ -68,6 +71,14 @@ public class BadgeFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+
+        backArrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "onClick: navigating back to profile activity");
+                backToActivity();
+            }
+        });
 
         return view;
     }
@@ -163,7 +174,7 @@ public class BadgeFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 count = 0;
                 for (DataSnapshot ds : dataSnapshot
-                        .child(getString(R.string.dbname_all_photos))
+                        .child(getContext().getString(R.string.dbname_all_photos))
                         .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                         .getChildren()) {
                     count++;
@@ -205,5 +216,7 @@ public class BadgeFragment extends Fragment {
         });
     }
 
-
+    public void backToActivity() {
+        getFragmentManager().popBackStack();
+    }
 }

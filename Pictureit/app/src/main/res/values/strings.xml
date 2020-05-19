@@ -12,8 +12,8 @@
     <string name="confirm_password_dialog">ConfirmPasswordDialog</string>
 
     <!--- Firebase massages -->
-    <string name="auth_failed">Failed to Authenticate</string>
-    <string name="auth_success">Authentication Success</string>
+    <string name="auth_failed">Sorry, you entered wrong password or email.</string>
+    <string name="auth_success">Welcome</string>
 
     <!-- Firebase database field -->
     <string name="dbname_users">users</string>

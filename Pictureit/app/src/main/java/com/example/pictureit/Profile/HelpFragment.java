@@ -26,7 +26,7 @@ public class HelpFragment extends Fragment {
 
     //Variables
     private TextView firstP, secondP, thirdP, fourthP, fifthP;
-    private ImageView questionmark, backButton;
+    private ImageView questionmark, backArrow;
 
 
     @Nullable
@@ -39,9 +39,9 @@ public class HelpFragment extends Fragment {
         fourthP = view.findViewById(R.id.FourthP);
         fifthP = view.findViewById(R.id.FifthP);
         questionmark = view.findViewById(R.id.QuestionEmoji);
-        backButton = view.findViewById(R.id.HelpbackArrow);
+        backArrow = view.findViewById(R.id.HelpbackArrow);
 
-        backButton.setOnClickListener(new View.OnClickListener() {
+        backArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: navigating back to profile activity");
