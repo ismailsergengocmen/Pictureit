@@ -11,14 +11,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
 import com.example.pictureit.Login.LoginActivity;
 import com.example.pictureit.R;
 import com.example.pictureit.Utils.BottomNavigationViewHelper;
 import com.example.pictureit.Utils.SectionsPagerAdapter;
 import com.example.pictureit.Utils.UniversalImageLoader;
+import com.example.pictureit.Utils.ViewGridItemFragment;
 import com.example.pictureit.models.Photo;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,7 +25,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
-public class HomeActivity extends AppCompatActivity implements EasyGameFragment.OnGridImageSelectedListener {
+public class HomeActivity extends AppCompatActivity implements PlayGameFragment.OnGridImageSelectedListener {
 
     private static final String TAG = "HomeActivity";
 
@@ -37,11 +36,7 @@ public class HomeActivity extends AppCompatActivity implements EasyGameFragment.
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
-    //widgets
-    private Button buttonEasy;
-    private Button buttonMedium;
-    private Button buttonHard;
-
+    //widget
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

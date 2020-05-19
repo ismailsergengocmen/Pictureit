@@ -30,7 +30,7 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/backArrow"
                     android:layout_centerVertical="true"
-                    android:text="Easy Game"
+                    android:text="Choose a task"
                     android:textSize="20dp"
                     android:textColor="@color/colorBlack"/>
 

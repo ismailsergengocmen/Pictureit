@@ -33,9 +33,9 @@ import java.util.HashMap;
 
 import java.util.Map;
 
-public class EasyGameFragment extends Fragment {
+public class PlayGameFragment extends Fragment {
 
-    private static final String TAG = "EasyGameFragment";
+    private static final String TAG = "PlayGameFragment";
 
     public interface OnGridImageSelectedListener {
         void onGridImageSelected(Photo photo, int position, Context context);
@@ -50,7 +50,7 @@ public class EasyGameFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_easy_game, container, false);
+        View view = inflater.inflate(R.layout.fragment_play_game, container, false);
         gridView = (GridView) view.findViewById(R.id.grid_view);
         setupGridView();
 
