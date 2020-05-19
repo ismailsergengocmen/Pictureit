@@ -33,12 +33,12 @@ public class ProgressMapFragment extends Fragment {
     //Constants
     private static final String TAG = "ProgressMapFragment";
     private final Context mContext = getContext();
+
     //Firebase
     private DatabaseReference reference;
 
     //Variables
     private List<Photo> photoList;
-
 
     //Widgets
     private RecyclerView recyclerView;

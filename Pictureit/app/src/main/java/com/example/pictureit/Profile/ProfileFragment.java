@@ -59,6 +59,7 @@ public class ProfileFragment extends Fragment {
     private Toolbar toolbar;
     private ImageView profileMenu;
     private ImageView progressMap;
+    private ImageView badges;
     private BottomNavigationViewEx bottomNavigationViewEx;
 
     @Nullable
@@ -76,11 +77,19 @@ public class ProfileFragment extends Fragment {
         mPhotoNumber = view.findViewById(R.id.displayPhotoCount);
         bottomNavigationViewEx = view.findViewById(R.id.bottomNavViewBar);
         mFirebaseMethods = new FirebaseMethods(getActivity());
+        badges = view.findViewById(R.id.imageViewBadges);
         progressMap = view.findViewById(R.id.imageViewEarth);
         progressMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 replaceFragment(new ProgressMapFragment());
+            }
+        });
+
+        badges.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                replaceFragment(new BadgeFragment());
             }
         });
 
