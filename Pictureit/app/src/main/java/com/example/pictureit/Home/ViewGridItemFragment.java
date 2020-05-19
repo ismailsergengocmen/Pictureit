@@ -199,6 +199,7 @@ public class ViewGridItemFragment extends Fragment {
     private void uploadImageToStorage(final String name, Uri uri) {
 
         String newPhotoKey = mRef.child(mContext.getString(R.string.dbname_user_photos)).push().getKey();
+
         final StorageReference image = mStorageReference.child("images/" + userID + "/" + name);
         image.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -254,6 +255,7 @@ public class ViewGridItemFragment extends Fragment {
                     public void onSuccess(Uri uri) {
                         try {
                             firebaseMethods.addPhotoToDatabase(name, uri.toString(), currentTag1, currentTag2, getActivity().getString(R.string.dbname_all_photos));
+                            firebaseMethods.addPhotoToDatabase(name, uri.toString(), currentTag1, currentTag2, getActivity().getString(R.string.dbname_all_photos_and_tags));
                         } catch (NullPointerException e) {
 
                         }

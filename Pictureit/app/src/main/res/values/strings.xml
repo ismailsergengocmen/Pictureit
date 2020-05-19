@@ -22,6 +22,7 @@
     <string name="dbname_tags_and_photos">tags_and_photos</string>
     <string name="dbname_captured_photos">captured_photos</string>
     <string name="dbname_all_photos">all_photos</string>
+    <string name="dbname_all_photos_and_tags">all_photos_and_tags</string>
 
     <string name="field_username">username</string>
     <string name="field_email">email</string>
