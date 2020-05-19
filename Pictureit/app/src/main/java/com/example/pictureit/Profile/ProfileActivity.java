@@ -1,24 +1,33 @@
 package com.example.pictureit.Profile;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+
+import androidx.appcompat.widget.Toolbar;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.pictureit.R;
+import com.example.pictureit.Utils.BottomNavigationViewHelper;
+import com.example.pictureit.Utils.UniversalImageLoader;
+import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 
 public class ProfileActivity extends AppCompatActivity {
 
-    //Constants
     private static final String TAG = "ProfileActivity";
+
     private static final int ACTIVITY_NUMBER = 2;
-    private final Context mContext = ProfileActivity.this;
+    private Context mContext = ProfileActivity.this;
 
     //Widgets
     private ProgressBar mProgressBar;

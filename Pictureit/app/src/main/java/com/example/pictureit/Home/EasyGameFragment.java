@@ -35,19 +35,17 @@ import java.util.Map;
 
 public class EasyGameFragment extends Fragment {
 
-    //Constants
     private static final String TAG = "EasyGameFragment";
-    private static final int NUM_GRID_COLUMNS = 3;
-
-    //Widgets
-    private GridView gridView;
-
-    //Interface
-    private OnGridImageSelectedListener mOnGridImageSelectedListener;
 
     public interface OnGridImageSelectedListener {
         void onGridImageSelected(Photo photo, Context context);
     }
+
+    OnGridImageSelectedListener mOnGridImageSelectedListener;
+
+    GridView gridView;
+    private static final int NUM_GRID_COLUMNS = 3;
+
 
     @Nullable
     @Override
@@ -55,6 +53,7 @@ public class EasyGameFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_easy_game, container, false);
         gridView = (GridView) view.findViewById(R.id.grid_view);
         setupGridView();
+
 
         ImageView backArrow = view.findViewById(R.id.backArrow);
         backArrow.setOnClickListener(new View.OnClickListener() {
@@ -111,7 +110,7 @@ public class EasyGameFragment extends Fragment {
                 int imageWidth = gridWidth / NUM_GRID_COLUMNS;
                 gridView.setColumnWidth(imageWidth);
 
-                ArrayList<String> imgUrls = new ArrayList<>();
+                ArrayList<String> imgUrls = new ArrayList<String>();
                 for (int i = 0; i < photos.size(); i++) {
                     imgUrls.add(photos.get(i).getImage_path());
                 }

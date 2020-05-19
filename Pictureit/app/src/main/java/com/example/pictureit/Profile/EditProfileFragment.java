@@ -1,6 +1,7 @@
 package com.example.pictureit.Profile;
 
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +26,7 @@ import com.example.pictureit.models.UserSettings;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -38,27 +40,10 @@ import com.google.firebase.database.ValueEventListener;
 
 public class EditProfileFragment extends Fragment implements ConfirmPasswordDialog.OnConfirmPasswordListener {
 
-    //Constants
-    private static final String TAG = "EditProfileFragment";
-
-    //Firebase
-    private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
-    private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference myRef;
-    private FirebaseMethods mFirebaseMethods;
-
-    //Widgets
-    private EditText mDisplayName, mEmail, mUserName;
-    private ImageView mProfilePhoto;
-    private Button mChangeProfilePhoto;
-
-    //Variables
-    private UserSettings mUserSettings;
-
     @Override
     public void onConfirmPassword(String password) {
         Log.d(TAG, "onConfirmPassword: got the password: " + password);
+
 
         //Get auth credentials from the user for re-authentication. The example below shows email and password
         //credentials but there are multiple possible providers,such as GoogleAuthProvider or FacebookAuthProvider.
@@ -77,6 +62,7 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
                         public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
                             if (task.isSuccessful()) {
                                 try {
+
                                     if (task.getResult().getSignInMethods().size() == 1) {
                                         Log.d(TAG, "onComplete: that email is already in use.");
                                         Toast.makeText(getActivity(), "that email is already in use", Toast.LENGTH_SHORT).show();
@@ -109,15 +95,32 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
         });
     }
 
+    private static final String TAG = "EditProfileFragment";
+
+    //Firebase
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference myRef;
+    private FirebaseMethods mFirebaseMethods;
+
+    //Widgets
+    private EditText mDisplayName, mEmail, mUserName;
+    private ImageView mProfilePhoto;
+    private Button mChangeProfilePhoto;
+
+    //Variables
+    private UserSettings mUserSettings;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_edit_profile, container, false);
         mProfilePhoto = view.findViewById(R.id.profilePhoto);
-        mDisplayName = view.findViewById(R.id.editTextProfileName);
-        mUserName = view.findViewById(R.id.editTextUserName);
-        mEmail = view.findViewById(R.id.editTextEmailAddress);
-        mChangeProfilePhoto = view.findViewById(R.id.changeProfilePhoto);
+        mDisplayName = (EditText) view.findViewById(R.id.editTextProfileName);
+        mUserName = (EditText) view.findViewById(R.id.editTextUserName);
+        mEmail = (EditText) view.findViewById(R.id.editTextEmailAddress);
+        mChangeProfilePhoto = (Button) view.findViewById(R.id.changeProfilePhoto);
         mFirebaseMethods = new FirebaseMethods(getActivity());
 
         // setProfileImage();
@@ -156,8 +159,10 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
         final String username = mUserName.getText().toString();
         final String email = mEmail.getText().toString();
 
+
         //case1: If the user made a change to their username
         if (!mUserSettings.getUser().getUsername().equals(username)) {
+
             checkIfUsernameExists(username);
         }
         //case2: If the user made a change to their mail
@@ -174,7 +179,7 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
             //step 3)Change the email
             //       - submit the new email to the database and authentication
         }
-        if (!mUserSettings.getSettings().getDisplay_name().equals(displayName)) {
+        if (!mUserSettings.getSettings().getDisplay_name().equals(displayName)){
             //update displayname
             mFirebaseMethods.updateDisplayName(displayName);
         }
@@ -209,10 +214,11 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.d(TAG, "onCancelled: cancelled.");
+
             }
         });
     }
+
 
     private void setProfileWidgets(UserSettings userSettings) {
         Log.d(TAG, "setProfileWidgets: setting widgets with data retrieving from firebase database: " + userSettings.toString());
@@ -227,6 +233,7 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
         mDisplayName.setText(settings.getDisplay_name());
         mUserName.setText(settings.getUsername());
         mEmail.setText(userSettings.getUser().getEmail());
+
     }
 
     //-----------------------------------------Firebase-------------------------------------------------
@@ -290,6 +297,5 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
     public void backToActivity() {
         getFragmentManager().popBackStack();
     }
-
 
 }

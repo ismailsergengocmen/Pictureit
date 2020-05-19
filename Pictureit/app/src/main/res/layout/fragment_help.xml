@@ -1,6 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/background_light">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <include layout="@layout/snippet_top_help" />
+
+    <ImageView
+        android:id="@+id/QuestionEmoji"
+        android:layout_width="137dp"
+        android:layout_height="101dp"
+        android:layout_below="@+id/FifthP"
+        android:layout_marginLeft="280dp"
+        android:layout_marginTop="60dp"
+        android:src="@drawable/question_mark_emoji" />
+
+    <TextView
+        android:id="@+id/SecondP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/FirstP"
+        android:layout_marginTop="20dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="You should see 3 buttons in the bottom of the screen. First button will take you to the main screen which contains categories.Second button will take you to the search screen which can be used to find the intented tag with related photos. Third button will take you to settings menu. You can use it for edit your profile or sign out.  "
+        android:textColor="@android:color/black"/>
+
+    <TextView
+        android:id="@+id/ThirdP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/SecondP"
+        android:layout_marginTop="20dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="In PictureIt, we classify the photos to be captured with tags. In main menu you will see 3 different categories. These categories were created according to the difficulty of the tags. You can upload the photo related to the desired tag by clicking  (+) symbol. "
+        android:textColor="@android:color/black"/>
+
+    <TextView
+        android:id="@+id/FourthP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ThirdP"
+        android:layout_marginTop="20dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="In search menu, you will be able to find the tag you want by simply entering it's name to the search area. Then you can see photos related with that tag. "
+        android:textColor="@android:color/black"/>
+
+    <TextView
+        android:id="@+id/FifthP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/FourthP"
+        android:layout_marginTop="20dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="In settings menu, you can change your profile's email,username and displayname by selecting edit profile option. Also, you can you can log out of your account to log in with another account by selecting sign out option. "
+        android:textColor="@android:color/black"/>
+
+    <TextView
+        android:id="@+id/FirstP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="Welcome to PictureIt. I know there are a lot of things you wonder.I will help you to discover some of items in your environment.But, firstly you need to understand that how can you use PictureIt. "
+        android:textColor="@android:color/black"/>
+
+</RelativeLayout>

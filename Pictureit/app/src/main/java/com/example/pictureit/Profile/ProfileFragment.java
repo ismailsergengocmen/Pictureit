@@ -40,10 +40,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileFragment extends Fragment {
 
-    //Constants
     private static final String TAG = "ProfileFragment";
+
     private static final int ACTIVITY_NUMBER = 2;
-    private final Context mContext = getActivity();
 
     //Firebase
     private FirebaseAuth mAuth;
@@ -62,12 +61,12 @@ public class ProfileFragment extends Fragment {
     private ImageView badges;
     private BottomNavigationViewEx bottomNavigationViewEx;
 
+    private Context mContext;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-        Log.d(TAG, "onCreateView: started.");
-
         mDisplayName = view.findViewById(R.id.displayName);
         mUserName = view.findViewById(R.id.username);
         mProfilePhoto = view.findViewById(R.id.profileImage);
@@ -76,6 +75,7 @@ public class ProfileFragment extends Fragment {
         profileMenu = view.findViewById(R.id.profileMenu);
         mPhotoNumber = view.findViewById(R.id.displayPhotoCount);
         bottomNavigationViewEx = view.findViewById(R.id.bottomNavViewBar);
+        mContext = getActivity();
         mFirebaseMethods = new FirebaseMethods(getActivity());
         badges = view.findViewById(R.id.imageViewBadges);
         progressMap = view.findViewById(R.id.imageViewEarth);
@@ -92,6 +92,8 @@ public class ProfileFragment extends Fragment {
                 replaceFragment(new BadgeFragment());
             }
         });
+        Log.d(TAG, "onCreateView: started.");
+
 
         setupBottomNavigationView();
         setupToolBar();

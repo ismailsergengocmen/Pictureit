@@ -2,7 +2,6 @@ package com.example.pictureit.models;
 
 public class UserSettings {
 
-    //Properties
     private User user;
     private UserAccountSettings settings;
 

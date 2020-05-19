@@ -14,6 +14,7 @@ import com.example.pictureit.R;
 import com.example.pictureit.Utils.FirebaseMethods;
 import com.example.pictureit.models.User;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,9 +29,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    //Constants
     private static final String TAG = "RegisterActivity";
-    private final Context mContext = RegisterActivity.this;
+
+    private Context mContext;
 
     //Widgets
     private String email, username, password;
@@ -46,17 +47,15 @@ public class RegisterActivity extends AppCompatActivity {
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference myRef;
 
-    //Variable
-    private String append;
+    private String append = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        Log.d(TAG, "onCreate: started.");
-
+        mContext = RegisterActivity.this;
         firebaseMethods = new FirebaseMethods(mContext);
-        append = "";
+        Log.d(TAG, "onCreate: started.");
 
         initWidgets();
         setupFirebaseAuth();
@@ -101,6 +100,7 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister = findViewById(R.id.btn_register);
         loadingPleaseWait = findViewById(R.id.loadingPleaseWait);
         mPassword = findViewById(R.id.register_password);
+        mContext = RegisterActivity.this;
         mProgressBar.setVisibility(View.GONE);
         loadingPleaseWait.setVisibility(View.GONE);
     }
@@ -119,8 +119,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     /**
      * Check if @param username already exists in teh database
-     *
-     * @param username user's username
+     * @param username
      */
     private void checkIfUsernameExists(final String username) {
         Log.d(TAG, "checkIfUsernameExists: Checking if " + username + " already exists.");
@@ -131,8 +130,8 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                for (DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
-                    if (singleSnapshot.exists()) {
+                for (DataSnapshot singleSnapshot: dataSnapshot.getChildren()){
+                    if (singleSnapshot.exists()){
                         Log.d(TAG, "checkIfUsernameExists: FOUND A MATCH: " + singleSnapshot.getValue(User.class).getUsername());
                         append = myRef.push().getKey().substring(3, 10);
                         Log.d(TAG, "onDataChange: username already exists. Appending random string to name: " + append);
@@ -151,7 +150,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.d(TAG, "onCancelled: cancelled.");
+
             }
         });
     }
@@ -171,6 +170,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
 
+
                 if (user != null) {
                     //User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in" + user.getUid());
@@ -178,12 +178,12 @@ public class RegisterActivity extends AppCompatActivity {
                     myRef.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            checkIfUsernameExists(username);
+                           checkIfUsernameExists(username);
                         }
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
-                            Log.d(TAG, "onCancelled: cancelled.");
+
                         }
                     });
 
@@ -201,6 +201,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);
+
     }
 
     @Override
