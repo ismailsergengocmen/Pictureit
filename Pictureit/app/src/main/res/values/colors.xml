@@ -13,7 +13,7 @@
     <color name="colorRed" >#D00E0E</color>
     <color name="colorLinkBlue" >#0293D7</color>
     <color name="colorBeige" >#d6d6c2</color>
-<<<<<<< HEAD
+
 
     <color name="colorPastelRed">#CD9393</color>
     <color name="colorPastelYellow">#B1985E</color>
@@ -21,6 +21,5 @@
     <color name="colorPastelBlue">#F07CAFB5</color>
     <color name="colorPastelGrey">#423D3D</color>
 
-=======
->>>>>>> parent of d46a81a... Little visual changes
+
 </resources>
