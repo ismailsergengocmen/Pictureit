@@ -266,11 +266,12 @@ public class ViewGridItemFragment extends Fragment {
     private void setCurrentPhoto() {
         DatabaseReference smallRef = mRef.child(getString(R.string.dbname_user_photos))
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                .child("photo_0");
+                .child("photo_" + position);
 
         smallRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.d(TAG, "onDataChange: " + dataSnapshot.getValue(Photo.class).getTag1());
                 currentTag1 = dataSnapshot.getValue(Photo.class).getTag1();
                 currentTag2 = dataSnapshot.getValue(Photo.class).getTag2();
             }
@@ -310,7 +311,6 @@ public class ViewGridItemFragment extends Fragment {
 //                        newPhoto.setImage_path("file:///storage/emulated/0/Android/data/com.example.pictureit/files/Pictures/JPEG_20200518_111007_8855921001812468337.jpg");
 //                        UniversalImageLoader.setImage(newPhoto.getImage_path(), image, null, "");
                     }
-
                 }
 
                 @Override
