@@ -312,7 +312,6 @@ public class FirebaseMethods {
         Log.d(TAG, "addPhotoToDatabase: adding photo to database.");
 
         String newPhotoKey = myRef.child(mContext.getString(R.string.dbname_all_photos)).push().getKey();
-
         Photo photo = new Photo();
         photo.setImage_path(url);
         photo.setDate_created(getTimestamp());
@@ -321,27 +320,10 @@ public class FirebaseMethods {
         photo.setUser_id(FirebaseAuth.getInstance().getCurrentUser().getUid());
         photo.setImage_id(image_id);
 
-        if (node == mContext.getString(R.string.dbname_all_photos)) {
-            //insert into database's all_photos node
-            myRef.child(node)
-                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                    .child(newPhotoKey).setValue(photo);
-
-        } else if (node == mContext.getString(R.string.dbname_all_photos_and_tags)) {
-            //insert into database's all_photos_and_tags node(for tag1)
-            myRef.child(node)
-                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                    .child(tag1.toLowerCase())
-                    .child(newPhotoKey)
-                    .setValue(photo);
-
-            //insert into database's all_photos_and_tags node(for tag2)
-            myRef.child(node)
-                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                    .child(tag2.toLowerCase())
-                    .child(newPhotoKey)
-                    .setValue(photo);
-        }
+        //insert into database's all_photos node
+        myRef.child(node)
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .child(newPhotoKey).setValue(photo);
     }
 
     /**
