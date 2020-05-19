@@ -28,3 +28,6 @@ Today I completed the progressmap. I added CardRecyclerViewAdapter class(Custon 
 ### ~ 18/05/2020 ~
 Today I created the search activity. I added activity_search(xml) and snippet_searchbar(xml). Then I filled the search activity.(I used the firebase in order to get the related photos) Now user can enter a tag and search for related photos.Then, I organized our database and storage. With my group we decided the basic structure of the database. Then I made it. I added 2 new nodes(all_photos and tags_and_photos). I also organized the storage. Now storage have 2 folders(images and all_images). Then I organized and added the related methods to add photo to storage and realtime database(Those methods are uploading photos into correct folders/nodes). Then I tidied some parts of the project. 
 
+
+### ~ 19/05/2020 ~
+Today I worked with Sergen to solve a problem related to profile activity. We solved the problem. Then I worked with badge/achievements system. Now it is correct and it properly shows the achievement/ achievement badge/ progress/ wheter it is done or not. I also added functionality to the profile activity that now users can see their photo count.(Now users can see how many pictures they have captured).
