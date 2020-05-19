@@ -262,18 +262,12 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
                 alertDialog.show();
             }
         });
-        return view;
-    }
-
-
-
         mChangeProfilePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 askCameraPermission();
             }
         });
-
         return view;
     }
 
