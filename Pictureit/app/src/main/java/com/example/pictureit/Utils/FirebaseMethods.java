@@ -167,6 +167,15 @@ public class FirebaseMethods {
         addPhotoToDatabase("photo_0", "https://firebasestorage.googleapis.com/v0/b/pictureit-7d068.appspot.com/o/EasyGamePhotos%2Fphoto0.png?alt=media&token=7bad77d7-7ca4-4aa4-bd53-0a03feca2a13", "Black", "Cat");
         addPhotoToDatabase("photo_1", "https://firebasestorage.googleapis.com/v0/b/pictureit-7d068.appspot.com/o/EasyGamePhotos%2Fphoto1.png?alt=media&token=e4e9d72c-798a-481b-93aa-ffd29dd84861", "Yellow", "Dog");
         addPhotoToDatabase("photo_2", "https://firebasestorage.googleapis.com/v0/b/pictureit-7d068.appspot.com/o/EasyGamePhotos%2Fphoto2.png?alt=media&token=b45637ac-7a43-40a8-b38f-10fd9a562f3f", "Orange", "Fish");
+        addPhotoToDatabase("photo_3", "https://firebasestorage.googleapis.com/v0/b/pictureit-7d068.appspot.com/o/EasyGamePhotos%2F02903af6a22cd87679bb384e806dc2cb.png?alt=media&token=76061755-dee1-4c71-99c8-0b6878bee97f", "Yellow", "Flower");
+        addPhotoToDatabase("photo_4", "https://firebasestorage.googleapis.com/v0/b/pictureit-7d068.appspot.com/o/EasyGamePhotos%2F1f1458057fdf5f190f71f0e7667fa393.jpg?alt=media&token=7c66c17f-b106-4f2c-a4a5-a61b5a72182a", "Red", "Flower");
+        addPhotoToDatabase("photo_5", "https://firebasestorage.googleapis.com/v0/b/pictureit-7d068.appspot.com/o/EasyGamePhotos%2F78b49e23522b6ad462f1ae94eaba1adb.png?alt=media&token=17ed21a6-f42e-450c-b744-8e230f0bf0e5", "White", "Dog");
+        addPhotoToDatabase("photo_6", "https://firebasestorage.googleapis.com/v0/b/pictureit-7d068.appspot.com/o/EasyGamePhotos%2F91002391-car-icon-vector-flat-simple-cartoon-transportation-symbol-isolated-on-white-side-view-.jpg?alt=media&token=ae401717-4c18-4b1e-92c1-c25a6e0a082c", "Black", "Car");
+        addPhotoToDatabase("photo_7", "https://firebasestorage.googleapis.com/v0/b/pictureit-7d068.appspot.com/o/EasyGamePhotos%2Fd00428efa0bf27b9edd37eac32dfd2c1.png?alt=media&token=79329c25-8ca1-47c2-a1e5-44653cf89a9e", "Green", "Tree");
+        addPhotoToDatabase("photo_8", "https://firebasestorage.googleapis.com/v0/b/pictureit-7d068.appspot.com/o/EasyGamePhotos%2Fdownload%20(1).png?alt=media&token=7d338f79-f95f-4888-85ec-68525e2ef42d", "Yellow", "Cat");
+        addPhotoToDatabase("photo_9", "https://firebasestorage.googleapis.com/v0/b/pictureit-7d068.appspot.com/o/EasyGamePhotos%2Fdownload.png?alt=media&token=5ae934de-a9c6-41de-94cb-a6bd778919b1", "Brown", "Bird");
+        addPhotoToDatabase("photo_10", "https://firebasestorage.googleapis.com/v0/b/pictureit-7d068.appspot.com/o/EasyGamePhotos%2Fimages.png?alt=media&token=047b9d9f-9501-44fc-96e2-0506fe0328c7", "Orange", "Cone");
+        addPhotoToDatabase("photo_11", "https://firebasestorage.googleapis.com/v0/b/pictureit-7d068.appspot.com/o/EasyGamePhotos%2Funnamed.jpg?alt=media&token=a94a7302-6720-48d4-a37c-c913a70e9227", "White", "Cloud");
     }
 
 
