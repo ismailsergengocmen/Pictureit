@@ -1,5 +1,9 @@
 package com.example.pictureit.Profile;
 
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
@@ -26,6 +30,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
+import com.example.pictureit.Login.LoginActivity;
 import com.example.pictureit.R;
 import com.example.pictureit.Utils.FirebaseMethods;
 import com.example.pictureit.Utils.SquareImageView;
@@ -67,8 +72,8 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
     public void onConfirmPassword(String password) {
         Log.d(TAG, "onConfirmPassword: got the password: " + password);
 
-        //Get auth credentials from the user for re-authentication. The example below shows email and password
-        //credentials but there are multiple possible providers,such as GoogleAuthProvider or FacebookAuthProvider.
+
+        //Get auth credentials from the user for re-authentication
         AuthCredential credential = EmailAuthProvider.getCredential(mAuth.getCurrentUser().getEmail(), password);
 
         //Prompt the user to re-provide their sign-in credentials
@@ -129,8 +134,9 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
 
     //Widgets
     private EditText mDisplayName, mEmail, mUserName;
+    private Button mChangeProfilePhoto,mChangePasswordButton,mDeleteAccountButton;
     private CircleImageView mProfilePhoto;
-    private Button mChangeProfilePhoto;
+
 
     //Variables
     private UserSettings mUserSettings;
@@ -149,10 +155,14 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
         mUserName = (EditText) view.findViewById(R.id.editTextUserName);
         mEmail = (EditText) view.findViewById(R.id.editTextEmailAddress);
         mChangeProfilePhoto = (Button) view.findViewById(R.id.changeProfilePhoto);
+        mChangePasswordButton = (Button) view.findViewById(R.id.changePasswordButton);
+        mDeleteAccountButton = view.findViewById(R.id.deleteAccountButton);
         mFirebaseMethods = new FirebaseMethods(getActivity());
+        myRef = mFirebaseDatabase.getReference();
         mStorageReference = FirebaseStorage.getInstance().getReference();
         userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         downloader = new UniversalImageLoader(getContext());
+
 
         // setProfileImage();
         setupFirebaseAuth();
@@ -175,6 +185,86 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
                 saveProfileSettings();
             }
         });
+
+
+        mChangePasswordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "onClick: changing password");
+
+                final EditText resetPassword = new EditText(view.getContext());
+                final AlertDialog.Builder passwordResetDialog = new AlertDialog.Builder(view.getContext());
+                passwordResetDialog.setTitle("Do you want to reset your password ?");
+                passwordResetDialog.setMessage(" Enter new password at least 6 characters long");
+                passwordResetDialog.setView(resetPassword);
+
+                passwordResetDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        //extract the email and send reset link
+                        String newPassword = resetPassword.getText().toString();
+                        mAuth.getCurrentUser().updatePassword(newPassword).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(getActivity(), "Password Reset Successfully", Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getActivity(), "Password Reset Failed.", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
+
+                passwordResetDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        //close
+                    }
+                });
+                passwordResetDialog.create().show();
+            }
+        });
+
+        mDeleteAccountButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+                dialog.setTitle("Are you sure?");
+                dialog.setMessage("Deleting this account will result in completely removing your "
+                + "account from the system and you won't be able to access your profile");
+                dialog.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        mAuth.getCurrentUser().delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isSuccessful()){
+                                    Toast.makeText(getActivity(), "Account Deleted", Toast.LENGTH_LONG).show();
+                                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+                                    startActivity(intent);
+                                }else{
+                                    Toast.makeText(getActivity(),task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        });
+                    }
+                });
+                dialog.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+
+                AlertDialog alertDialog = dialog.create();
+                alertDialog.show();
+            }
+        });
+        return view;
+    }
+
 
 
         mChangeProfilePhoto.setOnClickListener(new View.OnClickListener() {
@@ -285,7 +375,6 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
         });
     }
 
-    // String imgURL = "cdn.webrazzi.com/uploads/2013/06/android-malware.jpg";
 
     /**
      * Retrieves the data contained in the widgets and submits it to the database
@@ -356,7 +445,6 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
         });
     }
 
-
     private void setProfileWidgets(UserSettings userSettings) {
         Log.d(TAG, "setProfileWidgets: setting widgets with data retrieving from firebase database: " + userSettings.toString());
         Log.d(TAG, "setProfileWidgets: setting widgets with data retrieving from firebase database: " + userSettings.getUser().getEmail());
@@ -371,6 +459,10 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
         mUserName.setText(settings.getUsername());
         mEmail.setText(userSettings.getUser().getEmail());
 
+    }
+
+    public void backToActivity() {
+        getFragmentManager().popBackStack();
     }
 
     //-----------------------------------------Firebase-------------------------------------------------
@@ -431,8 +523,5 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
         }
     }
 
-    public void backToActivity() {
-        getFragmentManager().popBackStack();
-    }
 
 }
