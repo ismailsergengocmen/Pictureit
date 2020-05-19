@@ -37,5 +37,6 @@
     <string name="field_image_uri">image_uri</string>
     <string name="field_profile_photo">profile_photo</string>
     <string name="field_timestamp">timestamp</string>
+    <string name="field_posts">posts</string>
 
 </resources>

@@ -25,6 +25,7 @@ import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.pictureit.Home.HomeActivity;
 import com.example.pictureit.R;
 import com.example.pictureit.Utils.FirebaseMethods;
 import com.example.pictureit.Utils.SquareImageView;
@@ -68,6 +69,7 @@ public class ViewGridItemFragment extends Fragment {
     private String userID;
     private String currentTag1;
     private String currentTag2;
+    private int imageCount;
 
     //Widgets
     private ImageView camera;
@@ -262,6 +264,29 @@ public class ViewGridItemFragment extends Fragment {
                 });
             }
         });
+
+        mRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                imageCount = firebaseMethods.getImageCount(dataSnapshot);
+                Log.d(TAG, "uploadImageToStorage:image count " + imageCount);
+                try {
+                    DatabaseReference newRef = mRef.child(getContext().getString(R.string.dbname_user_account_settings))
+                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                            .child(getString(R.string.field_posts));
+                    newRef.setValue(imageCount);
+                } catch ( NullPointerException e){
+
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void setCurrentPhoto() {
@@ -282,7 +307,6 @@ public class ViewGridItemFragment extends Fragment {
 
             }
         });
-
     }
 
     private void init() {

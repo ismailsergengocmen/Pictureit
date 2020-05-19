@@ -344,6 +344,17 @@ public class FirebaseMethods {
         }
     }
 
+    public int getImageCount(DataSnapshot dataSnapshot) {
+        int count = 0;
+        for (DataSnapshot ds : dataSnapshot
+                .child(mContext.getString(R.string.dbname_all_photos))
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .getChildren()) {
+            count++;
+        }
+        return count;
+    }
+
     /**
      * A method for producing String which is the representation of current date and time
      *
