@@ -293,13 +293,14 @@ public class ViewGridItemFragment extends Fragment {
         DatabaseReference smallRef = mRef.child(getString(R.string.dbname_user_photos))
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .child("photo_" + position);
-
+        Log.d(TAG, "setCurrentPhotoPosition: " + position);
         smallRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Log.d(TAG, "onDataChange: " + dataSnapshot.getValue(Photo.class).getTag1());
                 currentTag1 = dataSnapshot.getValue(Photo.class).getTag1();
                 currentTag2 = dataSnapshot.getValue(Photo.class).getTag2();
+                Log.d("lol", "onDataChange: " + currentTag2);
             }
 
             @Override
