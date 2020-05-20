@@ -30,4 +30,7 @@ Today I created the search activity. I added activity_search(xml) and snippet_se
 
 
 ### ~ 19/05/2020 ~
-Today I worked with Sergen to solve a problem related to profile activity. We solved the problem. Then I worked with badge/achievements system. Now it is correct and it properly shows the achievement/ achievement badge/ progress/ wheter it is done or not. I also added functionality to the profile activity that now users can see their photo count.(Now users can see how many pictures they have captured).
+Today I worked with Sergen to solve a problem related to profile activity. We solved the problem. Then I worked with badge/achievements system. Now it is correct and it properly shows the achievement/ achievement badge/ progress/ wheter it is done or not. I also added functionality to the profile activity that now users can see their photo count.(Now users can see how many pictures they have captured). Then I worked with Mehmet Ali to create the profile image part. Now when user clicks the "change profile image" button, it automatically opens the camera then saves it in the related node of the firebase. Then, I worked with the last version of our app. After uploading the all images, app and database caused a problem related to the items position so I solved the error. I also worked with the colors of the app and the theme. I also changed some of the photos of the play section.(Faruk had already uploaded them to storage and database but some of them have strange looks so I changed those)
+
+### ~ 20/05/2020 ~
+Today, to finish the app I changed the help part a little bit. Sergen has already created this part, but I added more information to it and changed the text style/font. Then as a group we took a video of our app demo.

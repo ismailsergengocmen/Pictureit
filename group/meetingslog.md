@@ -69,3 +69,13 @@ We talked about the general structure of the database and how we should create i
 -->Faruk will work with onclick method of the gridview which is in the search activity
 -->Mehmet Ali was missing.
 -->Ahmed Salih will work on general structure of the database/storage and its methods.  
+
+### Meeting ~ (19/05/2020, 1hour)
+**Present:** Everyone
+**Discussion:** 
+We talked about the final version of our app and talked about what is remaining
+**ToDo:** 
+-->Sergen will work with help fragment.
+-->Faruk will work with uploading default images to the firebase storage 
+-->Mehmet Ali will work on profile photo capturing
+-->Ahmed Salih will work on the badges system and the achievements(general database related work)
