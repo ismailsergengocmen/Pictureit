@@ -38,7 +38,6 @@ public class HelpFragment extends Fragment {
         thirdP = view.findViewById(R.id.ThirdP);
         fourthP = view.findViewById(R.id.FourthP);
         fifthP = view.findViewById(R.id.FifthP);
-        questionmark = view.findViewById(R.id.QuestionEmoji);
         backArrow = view.findViewById(R.id.HelpbackArrow);
 
         backArrow.setOnClickListener(new View.OnClickListener() {

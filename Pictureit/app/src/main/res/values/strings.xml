@@ -40,4 +40,14 @@
     <string name="field_timestamp">timestamp</string>
     <string name="field_posts">posts</string>
 
+    <!-- Help fragment -->
+    <string name="firstPar">Welcome to PictureIt. I know there are a lots of things you wonder. I will help you to discover some of tools in your environment,so lets start!</string>
+    <string name="secondPar">Almost in every screen should see 3 buttons in the bottom. First button will take you to the main screen which contains the tasks. Second button will take you to the search screen which can be used to find the tasks you want. The third button will take you to profile menu.</string>
+    <string name="thirdPar">In the profile section you can see how many pictures you have taken under your user name. You can also see your progress and photos in the "Progress Map" section. If you want to see the achievements you can click on "Badges" section.</string>
+    <string name="fourthPar">If you want to make any changes related to your account, you can use the settings button. You can change your email, username, password and even your profile photo. In settings you can also sign out and change your account.</string>
+    <string name="fifthPar">Now lets talk about the play section. In PictureIt, we classify the photos with tags. In main menu you will see a play button. If you click, you can see the current tasks page. In that page, you can see example photos of tasks. However, if you are not sure about the task, you can click on the photo and see a bigger version of it with its tags. </string>
+    <string name="sixthPar">If you want to take a photo, you can click the camera button which is below the photo tags. You can click and capture your task. After you capture, the photo will be automatically uploaded to the app and then you can see your lovely photo.</string>
+    <string name="seventhPar">In search menu, you will be able to find the tags you want by simply entering to the search bar. Then you can see the related photos. If you want, you can also click on those images and take the photos in that section.</string>
+    <string name="eighthPar">This is the basic tour for the PictureIt. We hope you can enjoy your time with us.</string>
+
 </resources>
