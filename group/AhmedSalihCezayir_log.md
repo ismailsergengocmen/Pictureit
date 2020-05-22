@@ -1,6 +1,6 @@
 # CS102 ~ Personal Log page ~
 
-## Ahmed Salih Cezayir 
+## Ahmed Salih Cezayir 21802918
 
 On this page I will keep a weekly record of what I have done for the CS102 group project. This page will be submitted together with the rest of the repository, in partial fulfillment of the CS102 course requirements.
 
@@ -34,3 +34,19 @@ Today I worked with Sergen to solve a problem related to profile activity. We so
 
 ### ~ 20/05/2020 ~
 Today, to finish the app I changed the help part a little bit. Sergen has already created this part, but I added more information to it and changed the text style/font. Then as a group we took a video of our app demo.
+
+### ~ 22/05/2020 ~
+Today I locked the screen rotation of our app. Now it only shows the screen in portrait mode. Then I also solved one bug related to the search section. When user taking a photo in search part, it was uploading the image to wrong place, so I solved it by changing the photo class.
+
+### ~ The all tasks I have done ~
+*These are the tasks/jobs I did in this project*
+- General layout of the app
+- Camera functionality/ Camera permission/ Uploading image to firebase storage/ Uploading image uri to firebase realtime database(and methods to Firebasemethods class).
+- Firebase realtime database structure/node/branch design(all_photos/ tags_and_photos/ all_tags_and_photos/ user_photos) and uploading images to the related node(and methods to do those)
+- Progress map(using all_photos node) to show the all captured photos of the user.To create this part I created 2 layouts, one for general layout holding the recycler view, and one for the each individual item of the recycler view. Then I created the related java files for those. Then I combined them in the progressMapFragment. I worked with database references to get the photos.
+- Badges section to show some achievements and track the progress of them. Again, to create this part I created 2 layouts, one for general layout holding the recycler view, and one for the each individual item of the recycler view. Then I created the related java files for those. Then I combined them in the badgesFragment. I worked with database references to track the progress.
+- Photo count in the profile(This is below the username)
+- Search part. I got the photos from the database reference(all_photos_and_tags node) and filled the grid according to written tag. Then faruk added the on click listeners to make the grid work. 
+- With Mehmet Ali, we created "Change profile photo" part
+- Debugging related to search part and general debugging
+- I also helped my teammates when they encounter a problem
