@@ -269,6 +269,7 @@ public class FirebaseMethods {
         photo.setDate_created(getTimestamp());
         photo.setTag1("");
         photo.setTag2("");
+        photo.setPosition(0);
         photo.setUser_id(FirebaseAuth.getInstance().getCurrentUser().getUid());
         photo.setImage_id(newPhotoKey);
 
@@ -309,6 +310,7 @@ public class FirebaseMethods {
         photo.setDate_created(getTimestamp());
         photo.setTag1(tag1);
         photo.setTag2(tag2);
+        photo.setPosition(StringManipulation.photoPosition(image_id));
         photo.setUser_id(FirebaseAuth.getInstance().getCurrentUser().getUid());
         photo.setImage_id(image_id);
 
@@ -345,6 +347,7 @@ public class FirebaseMethods {
         photo.setDate_created(getTimestamp());
         photo.setTag1(tag1);
         photo.setTag2(tag2);
+        photo.setPosition(StringManipulation.photoPosition(image_id));
         photo.setUser_id(FirebaseAuth.getInstance().getCurrentUser().getUid());
         photo.setImage_id(image_id);
 

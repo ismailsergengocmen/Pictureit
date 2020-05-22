@@ -98,6 +98,7 @@ public class PlayGameFragment extends Fragment {
                         photo.setUser_id(objectMap.get(getString(R.string.field_user_id)).toString());
                         photo.setDate_created(objectMap.get(getString(R.string.field_date_created)).toString());
                         photo.setImage_path(objectMap.get(getString(R.string.field_image_path)).toString());
+                        photo.setPosition(Integer.parseInt(objectMap.get(getString(R.string.field_position)).toString()));
 
                         photos.add(photo);
                     } catch (NullPointerException e) {

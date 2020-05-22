@@ -137,13 +137,13 @@ public class HomeActivity extends AppCompatActivity implements PlayGameFragment.
 
     @Override
     public void onGridImageSelected(Photo photo, int position, Context context) {
-        Log.d(TAG, "onGridImageSelected: selected an image");
+        Log.d(TAG, "onGridImageSelected: selected an image" + photo.getPosition());
         ViewGridItemFragment fragment = new ViewGridItemFragment();
         Bundle args = new Bundle();
         args.putParcelable("PHOTO", photo);
         args.putString("tag1", photo.getTag1());
         args.putString("tag2", photo.getTag2());
-        args.putInt("position", position);
+        args.putInt("position", photo.getPosition());
         fragment.setArguments(args);
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

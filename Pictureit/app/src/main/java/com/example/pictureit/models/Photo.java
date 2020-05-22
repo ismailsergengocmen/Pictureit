@@ -10,14 +10,16 @@ public class Photo implements Parcelable {
     private String user_id;
     private String tag1;
     private String tag2;
+    private Integer position;
 
-    public Photo(String date_created, String image_path, String image_id, String user_id, String tag1, String tag2) {
+    public Photo(String date_created, String image_path, String image_id, String user_id, String tag1, String tag2, Integer position) {
         this.date_created = date_created;
         this.image_path = image_path;
         this.image_id = image_id;
         this.tag1 = tag1;
         this.tag2 = tag2;
         this.user_id = user_id;
+        this.position = position;
     }
 
     protected Photo(Parcel in) {
@@ -27,6 +29,7 @@ public class Photo implements Parcelable {
         user_id = in.readString();
         tag1 = in.readString();
         tag2 = in.readString();
+        position = in.readInt();
     }
 
     public Photo() {
@@ -46,6 +49,7 @@ public class Photo implements Parcelable {
         dest.writeString(user_id);
         dest.writeString(tag1);
         dest.writeString(tag2);
+        dest.writeInt(position);
     }
 
     public static final Creator<Photo> CREATOR = new Creator<Photo>() {
@@ -84,6 +88,10 @@ public class Photo implements Parcelable {
         return user_id;
     }
 
+    public Integer getPosition() {
+        return position;
+    }
+
     public void setImage_path(String image_path) {
         this.image_path = image_path;
     }
@@ -108,6 +116,10 @@ public class Photo implements Parcelable {
         this.user_id = user_id;
     }
 
+    public void setPosition(Integer position) {
+        this.position = position;
+    }
+
     @Override
     public String toString() {
         return "Photo{" +
@@ -116,7 +128,8 @@ public class Photo implements Parcelable {
                 ", image_path='" + image_path + '\'' +
                 ", user_id='" + user_id + '\'' +
                 ", tag1='" + tag1 + '\'' +
-                ", tag2='" + tag2 +
+                ", tag2='" + tag2 + '\'' +
+                ", position='" + position +
                 '}';
     }
 }

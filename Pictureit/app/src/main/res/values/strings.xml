@@ -39,6 +39,8 @@
     <string name="field_profile_photo">profile_photo</string>
     <string name="field_timestamp">timestamp</string>
     <string name="field_posts">posts</string>
+    <string name="field_position">position</string>
+
 
     <!-- Help fragment -->
     <string name="firstPar">Welcome to PictureIt. I know there are a lots of things you wonder. I will help you to discover some of tools in your environment,so lets start!</string>

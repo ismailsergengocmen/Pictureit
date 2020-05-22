@@ -112,6 +112,7 @@ public class SearchActivity extends AppCompatActivity  {
                         photo.setImage_id(ds.child(getString(R.string.field_user_id)).getValue().toString());
                         photo.setTag1(ds.child(getString(R.string.field_tag1)).getValue().toString());
                         photo.setTag2(ds.child(getString(R.string.field_tag2)).getValue().toString());
+                        photo.setPosition(Integer.parseInt(ds.child(getString(R.string.field_position)).getValue().toString()));
 
                         photoList.add(photo);
                         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -145,9 +146,7 @@ public class SearchActivity extends AppCompatActivity  {
                     Log.d(TAG, "onCancelled: cancelled.");
                 }
             });
-
         }
-
     }
 
     /**
@@ -170,6 +169,7 @@ public class SearchActivity extends AppCompatActivity  {
         args.putParcelable("PHOTO", photo);
         args.putString("tag1", photo.getTag1());
         args.putString("tag2", photo.getTag2());
+        args.putInt("position", photo.getPosition());
         fragment.setArguments(args);
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
