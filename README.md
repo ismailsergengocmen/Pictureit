@@ -11,38 +11,37 @@ _Include a concise description of your project here. Be sure to include the prop
 This project is a mobile app that tries to make children go outside. The app gives several photo quests to children, and kids try to find those objects/tasks.
 
 Home Screen
-![](images/home_screen.jpg)
+<img src = "images/home_screen.jpg" width="100" >
 
 Play Screen
-![](images/play_screen.jpg)
-![](images/task_indv.jpg)
+<img src = "images/play_screen.jpg" width="100" >
+<img src = "images/task_indv.jpg" width="100" >
 
 Search Screen
-![](images/search_1.jpg)
-![](images/search_2.jpg)
-![](images/search_task_indv.jpg)
+<img src = "images/search_1.jpg" width="100" >
+<img src = "images/search_2.jpg" width="100" >
+<img src = "images/search_task_indv.jpg" width="100" >
 
 Profile Screen
-![](images/profile.jpg)
+<img src = "images/profile.jpg" width="100" >
 
 Progress Map Section
-![](images/progress_map.jpg)
+<img src = "images/progress_map.jpg" width="100" >
 
 Badges Section
-![](images/badges.jpg)
+<img src = "images/badges.jpg" width="100" >
 
 Settings Section
-![](images/settings.jpg)
+<img src = "images/settings.jpg" width="100" >
 
 Edit Profile Section
-![](images/edit_profile.jpg)
+<img src = "images/edit_profile.jpg" width="100" >
 
 Help Section
-![](images/help.jpg)
+<img src = "images/help.jpg" width="100" >
 
 Signout 
-![](images/signout.jpg)
-
+<img src = "images/signout.jpg" width="100" >
 
    
 ## Project Status
