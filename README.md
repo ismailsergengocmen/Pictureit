@@ -52,12 +52,10 @@ The information and code in this repository are submitted in partial fulfillment
 
 [Group Meetings Log](group/meetingslog.md)
 #### Group Members
-Ahmed Salih Cezayir 21802918
-İsmail Sergen Göçmen 21903707
-Cemal Faruk Güney   21903474
-Mehmet Ali Öztürk 21703425
-
-- [Ahmed Salih Cezayir](group/AhmedSalihCezayir_log.md)    _(full name & link to personal log file)_
+- [Ahmed Salih Cezayir](group/AhmedSalihCezayir_log.md)   
+- [İsmail Sergen Göçmen](group/İsmailSergenGöçmen_log.md)
+- [Cemal Faruk Güney](group/CemalFarukGuney_log.md)
+- [Mehmet Ali Öztürk](group/MehmetAliÖztürk_log.md)
 
 ****
 **Instructor:** _DavidDavenport_   **TA:**  _AtakanSerbes_
