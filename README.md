@@ -57,6 +57,8 @@ Ahmed Salih Cezayir 21802918
 Cemal Faruk Güney   21903474
 Mehmet Ali Öztürk 21703425
 
+- [Ahmed Salih Cezayir](group/AhmedSalihCezayir_log.md)    _(full name & link to personal log file)_
+
 ****
 **Instructor:** _DavidDavenport_   **TA:**  _AtakanSerbes_
 ****
