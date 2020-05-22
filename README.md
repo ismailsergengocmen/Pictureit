@@ -6,9 +6,7 @@ The information and code in this repository are submitted in partial fulfillment
 ****
 
 ## Project Description
-_Include a concise description of your project here. Be sure to include the proposed users, the architecture (eg. desktop, web, mobile, embedded, etc.) & screenshots when available._
-
-This project is a mobile app that tries to make children go outside. The app gives several photo quests to children, and kids try to find those objects/tasks.
+*This project is a mobile app that tries to make children go outside. The app gives several photo quests to children, and kids try to find those objects/tasks.*
 
 **Home Screen**  
 <img src = "images/home_screen.jpg" width="300" >
