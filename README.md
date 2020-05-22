@@ -4,17 +4,53 @@ The information and code in this repository are submitted in partial fulfillment
 ****
 ## g2I ~~ Pictureit ~~
 ****
-### ~ optional group name ~
 
 ## Project Description
 _Include a concise description of your project here. Be sure to include the proposed users, the architecture (eg. desktop, web, mobile, embedded, etc.) & screenshots when available._
+
+This project is a mobile app that tries to make children go outside. The app gives several photo quests to children, and kids try to find those objects/tasks.
+
+Home Screen
+![](images/home_screen.jpg)
+
+Play Screen
+![](images/play_screen.jpg)
+![](images/task_indv.jpg)
+
+Search Screen
+![](images/search_1.jpg)
+![](images/search_2.jpg)
+![](images/search_task_indv.jpg)
+
+Profile Screen
+![](images/profile.jpg)
+
+Progress Map Section
+![](images/progress_map.jpg)
+
+Badges Section
+![](images/badges.jpg)
+
+Settings Section
+![](images/settings.jpg)
+
+Edit Profile Section
+![](images/edit_profile.jpg)
+
+Help Section
+![](images/help.jpg)
+
+Signout 
+![](images/signout.jpg)
+
+
    
 ## Project Status
-+ **Group/project Selection:** completed (date)
-+ **Requirements:** completed (date)
-+ **UI Design:** completed (date)
-+ **Detailed Design:** in progress
-+ **Implementation:** not started!
++ **Group/project Selection:** completed (12/02/2020)
++ **Requirements:** completed (24/02/2020)
++ **UI Design:** completed (07/03/2020)
++ **Detailed Design:** completed (13/05/2020)
++ **Implementation:** completed (20/05/2020)
 + **Reflections:** not yet!
 
 [Group Meetings Log](group/meetingslog.md)
