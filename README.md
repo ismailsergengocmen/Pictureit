@@ -10,38 +10,38 @@ _Include a concise description of your project here. Be sure to include the prop
 
 This project is a mobile app that tries to make children go outside. The app gives several photo quests to children, and kids try to find those objects/tasks.
 
-Home Screen
-<img src = "images/home_screen.jpg" width="100" >
+**Home Screen**__
+<img src = "images/home_screen.jpg" width="300" >
 
-Play Screen
-<img src = "images/play_screen.jpg" width="100" >
-<img src = "images/task_indv.jpg" width="100" >
+**Play Screen**__
+<img src = "images/play_screen.jpg" width="300" >
+<img src = "images/task_indv.jpg" width="300" >
 
-Search Screen
-<img src = "images/search_1.jpg" width="100" >
-<img src = "images/search_2.jpg" width="100" >
-<img src = "images/search_task_indv.jpg" width="100" >
+**Search Screen**__
+<img src = "images/search_1.jpg" width="300" >
+<img src = "images/search_2.jpg" width="300" >
+<img src = "images/search_task_indv.jpg" width="300" >
 
-Profile Screen
-<img src = "images/profile.jpg" width="100" >
+**Profile Screen**__
+<img src = "images/profile.jpg" width="300" >
 
-Progress Map Section
-<img src = "images/progress_map.jpg" width="100" >
+**Progress Map Section**__
+<img src = "images/progress_map.jpg" width="300" >
 
-Badges Section
-<img src = "images/badges.jpg" width="100" >
+**Badges Section**__
+<img src = "images/badges.jpg" width="300" >
 
-Settings Section
-<img src = "images/settings.jpg" width="100" >
+**Settings Section**__
+<img src = "images/settings.jpg" width="300" >
 
-Edit Profile Section
-<img src = "images/edit_profile.jpg" width="100" >
+**Edit Profile Section**__
+<img src = "images/edit_profile.jpg" width="300" >
 
-Help Section
-<img src = "images/help.jpg" width="100" >
+**Help Section**__
+<img src = "images/help.jpg" width="300" >
 
-Signout 
-<img src = "images/signout.jpg" width="100" >
+**Signout**__
+<img src = "images/signout.jpg" width="300" >
 
    
 ## Project Status
