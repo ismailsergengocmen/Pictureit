@@ -10,37 +10,37 @@ _Include a concise description of your project here. Be sure to include the prop
 
 This project is a mobile app that tries to make children go outside. The app gives several photo quests to children, and kids try to find those objects/tasks.
 
-**Home Screen**__
+**Home Screen**  
 <img src = "images/home_screen.jpg" width="300" >
 
-**Play Screen**__
+**Play Screen**  
 <img src = "images/play_screen.jpg" width="300" >
 <img src = "images/task_indv.jpg" width="300" >
 
-**Search Screen**__
+**Search Screen**  
 <img src = "images/search_1.jpg" width="300" >
 <img src = "images/search_2.jpg" width="300" >
 <img src = "images/search_task_indv.jpg" width="300" >
 
-**Profile Screen**__
+**Profile Screen**  
 <img src = "images/profile.jpg" width="300" >
 
-**Progress Map Section**__
+**Progress Map Section**  
 <img src = "images/progress_map.jpg" width="300" >
 
-**Badges Section**__
+**Badges Section**  
 <img src = "images/badges.jpg" width="300" >
 
-**Settings Section**__
+**Settings Section**  
 <img src = "images/settings.jpg" width="300" >
 
-**Edit Profile Section**__
+**Edit Profile Section**  
 <img src = "images/edit_profile.jpg" width="300" >
 
-**Help Section**__
+**Help Section**  
 <img src = "images/help.jpg" width="300" >
 
-**Signout**__
+**Signout**  
 <img src = "images/signout.jpg" width="300" >
 
    
