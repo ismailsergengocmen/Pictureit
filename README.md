@@ -38,7 +38,7 @@ This project is a mobile app that tries to make children go outside. The app giv
 <img src = "images/edit_profile.jpg" width="300" >
 
 **Help Section**  
-<img src = "images/help.jpg" width="300" >
+<img src = "images/help_screen.jpg" width="300" >
 
 **Signout**  
 <img src = "images/signout.jpg" width="300" >
