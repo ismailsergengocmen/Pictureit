@@ -17,8 +17,11 @@ import androidx.fragment.app.DialogFragment;
 
 public class ConfirmPasswordDialog extends DialogFragment {
 
+    //Constants
     private static final String TAG = "ConfirmPasswordDialog";
     private OnConfirmPasswordListener mOnConfirmPasswordListener;
+
+    //Widgets
     private TextView mPassword;
 
     @Nullable
@@ -38,8 +41,7 @@ public class ConfirmPasswordDialog extends DialogFragment {
                 if (!password.equals("")) {
                     mOnConfirmPasswordListener.onConfirmPassword(password);
                     getDialog().dismiss();
-                }
-                else {
+                } else {
                     Toast.makeText(getActivity(), "you must enter a password", Toast.LENGTH_SHORT).show();
                 }
             }

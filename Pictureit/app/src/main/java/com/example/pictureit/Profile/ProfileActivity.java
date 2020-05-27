@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
@@ -19,13 +18,14 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.pictureit.R;
 
 
-
 public class ProfileActivity extends AppCompatActivity {
 
+    //Constants
     private static final String TAG = "ProfileActivity";
-
     private static final int ACTIVITY_NUMBER = 2;
-    private Context mContext = ProfileActivity.this;
+
+    //Variables
+    private Context mContext;
 
     //Widgets
     private ProgressBar mProgressBar;
@@ -36,6 +36,7 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         Log.d(TAG, "onCreate: started.");
+        mContext = ProfileActivity.this;
 
         init();
     }

@@ -19,7 +19,6 @@ import com.example.pictureit.Utils.SectionsPagerAdapter;
 import com.example.pictureit.Utils.UniversalImageLoader;
 import com.example.pictureit.Utils.ViewGridItemFragment;
 import com.example.pictureit.models.Photo;
-import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
@@ -27,23 +26,23 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class HomeActivity extends AppCompatActivity implements PlayGameFragment.OnGridImageSelectedListener {
 
+    //Constants
     private static final String TAG = "HomeActivity";
-
     private static final int ACTIVITY_NUMBER = 0;
-    private Context mContext = HomeActivity.this;
+
+    //Variables
+    private Context mContext;
 
     //Firebase
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-
-    //widget
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         Log.d(TAG, "onCreate: starting.");
-
+        mContext = HomeActivity.this;
         setupFirebaseAuth();
         initImageLoader();
         setupBottomNavigationView();
@@ -72,7 +71,7 @@ public class HomeActivity extends AppCompatActivity implements PlayGameFragment.
         Log.d(TAG, "setupBottomNavigationView: setting up BottomNavigationView");
         BottomNavigationViewEx bottomNavigationViewEx = (BottomNavigationViewEx) findViewById(R.id.bottomNavViewBar);
         BottomNavigationViewHelper.setupBottomNavigationView(bottomNavigationViewEx);
-        BottomNavigationViewHelper.enableNavigation(mContext, this , bottomNavigationViewEx);
+        BottomNavigationViewHelper.enableNavigation(mContext, this, bottomNavigationViewEx);
 
         Menu menu = bottomNavigationViewEx.getMenu();
         MenuItem menuItem = menu.getItem(ACTIVITY_NUMBER);
@@ -80,6 +79,7 @@ public class HomeActivity extends AppCompatActivity implements PlayGameFragment.
     }
 
 //-----------------------------------------Firebase-------------------------------------------------
+
     /**
      * check to see if the user is logged in
      *

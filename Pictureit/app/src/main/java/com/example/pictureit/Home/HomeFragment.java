@@ -17,7 +17,10 @@ import com.example.pictureit.R;
 
 public class HomeFragment extends Fragment {
 
+    //Constants
     private static final String TAG = "HomeFragment";
+
+    //Widgets
     private ImageView helpButton;
 
     /**

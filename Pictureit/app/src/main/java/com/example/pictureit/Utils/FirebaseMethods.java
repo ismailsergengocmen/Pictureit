@@ -29,8 +29,10 @@ import java.util.TimeZone;
 
 public class FirebaseMethods {
 
+    //Constants
     private static final String TAG = "FirebaseMethods";
 
+    //Variables
     private Context mContext;
 
     //Firebase
@@ -55,6 +57,7 @@ public class FirebaseMethods {
 
     /**
      * update display name
+     *
      * @param displayName
      */
     public void updateDisplayName(String displayName) {
@@ -66,6 +69,7 @@ public class FirebaseMethods {
 
     /**
      * update username in the 'users' node and 'user_account_settings' node
+     *
      * @param username
      */
     public void updateUsername(String username) {
@@ -81,6 +85,7 @@ public class FirebaseMethods {
 
     /**
      * update the email in the 'users' node
+     *
      * @param email
      */
     public void updateEmail(String email) {
@@ -90,6 +95,7 @@ public class FirebaseMethods {
 
     /**
      * Register a new email and password to Firebase Authentication
+     *
      * @param email    user email
      * @param password user password
      */
@@ -139,6 +145,7 @@ public class FirebaseMethods {
     /**
      * Add information to the users nodes
      * Add information to the user_account_setting node
+     *
      * @param email         user email
      * @param username      user username
      * @param profile_photo user profile photo
@@ -164,6 +171,9 @@ public class FirebaseMethods {
         setupDefaultPhotos();
     }
 
+    /**
+     * Method to setup the default photos
+     */
     private void setupDefaultPhotos() {
         addPhotoToDatabase("photo_0", "https://firebasestorage.googleapis.com/v0/b/pictureit-7d068.appspot.com/o/EasyGamePhotos%2F1.jpg?alt=media&token=a79ac68d-9157-4c2d-a21e-24bc52bccd4e", "Black", "Cat");
         addPhotoToDatabase("photo_1", "https://firebasestorage.googleapis.com/v0/b/pictureit-7d068.appspot.com/o/EasyGamePhotos%2Fphoto1.png?alt=media&token=e4e9d72c-798a-481b-93aa-ffd29dd84861", "Yellow", "Dog");
@@ -177,10 +187,10 @@ public class FirebaseMethods {
         addPhotoToDatabase("photo_9", "https://firebasestorage.googleapis.com/v0/b/pictureit-7d068.appspot.com/o/EasyGamePhotos%2Fdownload.png?alt=media&token=5ae934de-a9c6-41de-94cb-a6bd778919b1", "Brown", "Bird");
     }
 
-
     /**
      * Retrieves the account settings for tech user currently logged in
      * Database: user_account_settings node
+     *
      * @param dataSnapshot
      * @return UserSettings
      */
@@ -252,6 +262,7 @@ public class FirebaseMethods {
 
     /**
      * A method for adding photo to "user photos" node of the firebase database
+     *
      * @param url this is the download url of the photo. It shows the location of the photo in the firebase storage
      */
     public void addPhotoToDatabase(String url) {
@@ -274,11 +285,11 @@ public class FirebaseMethods {
     }
 
     /**
-     *  Uploads images to firebase database
-     * @param url url of the image
+     * Uploads images to firebase database
+     *
+     * @param url  url of the image
      * @param node node of the database that you want to upload the photo
      */
-
     public void addPhotoToDatabase(String url, String node) {
         Log.d(TAG, "addPhotoToDatabase: adding photo to database.");
 
@@ -362,6 +373,12 @@ public class FirebaseMethods {
         }
     }
 
+    /**
+     * Method which gets the photo count
+     *
+     * @param dataSnapshot of the database
+     * @return image count
+     */
     public int getImageCount(DataSnapshot dataSnapshot) {
         int count = 0;
         for (DataSnapshot ds : dataSnapshot
@@ -375,6 +392,7 @@ public class FirebaseMethods {
 
     /**
      * A method for producing String which is the representation of current date and time
+     *
      * @return the current time and date
      */
     public String getTimestamp() {

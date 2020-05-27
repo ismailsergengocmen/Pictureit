@@ -35,7 +35,13 @@ import java.util.Map;
 
 public class PlayGameFragment extends Fragment {
 
+    //Constants
     private static final String TAG = "PlayGameFragment";
+    private static final int NUM_GRID_COLUMNS = 3;
+
+    //Widgets
+    public GridView gridView;
+    OnGridImageSelectedListener mOnGridImageSelectedListener;
 
     /**
      * This interface will be used for selecting photos from the grid.
@@ -44,12 +50,6 @@ public class PlayGameFragment extends Fragment {
     public interface OnGridImageSelectedListener {
         void onGridImageSelected(Photo photo, int position, Context context);
     }
-
-    OnGridImageSelectedListener mOnGridImageSelectedListener;
-
-    GridView gridView;
-    private static final int NUM_GRID_COLUMNS = 3;
-
 
     /**
      * When the user calls the PlayGameFragment by pressing the play button it will be initialized with

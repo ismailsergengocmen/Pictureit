@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class SignOutFragment extends Fragment {
 
+    //Constants
     private static final String TAG = "SignOutFragment";
 
     //Firebase
@@ -59,6 +60,7 @@ public class SignOutFragment extends Fragment {
     }
 
     //-----------------------------------------Firebase-------------------------------------------------
+
     /**
      * Setup the firebase auth object
      */
@@ -75,8 +77,7 @@ public class SignOutFragment extends Fragment {
                 if (user != null) {
                     //User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in" + user.getUid());
-                }
-                else {
+                } else {
                     //User is signed out
                     Log.d(TAG, "on AuthStateChanged:signed_out");
                     Log.d(TAG, "onAuthStateChanged: navigating back to login screen.");

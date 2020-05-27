@@ -15,10 +15,12 @@ import com.example.pictureit.R;
 
 public class HelpFragment extends Fragment {
 
+    //Constants
     private static final String TAG = "HelpFragment";
 
     //Variables
     private ImageView backArrow;
+
 
     @Nullable
     @Override
@@ -35,7 +37,7 @@ public class HelpFragment extends Fragment {
         return view;
     }
 
-    public void backToActivity() {
+    private void backToActivity() {
         getFragmentManager().popBackStack();
     }
 }
