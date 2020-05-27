@@ -17,9 +17,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
-
 import com.example.pictureit.R;
 import com.example.pictureit.Utils.BottomNavigationViewHelper;
+import com.example.pictureit.Utils.SectionsStatePagerAdapter;
 
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
@@ -28,11 +28,13 @@ import java.util.ArrayList;
 public class AccountSettingsActivity extends AppCompatActivity {
 
     private static final String TAG = "AccountSettingsActivity";
-
+    private SectionsStatePagerAdapter pagerAdapter;
     private Context mContext;
+
 
     //Widgets
     private RelativeLayout mRelativeLayout;
+    private ViewPager mViewPager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,8 +42,8 @@ public class AccountSettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_account_settings);
         Log.d(TAG, "onCreate: started.");
 
+        mViewPager = findViewById(R.id.container);
         mContext = AccountSettingsActivity.this;
-
         mRelativeLayout = findViewById(R.id.relLayout1);
 
         setupSettingsList();

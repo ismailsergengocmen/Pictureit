@@ -7,17 +7,14 @@ public class UserAccountSettings {
     private String profile_photo;
     private String username;
 
-
-    public UserAccountSettings(String display_name,  long posts, String profile_photo, String username) {
+    public UserAccountSettings(String display_name, long posts, String profile_photo, String username) {
         this.display_name = display_name;
         this.posts = posts;
         this.profile_photo = profile_photo;
         this.username = username;
-
     }
 
     public UserAccountSettings() {
-
     }
 
     public String getDisplay_name() {

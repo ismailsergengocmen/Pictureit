@@ -10,16 +10,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
-import androidx.appcompat.widget.Toolbar;
+
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.pictureit.R;
-import com.example.pictureit.Utils.BottomNavigationViewHelper;
-import com.example.pictureit.Utils.UniversalImageLoader;
-import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
+
 
 
 public class ProfileActivity extends AppCompatActivity {

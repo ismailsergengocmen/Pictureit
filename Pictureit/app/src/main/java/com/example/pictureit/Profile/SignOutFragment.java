@@ -26,7 +26,6 @@ public class SignOutFragment extends Fragment {
     //Firebase
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-
     private ProgressBar mProgressBar;
     private TextView tvSignout, tvSigningOut;
     private Button btnConfirmSignout;
@@ -60,7 +59,6 @@ public class SignOutFragment extends Fragment {
     }
 
     //-----------------------------------------Firebase-------------------------------------------------
-
     /**
      * Setup the firebase auth object
      */
@@ -77,10 +75,10 @@ public class SignOutFragment extends Fragment {
                 if (user != null) {
                     //User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in" + user.getUid());
-                } else {
+                }
+                else {
                     //User is signed out
                     Log.d(TAG, "on AuthStateChanged:signed_out");
-
                     Log.d(TAG, "onAuthStateChanged: navigating back to login screen.");
                     Intent intent = new Intent(getActivity(), LoginActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

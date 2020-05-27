@@ -1,17 +1,14 @@
 package com.example.pictureit.Profile;
 
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.Manifest;
 import android.app.Activity;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,7 +30,6 @@ import androidx.fragment.app.Fragment;
 import com.example.pictureit.Login.LoginActivity;
 import com.example.pictureit.R;
 import com.example.pictureit.Utils.FirebaseMethods;
-import com.example.pictureit.Utils.SquareImageView;
 import com.example.pictureit.Utils.UniversalImageLoader;
 import com.example.pictureit.dialogs.ConfirmPasswordDialog;
 import com.example.pictureit.models.User;
@@ -44,7 +40,6 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.EmailAuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -64,14 +59,12 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class EditProfileFragment extends Fragment implements ConfirmPasswordDialog.OnConfirmPasswordListener {
 
     @Override
     public void onConfirmPassword(String password) {
         Log.d(TAG, "onConfirmPassword: got the password: " + password);
-
 
         //Get auth credentials from the user for re-authentication
         AuthCredential credential = EmailAuthProvider.getCredential(mAuth.getCurrentUser().getEmail(), password);
@@ -382,16 +375,11 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
         //case2: If the user made a change to their mail
         if (!mUserSettings.getUser().getEmail().equals(email)) {
 
-            //step 1)Reauthenticate
-            //       - Confirm the password and email
+            // Confirm the password and email
             ConfirmPasswordDialog dialog = new ConfirmPasswordDialog();
             dialog.show(getFragmentManager(), getString(R.string.confirm_password_dialog));
             dialog.setTargetFragment(EditProfileFragment.this, 1);
 
-            //step 2)Check if the email is already registered
-            //       - 'fetchProvidersForEmail(String email)'
-            //step 3)Change the email
-            //       - submit the new email to the database and authentication
         }
         if (!mUserSettings.getSettings().getDisplay_name().equals(displayName)) {
             //update displayname
@@ -401,7 +389,6 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
 
     /**
      * Check if @param username already exists in teh database
-     *
      * @param username
      */
     private void checkIfUsernameExists(final String username) {
@@ -428,7 +415,7 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                Toast.makeText(getActivity(), "Cancelled", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -490,7 +477,7 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                //Toast.makeText(getActivity(), "Cancelled", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Cancelled", Toast.LENGTH_SHORT).show();
             }
         });
     }
