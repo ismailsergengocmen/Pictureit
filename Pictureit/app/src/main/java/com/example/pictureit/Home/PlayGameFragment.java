@@ -37,6 +37,10 @@ public class PlayGameFragment extends Fragment {
 
     private static final String TAG = "PlayGameFragment";
 
+    /**
+     * This interface will be used for selecting photos from the grid.
+     * We need an interface since we want to call it from the Activity.
+     */
     public interface OnGridImageSelectedListener {
         void onGridImageSelected(Photo photo, int position, Context context);
     }
@@ -47,6 +51,10 @@ public class PlayGameFragment extends Fragment {
     private static final int NUM_GRID_COLUMNS = 3;
 
 
+    /**
+     * When the user calls the PlayGameFragment by pressing the play button it will be initialized with
+     * a gridView and a backArrow
+     */
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -76,6 +84,9 @@ public class PlayGameFragment extends Fragment {
         super.onAttach(context);
     }
 
+    /**
+     * Creating the gridView with the items on database.
+     */
     private void setupGridView() {
         Log.d(TAG, "setupGridView: Setting up image grid.");
 
@@ -85,6 +96,9 @@ public class PlayGameFragment extends Fragment {
                 .child(getString(R.string.dbname_user_photos))
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
         query.addListenerForSingleValueEvent(new ValueEventListener() {
+            /**
+             * This method observes the changed data and controls the grid accordingly.
+             */
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
@@ -119,6 +133,7 @@ public class PlayGameFragment extends Fragment {
                         "", imgUrls);
                 gridView.setAdapter(adapter);
 
+                //Using our interface for OnItemClickListener.
                 gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -134,6 +149,10 @@ public class PlayGameFragment extends Fragment {
         });
     }
 
+
+    /**
+     * Will be used when the back arrow is pressed.
+     */
     public void backToActivity() {
         getFragmentManager().popBackStack();
     }

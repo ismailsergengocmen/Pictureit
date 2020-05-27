@@ -35,14 +35,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class SearchActivity extends AppCompatActivity  {
+public class SearchActivity extends AppCompatActivity {
 
+    //Constants
     private static final String TAG = "SearchActivity";
-
-    //Constant
     private static final int ACTIVITY_NUMBER = 1;
     private static final int NUM_GRID_COLUMNS = 3;
-    private final Context mContext = SearchActivity.this;
 
     //Widgets
     private EditText mSearchBar;
@@ -50,6 +48,7 @@ public class SearchActivity extends AppCompatActivity  {
 
     //Variables
     private List<Photo> photoList;
+    private Context mContext;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,6 +56,7 @@ public class SearchActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_search);
         Log.d(TAG, "onCreate: started.");
 
+        mContext = SearchActivity.this;
         mSearchBar = findViewById(R.id.searchbar);
         mGridView = findViewById(R.id.search_gridview);
 
@@ -64,6 +64,9 @@ public class SearchActivity extends AppCompatActivity  {
         setupBottomNavigationView();
     }
 
+    /**
+     * Listener for search bar
+     */
     private void initTextListener() {
         Log.d(TAG, "initTextListener: initializing.");
         photoList = new ArrayList<Photo>();
@@ -71,12 +74,12 @@ public class SearchActivity extends AppCompatActivity  {
         mSearchBar.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+                Log.d(TAG, "beforeTextChanged: beforeTextChanged");
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                Log.d(TAG, "onTextChanged: onTextChanged");
             }
 
             @Override
@@ -87,12 +90,19 @@ public class SearchActivity extends AppCompatActivity  {
         });
     }
 
+    /**
+     * Method for searching for a keyword match
+     *
+     * @param keyword Wanted tag
+     */
+
     private void searchForMatch(final String keyword) {
         Log.d(TAG, "searchForMatch: searching for string: " + keyword);
         photoList.clear();
         if (keyword.length() == 0) {
 
-        } else {
+        }
+        else {
             final DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
             reference.child(getString(R.string.dbname_tags_and_photos))
@@ -104,6 +114,7 @@ public class SearchActivity extends AppCompatActivity  {
                     final StringManipulation stringManipulation;
                     stringManipulation = new StringManipulation();
 
+                    //To get the photos users want, we need to loop through the database
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         Photo photo = new Photo();
                         photo.setUser_id(ds.child(getString(R.string.field_user_id)).getValue().toString());
@@ -163,6 +174,9 @@ public class SearchActivity extends AppCompatActivity  {
         menuItem.setChecked(true);
     }
 
+    /**
+     * This method sends the user to a fragment where they will see the selected photo.
+     */
     private void gridFragmentInit(Photo photo) {
         ViewGridItemFragment fragment = new ViewGridItemFragment();
         Bundle args = new Bundle();

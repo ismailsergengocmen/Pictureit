@@ -135,6 +135,9 @@ public class HomeActivity extends AppCompatActivity implements PlayGameFragment.
         }
     }
 
+    /**
+     * When user selects an image on the PlayGameFragment this method will be used to open the new fragment.
+     */
     @Override
     public void onGridImageSelected(Photo photo, int position, Context context) {
         Log.d(TAG, "onGridImageSelected: selected an image" + photo.getPosition());

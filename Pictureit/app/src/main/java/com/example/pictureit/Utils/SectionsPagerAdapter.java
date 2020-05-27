@@ -13,8 +13,8 @@ import java.util.List;
  */
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
+    //Constants
     private static final String TAG = "SectionsPagerAdapter";
-
     private final List<Fragment> mFragmentList = new ArrayList<>();
 
     public SectionsPagerAdapter(@NonNull FragmentManager fm) {

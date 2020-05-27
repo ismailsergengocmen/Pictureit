@@ -23,13 +23,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
-import com.example.pictureit.Home.HomeActivity;
 import com.example.pictureit.R;
-import com.example.pictureit.Utils.FirebaseMethods;
-import com.example.pictureit.Utils.SquareImageView;
-import com.example.pictureit.Utils.UniversalImageLoader;
 import com.example.pictureit.models.Photo;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -38,7 +33,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -48,14 +42,13 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 public class ViewGridItemFragment extends Fragment {
 
+    //Constants
     private static final String TAG = "ViewGridItemFragment";
-
-    private Context mContext;
+    private static final int CAMERA_PERMISSION_CODE = 1;
+    private static final int CAMERA_REQUEST_CODE = 2;
 
     //Firebase
     private FirebaseMethods firebaseMethods;
@@ -63,13 +56,12 @@ public class ViewGridItemFragment extends Fragment {
     private DatabaseReference mRef;
 
     //Variables
-    private static final int CAMERA_PERMISSION_CODE = 1;
-    private static final int CAMERA_REQUEST_CODE = 2;
     private String currentPhotoPath;
     private String userID;
     private String currentTag1;
     private String currentTag2;
     private int imageCount;
+    private Context mContext;
 
     //Widgets
     private ImageView camera;
@@ -120,6 +112,9 @@ public class ViewGridItemFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Method for asking camera permission
+     */
     private void askCameraPermission() {
         if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
@@ -139,6 +134,9 @@ public class ViewGridItemFragment extends Fragment {
         }
     }
 
+    /**
+     * Method that starts camera intent and saves the captured photo in a file
+     */
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
         // Ensure that there's a camera activity to handle the intent
@@ -161,6 +159,12 @@ public class ViewGridItemFragment extends Fragment {
         }
     }
 
+    /**
+     * Method for creating a empty file with a unique name
+     *
+     * @return The unique created file
+     * @throws IOException
+     */
     private File createImageFile() throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
@@ -176,6 +180,9 @@ public class ViewGridItemFragment extends Fragment {
         return image;
     }
 
+    /**
+     * Method which is called when photo capture is successful.
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -183,7 +190,6 @@ public class ViewGridItemFragment extends Fragment {
         if (requestCode == CAMERA_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
                 File f = new File(currentPhotoPath);
-                //image.setImageURI(Uri.fromFile(f));
                 Log.d("tag", "Absolute Url of Image: " + Uri.fromFile(f));
 
                 setCurrentPhoto();
@@ -208,29 +214,12 @@ public class ViewGridItemFragment extends Fragment {
                 try {
                     Toast.makeText(getActivity(), "Upload succeeded", Toast.LENGTH_SHORT).show();
                 } catch (NullPointerException e) {
-
+                    Log.e(TAG, "onCreateView: NullPointerException: " + e.getMessage());
                 }
                 image.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
                         Log.d("tag", "onSuccess: Url " + uri.toString());
-
-//                        DatabaseReference smallRef1 = mRef.child(getString(R.string.dbname_user_photos))
-//                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-//                                .child(name);
-//
-//                        DatabaseReference smallRef2 = mRef.child(getString(R.string.dbname_tags_and_photos))
-//                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-//                                .child(currentTag1)
-//                                .child(name);
-//
-//                        DatabaseReference smallRef3 = mRef.child(getString(R.string.dbname_tags_and_photos))
-//                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-//                                .child(currentTag2)
-//                                .child(name);
-//                        smallRef1.removeValue();
-//                        smallRef2.removeValue();
-//                        smallRef3.removeValue();
                         firebaseMethods.addPhotoToDatabase(name, uri.toString(), currentTag1, currentTag2);
                     }
                 });
@@ -249,7 +238,7 @@ public class ViewGridItemFragment extends Fragment {
                 try {
                     Toast.makeText(getActivity(), "Upload succeeded", Toast.LENGTH_SHORT).show();
                 } catch (NullPointerException e) {
-
+                    Log.e(TAG, "onCreateView: NullPointerException: " + e.getMessage());
                 }
                 all.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
@@ -258,7 +247,7 @@ public class ViewGridItemFragment extends Fragment {
                             firebaseMethods.addPhotoToDatabase(name, uri.toString(), currentTag1, currentTag2, getActivity().getString(R.string.dbname_all_photos));
                             firebaseMethods.addPhotoToDatabase(name, uri.toString(), currentTag1, currentTag2, getActivity().getString(R.string.dbname_all_photos_and_tags));
                         } catch (NullPointerException e) {
-
+                            Log.e(TAG, "onCreateView: NullPointerException: " + e.getMessage());
                         }
                     }
                 });
@@ -275,20 +264,21 @@ public class ViewGridItemFragment extends Fragment {
                             .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                             .child(getString(R.string.field_posts));
                     newRef.setValue(imageCount);
-                } catch ( NullPointerException e){
-
+                } catch (NullPointerException e) {
+                    Log.e(TAG, "onCreateView: NullPointerException: " + e.getMessage());
                 }
-
-
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                Log.d(TAG, "onCancelled: cancelled.");
             }
         });
     }
 
+    /**
+     * This method sets the clicked photo's tags into related variables (currentTag1, currentTag2).
+     */
     private void setCurrentPhoto() {
         DatabaseReference smallRef = mRef.child(getString(R.string.dbname_user_photos))
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -305,7 +295,7 @@ public class ViewGridItemFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                Log.d(TAG, "onCancelled: cancelled.");
             }
         });
     }
@@ -318,32 +308,6 @@ public class ViewGridItemFragment extends Fragment {
             tag2.setText(mPhoto.getTag2());
             String photo_id = mPhoto.getImage_id();
 
-            Query query = FirebaseDatabase.getInstance().getReference()
-                    .child(getString(R.string.dbname_user_photos))
-                    .orderByChild(getString(R.string.field_image_id))
-                    .equalTo(photo_id);
-            query.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    for (DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
-                        Photo newPhoto = new Photo();
-                        Map<String, Object> objectMap = (HashMap<String, Object>) singleSnapshot.getValue();
-
-//                        newPhoto.setTag1(mPhoto.getTag1());
-//                        newPhoto.setTag2(mPhoto.getTag2());
-//                        newPhoto.setImage_id(mPhoto.getImage_id());
-//                        newPhoto.setUser_id(mPhoto.getUser_id());
-//                        newPhoto.setDate_created(firebaseMethods.getTimestamp());
-//                        newPhoto.setImage_path("file:///storage/emulated/0/Android/data/com.example.pictureit/files/Pictures/JPEG_20200518_111007_8855921001812468337.jpg");
-//                        UniversalImageLoader.setImage(newPhoto.getImage_path(), image, null, "");
-                    }
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    Log.d(TAG, "onCancelled: query cancelled.");
-                }
-            });
         } catch (NullPointerException e) {
             Log.e(TAG, "onCreateView: NullPointerException: " + e.getMessage());
         }
@@ -358,9 +322,9 @@ public class ViewGridItemFragment extends Fragment {
     }
 
     /**
-     * retrieve the photo from the incoming bundle from profileActivity interface
+     * Retrieve the photo from the incoming bundle from profileActivity interface
      *
-     * @return
+     * @return The photo which comes with the Bundle
      */
     private Photo getPhotoFromBundle() {
         Log.d(TAG, "getPhotoFromBundle: arguments: " + getArguments());

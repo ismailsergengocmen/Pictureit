@@ -20,6 +20,9 @@ public class HomeFragment extends Fragment {
     private static final String TAG = "HomeFragment";
     private ImageView helpButton;
 
+    /**
+     * Home fragment will be initialized with 2 buttons play and help.
+     */
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -43,6 +46,9 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Will be used when the helpButton is pressed.
+     */
     public void replaceFragment(Fragment someFragment) {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, someFragment);
