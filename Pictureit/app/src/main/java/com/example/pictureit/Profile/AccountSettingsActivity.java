@@ -34,6 +34,7 @@ public class AccountSettingsActivity extends AppCompatActivity {
 
     //Widgets
     private RelativeLayout mRelativeLayout;
+    private ViewPager mViewPager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
