@@ -4,6 +4,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Photo implements Parcelable {
+
+    //Properties
     private String date_created;
     private String image_path;
     private String image_id;
@@ -12,6 +14,7 @@ public class Photo implements Parcelable {
     private String tag2;
     private Integer position;
 
+    //Constructors
     public Photo(String date_created, String image_path, String image_id, String user_id, String tag1, String tag2, Integer position) {
         this.date_created = date_created;
         this.image_path = image_path;
@@ -36,6 +39,11 @@ public class Photo implements Parcelable {
 
     }
 
+    //Methods
+
+    /**
+     * Overriding abstract methods of the interface with default settings.
+     */
     @Override
     public int describeContents() {
         return 0;
@@ -64,6 +72,10 @@ public class Photo implements Parcelable {
         }
     };
 
+
+    /**
+     * Simple get methods.
+     */
     public String getImage_path() {
         return image_path;
     }
@@ -92,6 +104,9 @@ public class Photo implements Parcelable {
         return position;
     }
 
+    /**
+     * Simple set methods.
+     */
     public void setImage_path(String image_path) {
         this.image_path = image_path;
     }

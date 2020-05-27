@@ -92,7 +92,8 @@ public class SearchActivity extends AppCompatActivity  {
         photoList.clear();
         if (keyword.length() == 0) {
 
-        } else {
+        }
+        else {
             final DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
             reference.child(getString(R.string.dbname_tags_and_photos))
@@ -163,6 +164,9 @@ public class SearchActivity extends AppCompatActivity  {
         menuItem.setChecked(true);
     }
 
+    /**
+     * This method sends the user to a fragment where they will see the selected photo.
+     */
     private void gridFragmentInit(Photo photo) {
         ViewGridItemFragment fragment = new ViewGridItemFragment();
         Bundle args = new Bundle();
