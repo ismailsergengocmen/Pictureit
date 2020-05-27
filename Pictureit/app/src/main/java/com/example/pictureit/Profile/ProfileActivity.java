@@ -40,11 +40,6 @@ public class ProfileActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate: started.");
 
         init();
-
-//        setupBottomNavigationView();
-//        setupToolBar();
-//        setupActivityWidgets();
-//        setProfileImage();
     }
 
     /**
@@ -59,47 +54,4 @@ public class ProfileActivity extends AppCompatActivity {
         transaction.addToBackStack(getString(R.string.profile_fragment));
         transaction.commit();
     }
-//
-//    //This method will be changed later since firebase is needed
-//    private void setProfileImage() {
-//        Log.d(TAG, "setProfileImage: setting profile image.");
-//        String imgURL = "cdn.webrazzi.com/uploads/2013/06/android-malware.jpg";
-//        UniversalImageLoader.setImage(imgURL, profileImage, mProgressBar, "https://");
-//    }
-//
-//    private void setupActivityWidgets() {
-//        mProgressBar = findViewById(R.id.profileProgressBar);
-//        mProgressBar.setVisibility(View.GONE);
-//        profileImage = findViewById(R.id.profileImage);
-//    }
-//
-//    private void setupToolBar() {
-//        Toolbar profileToolBar = (Toolbar) findViewById(R.id.profileToolBar);
-//        setSupportActionBar(profileToolBar);
-//
-//        ImageView profileMenu = findViewById(R.id.profileMenu);
-//        profileMenu.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Log.d(TAG, "onClick: navigating to settings");
-//                Intent intent = new Intent(mContext,AccountSettingsActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-//    }
-//
-//    /**
-//     * BottomNavigationView setup
-//     */
-//    private void setupBottomNavigationView() {
-//        Log.d(TAG, "setupBottomNavigationView: setting up BottomNavigationView");
-//        BottomNavigationViewEx bottomNavigationViewEx = (BottomNavigationViewEx) findViewById(R.id.bottomNavViewBar);
-//        BottomNavigationViewHelper.setupBottomNavigationView(bottomNavigationViewEx);
-//        BottomNavigationViewHelper.enableNavigation(mContext, bottomNavigationViewEx);
-//
-//        Menu menu = bottomNavigationViewEx.getMenu();
-//        MenuItem menuItem = menu.getItem(ACTIVITY_NUMBER);
-//        menuItem.setChecked(true);
-//    }
-
 }

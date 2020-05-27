@@ -1,0 +1,13 @@
+In this project, we learned how to develop a mobile app using Android Studio. While creating the app, we learned how to use the firebase database, firebase storage, xml and GitHub. We also learned how to work as a group. 
+
+We learnt how to develop a whole new app. In this process, we understand that we can face multiple problems and bugs. Such knowledge can definitely help us in the following years. 
+
+We had difficulties while learning new concepts realted to the project since some tutorials were outdated. Finding up-to-date tutorials was hard. Also, we had troubles to find bugs and solve them. Plus, sometimes Android Studio having some problems related to the file names. 
+
+The most difficult part of the project was the start point. We did not know where to start. 
+
+If we had a second chance, we would start earlier to work and design the structure of the project. 
+
+For this project, we almost used 4.5 weeks to learn and implement. 
+
+We are happy with our project since we did not know anything about android programing and we achieved our goals. 

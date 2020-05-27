@@ -48,7 +48,7 @@ The information and code in this repository are submitted in partial fulfillment
 + **UI Design:** completed (07/03/2020)
 + **Detailed Design:** completed (13/05/2020)
 + **Implementation:** completed (20/05/2020)
-+ **Reflections:** not yet!
++ **Reflections:** completed (27/05/2020)
 
 [Group Meetings Log](group/meetingslog.md)
 #### Group Members
