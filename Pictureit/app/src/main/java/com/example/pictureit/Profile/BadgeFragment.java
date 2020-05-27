@@ -106,13 +106,15 @@ public class BadgeFragment extends Fragment {
     }
 
     /**
-     * Method for setting the progress ArrayList by looping through the database
+     * Method for setting the progress ArrayList by looping through the database.
+     * It basically loops through the relevant nodes of the database to fill the progress ArrayList
      */
     private void setProgress() {
         DatabaseReference newRef = mRef
                 .child(getString(R.string.dbname_all_photos_and_tags))
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
+        //Badge1
         newRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -133,6 +135,7 @@ public class BadgeFragment extends Fragment {
             }
         });
 
+        //Badge2
         newRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -153,6 +156,7 @@ public class BadgeFragment extends Fragment {
             }
         });
 
+        //Badge3
         newRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -173,6 +177,7 @@ public class BadgeFragment extends Fragment {
             }
         });
 
+        //Badge4
         mRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -202,6 +207,7 @@ public class BadgeFragment extends Fragment {
             }
         });
 
+        //Badge5
         mRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

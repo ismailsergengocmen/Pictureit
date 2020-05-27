@@ -33,6 +33,9 @@ public class CardRecyclerViewAdapter extends RecyclerView.Adapter<CardRecyclerVi
         universalImageLoader = new UniversalImageLoader(mContext);
     }
 
+    /**
+     * Method for inflating the recycler view
+     */
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -40,6 +43,12 @@ public class CardRecyclerViewAdapter extends RecyclerView.Adapter<CardRecyclerVi
         return new ViewHolder(v);
     }
 
+    /**
+     * Method for filling the recycler view
+     *
+     * @param holder   item
+     * @param position position of the item in the recycler view
+     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         Log.d(TAG, "onBindViewHolder: called.");
@@ -56,11 +65,18 @@ public class CardRecyclerViewAdapter extends RecyclerView.Adapter<CardRecyclerVi
         });
     }
 
+    /**
+     * @return The item count
+     */
     @Override
     public int getItemCount() {
         return mPhotos.size();
     }
 
+    /**
+     * ViewHolder Inner class
+     * It is used for filling the recycler view
+     */
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         //Widgets
