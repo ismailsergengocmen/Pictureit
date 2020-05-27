@@ -38,6 +38,9 @@ public class BadgeCardRecyclerViewAdapter extends RecyclerView.Adapter<BadgeCard
         universalImageLoader = new UniversalImageLoader(mContext);
     }
 
+    /**
+     * Method for inflating the recycler view
+     */
     @NonNull
     @Override
     public BadgeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -45,6 +48,12 @@ public class BadgeCardRecyclerViewAdapter extends RecyclerView.Adapter<BadgeCard
         return new BadgeCardRecyclerViewAdapter.BadgeViewHolder(v);
     }
 
+    /**
+     * Method for filling the recycler view
+     *
+     * @param holder   item
+     * @param position position of the item in the recycler view
+     */
     @Override
     public void onBindViewHolder(@NonNull BadgeViewHolder holder, int position) {
         Log.d(TAG, "onBindViewHolder: called.");
@@ -61,12 +70,21 @@ public class BadgeCardRecyclerViewAdapter extends RecyclerView.Adapter<BadgeCard
         }
     }
 
+    /**
+     * @return The item count
+     */
     @Override
     public int getItemCount() {
         return mTask.size();
     }
 
+    /**
+     * BadgeViewHolder Inner Class
+     * It is used for filling the recycler view
+     */
     public class BadgeViewHolder extends RecyclerView.ViewHolder {
+
+        //Widgets
         ImageView image;
         ImageView status;
         TextView task;

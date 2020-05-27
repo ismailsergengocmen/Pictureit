@@ -54,10 +54,11 @@ public class UniversalImageLoader {
     /**
      * This method can be used to set images that are static. It cannot be used if the images
      * are being changed in the fragment/activity - Or if they are being  set in  a list or a gridView !!
-     * @param imgURL url of the wanted image
-     * @param image imageView where you want to put the image
+     *
+     * @param imgURL       url of the wanted image
+     * @param image        imageView where you want to put the image
      * @param mProgressBar progress bar for the downloaded image
-     * @param append appended String for image url
+     * @param append       appended String for image url
      */
     public static void setImage(String imgURL, ImageView image, final ProgressBar mProgressBar, String append) {
         ImageLoader imageLoader = ImageLoader.getInstance();

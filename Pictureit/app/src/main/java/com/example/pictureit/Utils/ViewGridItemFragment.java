@@ -207,7 +207,10 @@ public class ViewGridItemFragment extends Fragment {
     private void uploadImageToStorage(final String name, Uri uri) {
 
         String newPhotoKey = mRef.child(mContext.getString(R.string.dbname_user_photos)).push().getKey();
+
         final StorageReference image = mStorageReference.child("images/" + userID + "/" + name);
+
+        //Put the captured image to storage(images folder)
         image.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(final UploadTask.TaskSnapshot taskSnapshot) {
@@ -220,6 +223,7 @@ public class ViewGridItemFragment extends Fragment {
                     @Override
                     public void onSuccess(Uri uri) {
                         Log.d("tag", "onSuccess: Url " + uri.toString());
+                        //Upload the captured photo to database
                         firebaseMethods.addPhotoToDatabase(name, uri.toString(), currentTag1, currentTag2);
                     }
                 });
@@ -232,6 +236,8 @@ public class ViewGridItemFragment extends Fragment {
         });
 
         final StorageReference all = mStorageReference.child("all_images/" + userID + "/" + newPhotoKey + "/" + name);
+
+        //Put the captured image to storage(all_images folder)
         all.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(final UploadTask.TaskSnapshot taskSnapshot) {
@@ -244,6 +250,7 @@ public class ViewGridItemFragment extends Fragment {
                     @Override
                     public void onSuccess(Uri uri) {
                         try {
+                            //Upload the captures photo to database's "all_photos" and "all_photos_and_tags" node
                             firebaseMethods.addPhotoToDatabase(name, uri.toString(), currentTag1, currentTag2, getActivity().getString(R.string.dbname_all_photos));
                             firebaseMethods.addPhotoToDatabase(name, uri.toString(), currentTag1, currentTag2, getActivity().getString(R.string.dbname_all_photos_and_tags));
                         } catch (NullPointerException e) {
@@ -254,6 +261,7 @@ public class ViewGridItemFragment extends Fragment {
             }
         });
 
+        //To update the user's photo count which can be seen in the profile
         mRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -300,6 +308,9 @@ public class ViewGridItemFragment extends Fragment {
         });
     }
 
+    /**
+     * Method for getting the Photo object from the bundle
+     */
     private void init() {
         try {
             mPhoto = getPhotoFromBundle();
@@ -337,7 +348,7 @@ public class ViewGridItemFragment extends Fragment {
         }
     }
 
-    public void backToActivity() {
+    private void backToActivity() {
         getFragmentManager().popBackStack();
     }
 }

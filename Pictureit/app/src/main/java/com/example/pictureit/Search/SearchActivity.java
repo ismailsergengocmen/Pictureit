@@ -65,7 +65,8 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     /**
-     * Listener for search bar
+     * Listener for search bar.
+     * It listens for change and when there is any change, it searches for the entered tag/photo
      */
     private void initTextListener() {
         Log.d(TAG, "initTextListener: initializing.");
@@ -91,18 +92,16 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     /**
-     * Method for searching for a keyword match
+     * Method for searching for a keyword match and filling the grid with the matching photos
      *
      * @param keyword Wanted tag
      */
-
     private void searchForMatch(final String keyword) {
         Log.d(TAG, "searchForMatch: searching for string: " + keyword);
         photoList.clear();
         if (keyword.length() == 0) {
-
-        }
-        else {
+            Log.d(TAG, "searchForMatch: keyword length is 0.");
+        } else {
             final DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
             reference.child(getString(R.string.dbname_tags_and_photos))
@@ -139,7 +138,7 @@ public class SearchActivity extends AppCompatActivity {
                     int imageWidth = gridWidth / NUM_GRID_COLUMNS;
                     mGridView.setColumnWidth(imageWidth);
 
-                    ArrayList<String> imgUrls = new ArrayList<String>();
+                    ArrayList<String> imgUrls = new ArrayList<>();
                     for (int i = 0; i < photoList.size(); i++) {
                         imgUrls.add(photoList.get(i).getImage_path());
                     }
