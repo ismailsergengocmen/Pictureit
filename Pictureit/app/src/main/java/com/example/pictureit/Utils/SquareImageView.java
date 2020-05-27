@@ -19,6 +19,9 @@ public class SquareImageView extends AppCompatImageView {
         super(context, attrs, defStyleAttr);
     }
 
+    /**
+     * Measuring the photograph so that it will be a square.
+     */
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, widthMeasureSpec);
