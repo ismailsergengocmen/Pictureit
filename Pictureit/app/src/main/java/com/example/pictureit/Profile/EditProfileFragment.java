@@ -204,7 +204,6 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
                         });
                     }
                 });
-
                 passwordResetDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int which) {
@@ -245,7 +244,6 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
                         dialogInterface.dismiss();
                     }
                 });
-
                 AlertDialog alertDialog = dialog.create();
                 alertDialog.show();
             }
@@ -366,21 +364,19 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
         final String username = mUserName.getText().toString();
         final String email = mEmail.getText().toString();
 
-
         //case1: If the user made a change to their username
         if (!mUserSettings.getUser().getUsername().equals(username)) {
-
             checkIfUsernameExists(username);
         }
+
         //case2: If the user made a change to their mail
         if (!mUserSettings.getUser().getEmail().equals(email)) {
-
             // Confirm the password and email
             ConfirmPasswordDialog dialog = new ConfirmPasswordDialog();
             dialog.show(getFragmentManager(), getString(R.string.confirm_password_dialog));
             dialog.setTargetFragment(EditProfileFragment.this, 1);
-
         }
+
         if (!mUserSettings.getSettings().getDisplay_name().equals(displayName)) {
             //update displayname
             mFirebaseMethods.updateDisplayName(displayName);
@@ -399,7 +395,6 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
                 if (!dataSnapshot.exists()) {
                     //add the username
                     mFirebaseMethods.updateUsername(username);
@@ -425,15 +420,12 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
         Log.d(TAG, "setProfileWidgets: setting widgets with data retrieving from firebase database: " + userSettings.getUser().getEmail());
 
         mUserSettings = userSettings;
-
         UserAccountSettings settings = userSettings.getSettings();
-
         UniversalImageLoader.setImage(settings.getProfile_photo(), mProfilePhoto, null, "");
 
         mDisplayName.setText(settings.getDisplay_name());
         mUserName.setText(settings.getUsername());
         mEmail.setText(userSettings.getUser().getEmail());
-
     }
 
     public void backToActivity() {
@@ -441,7 +433,6 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
     }
 
     //-----------------------------------------Firebase-------------------------------------------------
-
     /**
      * Setup the firebase auth object
      */
@@ -460,7 +451,8 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
                 if (user != null) {
                     //User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in" + user.getUid());
-                } else {
+                }
+                else {
                     //User is signed out
                     Log.d(TAG, "on AuthStateChanged:signed_out");
                 }

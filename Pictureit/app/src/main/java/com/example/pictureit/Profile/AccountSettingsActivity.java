@@ -31,7 +31,6 @@ public class AccountSettingsActivity extends AppCompatActivity {
     private SectionsStatePagerAdapter pagerAdapter;
     private Context mContext;
 
-
     //Widgets
     private RelativeLayout mRelativeLayout;
     private ViewPager mViewPager;

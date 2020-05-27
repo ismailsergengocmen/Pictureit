@@ -182,7 +182,7 @@ public class FirebaseMethods {
      * Retrieves the account settings for tech user currently logged in
      * Database: user_account_settings node
      * @param dataSnapshot
-     * @return
+     * @return UserSettings
      */
     public UserSettings getUserSettings(DataSnapshot dataSnapshot) {
         Log.d(TAG, "getUserAccountSettings: retrieving user account settings from firebase");
@@ -290,7 +290,6 @@ public class FirebaseMethods {
 
     /**
      * A method for adding photo to "user photos" , "tags and photos" nodes of the firebase database
-     *
      * @param url  this is the download url of the photo. It shows the location of the photo in the firebase storage
      * @param tag1 tag1 of the photo
      * @param tag2 tag2 of the photo
