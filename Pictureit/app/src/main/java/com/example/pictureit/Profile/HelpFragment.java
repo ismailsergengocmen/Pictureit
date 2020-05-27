@@ -17,11 +17,12 @@ import com.example.pictureit.R;
 
 public class HelpFragment extends Fragment {
 
+    //Constants
     private static final String TAG = "HelpFragment";
 
     //Variables
     private TextView firstP, secondP, thirdP, fourthP, fifthP;
-    private ImageView questionmark, backArrow;
+    private ImageView backArrow;
 
 
     @Nullable
@@ -45,7 +46,7 @@ public class HelpFragment extends Fragment {
         return view;
     }
 
-    public void backToActivity() {
+    private void backToActivity() {
         getFragmentManager().popBackStack();
     }
 

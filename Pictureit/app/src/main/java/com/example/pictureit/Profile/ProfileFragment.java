@@ -40,6 +40,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileFragment extends Fragment {
 
+    //Constants
     private static final String TAG = "ProfileFragment";
     private static final int ACTIVITY_NUMBER = 2;
 
@@ -60,6 +61,7 @@ public class ProfileFragment extends Fragment {
     private ImageView badges;
     private BottomNavigationViewEx bottomNavigationViewEx;
 
+    //Variables
     private Context mContext;
 
     @Nullable
@@ -165,8 +167,7 @@ public class ProfileFragment extends Fragment {
                 if (user != null) {
                     //User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in" + user.getUid());
-                }
-                else {
+                } else {
                     //User is signed out
                     Log.d(TAG, "on AuthStateChanged:signed_out");
                 }

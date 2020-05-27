@@ -25,8 +25,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
+    //Constants
     private static final String TAG = "LoginActivity";
 
+    //Variables
     private Context mContext;
 
     //Firebase

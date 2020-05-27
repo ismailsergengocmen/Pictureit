@@ -28,8 +28,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class RegisterActivity extends AppCompatActivity {
 
+    //Constants
     private static final String TAG = "RegisterActivity";
 
+    //Variables
     private Context mContext;
     private String append = "";
 
