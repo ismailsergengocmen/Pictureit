@@ -15,13 +15,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.pictureit.R;
 import com.example.pictureit.models.Photo;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CardRecyclerViewAdapter extends RecyclerView.Adapter<CardRecyclerViewAdapter.ViewHolder> {
 
+    //Constants
     private static final String TAG = "CardRecyclerViewAdapter";
 
+    //Variables
     private List<Photo> mPhotos;
     private Context mContext;
     private UniversalImageLoader universalImageLoader;
@@ -29,7 +30,7 @@ public class CardRecyclerViewAdapter extends RecyclerView.Adapter<CardRecyclerVi
     public CardRecyclerViewAdapter(Context context, List<Photo> photo) {
         mContext = context;
         mPhotos = photo;
-        universalImageLoader= new UniversalImageLoader(mContext);
+        universalImageLoader = new UniversalImageLoader(mContext);
     }
 
     @NonNull
@@ -43,7 +44,7 @@ public class CardRecyclerViewAdapter extends RecyclerView.Adapter<CardRecyclerVi
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         Log.d(TAG, "onBindViewHolder: called.");
 
-        universalImageLoader.setImage(mPhotos.get(position).getImage_path(), holder.image, null, "" );
+        universalImageLoader.setImage(mPhotos.get(position).getImage_path(), holder.image, null, "");
         holder.text.setText(mPhotos.get(position).getDate_created());
 
         holder.image.setOnClickListener(new View.OnClickListener() {
@@ -61,6 +62,8 @@ public class CardRecyclerViewAdapter extends RecyclerView.Adapter<CardRecyclerVi
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+
+        //Widgets
         ImageView image;
         TextView text;
 

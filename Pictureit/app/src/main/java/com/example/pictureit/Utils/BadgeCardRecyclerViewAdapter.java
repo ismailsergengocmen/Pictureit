@@ -29,7 +29,7 @@ public class BadgeCardRecyclerViewAdapter extends RecyclerView.Adapter<BadgeCard
     private Context mContext;
     private UniversalImageLoader universalImageLoader;
 
-    public BadgeCardRecyclerViewAdapter( Context mContext, List<String> mTask, List<Integer> mProgress, List<String> mImageUrls, List<Integer> mStatus) {
+    public BadgeCardRecyclerViewAdapter(Context mContext, List<String> mTask, List<Integer> mProgress, List<String> mImageUrls, List<Integer> mStatus) {
         this.mTask = mTask;
         this.mProgress = mProgress;
         this.mImageUrls = mImageUrls;
@@ -53,10 +53,9 @@ public class BadgeCardRecyclerViewAdapter extends RecyclerView.Adapter<BadgeCard
         holder.task.setText(mTask.get(position));
         holder.progress.setText(mProgress.get(position) + " photos are taken");
 
-        if(mStatus.get(position) == 0) {
+        if (mStatus.get(position) == 0) {
             holder.status.setImageResource(R.drawable.ic_not_ok);
-        }
-        else {
+        } else {
             holder.status.setImageResource(R.drawable.ic_ok);
             holder.progress.setTextColor(Color.parseColor("#36BA0B"));
         }

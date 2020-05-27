@@ -19,7 +19,10 @@ import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 public class UniversalImageLoader {
 
+    //Constants
     private static final int DEFAULT_IMAGE = R.drawable.ic_android;
+
+    //Variables
     private Context mContext;
 
     public UniversalImageLoader(Context context) {
