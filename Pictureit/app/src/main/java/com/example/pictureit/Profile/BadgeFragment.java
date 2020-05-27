@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,7 +14,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.pictureit.Home.HomeActivity;
 import com.example.pictureit.R;
 import com.example.pictureit.Utils.BadgeCardRecyclerViewAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,18 +29,19 @@ import java.util.List;
 
 public class BadgeFragment extends Fragment {
 
+    //Constants
     private static final String TAG = "BadgeFragment";
-    private Context mContext;
-    private int count1;
-    private int count2;
 
+    //Variables
+    private Context mContext;
+    private int count;
     private List<String> mImageUrls;
     private List<String> mTask;
     private ArrayList<Integer> mProgress;
     private List<Integer> mStatus;
 
+    //Firebase
     private DatabaseReference mRef;
-    private int count;
 
     //Widgets
     private RecyclerView recyclerView;
@@ -54,14 +53,12 @@ public class BadgeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_badges, container, false);
 
-        count1 = 0;
-        count2 = 0;
         mContext = getContext();
-        mImageUrls = new ArrayList<String>(Arrays.asList("", "", "", "", ""));
-        mTask = new ArrayList<String>(Arrays.asList("", "", "", "", ""));
-        mProgress = new ArrayList<Integer>(Arrays.asList(0, 0, 0, 0, 0));
-        mProgress = new ArrayList<Integer>(Arrays.asList(0, 0, 0, 0, 0));
-        mStatus = new ArrayList<Integer>(Arrays.asList(0, 0, 0, 0, 0));
+        mImageUrls = new ArrayList<>(Arrays.asList("", "", "", "", ""));
+        mTask = new ArrayList<>(Arrays.asList("", "", "", "", ""));
+        mProgress = new ArrayList<>(Arrays.asList(0, 0, 0, 0, 0));
+        mProgress = new ArrayList<>(Arrays.asList(0, 0, 0, 0, 0));
+        mStatus = new ArrayList<>(Arrays.asList(0, 0, 0, 0, 0));
         mRef = FirebaseDatabase.getInstance().getReference();
         backArrow = view.findViewById(R.id.backArrow);
 
@@ -84,6 +81,9 @@ public class BadgeFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Method for initializing the badge recyclerView's ArrayLists
+     */
     private void initImageBitmaps() {
         Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
 
@@ -105,6 +105,9 @@ public class BadgeFragment extends Fragment {
         setProgress();
     }
 
+    /**
+     * Method for setting the progress ArrayList by looping through the database
+     */
     private void setProgress() {
         DatabaseReference newRef = mRef
                 .child(getString(R.string.dbname_all_photos_and_tags))
@@ -126,7 +129,7 @@ public class BadgeFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                Log.d(TAG, "onCancelled: cancelled.");
             }
         });
 
@@ -146,7 +149,7 @@ public class BadgeFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                Log.d(TAG, "onCancelled: cancelled.");
             }
         });
 
@@ -166,7 +169,7 @@ public class BadgeFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                Log.d(TAG, "onCancelled: cancelled.");
             }
         });
 
@@ -174,7 +177,6 @@ public class BadgeFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 count = 0;
-
                 try {
                     for (DataSnapshot ds : dataSnapshot
                             .child(getString(R.string.dbname_all_photos))
@@ -185,7 +187,7 @@ public class BadgeFragment extends Fragment {
                     mProgress.set(3, count);
 
                 } catch (IllegalStateException s) {
-
+                    Log.d(TAG, "onDataChange: IllegalStateException " + s.getMessage());
                 }
 
                 if (count >= 10) {
@@ -196,7 +198,7 @@ public class BadgeFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                Log.d(TAG, "onCancelled: cancelled.");
             }
         });
 
@@ -212,8 +214,8 @@ public class BadgeFragment extends Fragment {
                         count++;
                     }
                     mProgress.set(4, count);
-                }catch (IllegalStateException s) {
-
+                } catch (IllegalStateException s) {
+                    Log.d(TAG, "onDataChange: IllegalStateException " + s.getMessage());
                 }
 
                 if (count >= 20) {
@@ -224,12 +226,12 @@ public class BadgeFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                Log.d(TAG, "onCancelled: cancelled.");
             }
         });
     }
 
-    public void backToActivity() {
+    private void backToActivity() {
         getFragmentManager().popBackStack();
     }
 }

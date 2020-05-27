@@ -27,10 +27,10 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class ProgressMapFragment extends Fragment {
 
+    //Constants
     private static final String TAG = "ProgressMapFragment";
 
     //Firebase
@@ -38,12 +38,11 @@ public class ProgressMapFragment extends Fragment {
 
     //Variables
     private List<Photo> photoList;
-
     private Context mContext;
+    private CardRecyclerViewAdapter adapter;
 
     //Widgets
     private RecyclerView recyclerView;
-    private CardRecyclerViewAdapter adapter;
     private ImageView backArrow;
 
     @Nullable
@@ -51,7 +50,7 @@ public class ProgressMapFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_progress_map, container, false);
 
-        photoList = new ArrayList<Photo>();
+        photoList = new ArrayList<>();
         mContext = getContext();
         reference = FirebaseDatabase.getInstance().getReference();
         setPhotos();
@@ -73,10 +72,10 @@ public class ProgressMapFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Method that setups the photos of the progress map. It loops through the database's all_photos node
+     */
     private void setPhotos() {
-        //change the node!!
-        final StringManipulation stringManipulation = new StringManipulation();
-
         reference.child(getString(R.string.dbname_all_photos))
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .addValueEventListener(new ValueEventListener() {
@@ -100,20 +99,16 @@ public class ProgressMapFragment extends Fragment {
                         }
                         recyclerView.setAdapter(adapter);
                         recyclerView.getAdapter().notifyDataSetChanged();
-//                        reference.child(getActivity().getString(R.string.dbname_user_photos))
-//                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-//                                .removeEventListener(this);
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                        Log.d(TAG, "onCancelled: cancelled.");
                     }
                 });
-
     }
 
-    public void backToActivity() {
+    private void backToActivity() {
         getFragmentManager().popBackStack();
     }
 }
