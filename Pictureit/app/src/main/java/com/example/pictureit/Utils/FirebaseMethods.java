@@ -1,7 +1,6 @@
 package com.example.pictureit.Utils;
 
 import android.content.Context;
-import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -11,8 +10,6 @@ import com.example.pictureit.models.User;
 import com.example.pictureit.models.UserAccountSettings;
 import com.example.pictureit.models.UserSettings;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,7 +19,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
+
 
 import androidx.annotation.NonNull;
 
@@ -39,7 +36,6 @@ public class FirebaseMethods {
 
     //Firebase
     private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference myRef;
     private StorageReference mStorageReference;
@@ -58,6 +54,10 @@ public class FirebaseMethods {
         }
     }
 
+    /**
+     * update display name
+     * @param displayName
+     */
     public void updateDisplayName(String displayName) {
         if (displayName != null) {
             Log.d(TAG, "updating display name to:" + displayName);
@@ -67,7 +67,6 @@ public class FirebaseMethods {
 
     /**
      * update username in the 'users' node and 'user_account_settings' node
-     *
      * @param username
      */
     public void updateUsername(String username) {
@@ -83,7 +82,6 @@ public class FirebaseMethods {
 
     /**
      * update the email in the 'users' node
-     *
      * @param email
      */
     public void updateEmail(String email) {
@@ -93,12 +91,10 @@ public class FirebaseMethods {
 
     /**
      * Register a new email and password to Firebase Authentication
-     *
      * @param email    user email
      * @param password user password
-     * @param username user username
      */
-    public void registerNewEmail(final String email, String password, final String username) {
+    public void registerNewEmail(final String email, String password) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -121,6 +117,9 @@ public class FirebaseMethods {
                 });
     }
 
+    /**
+     * Sends verification email
+     */
     public void sendVerificationEmail() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -141,13 +140,11 @@ public class FirebaseMethods {
     /**
      * Add information to the users nodes
      * Add information to the user_account_setting node
-     *
      * @param email         user email
      * @param username      user username
      * @param profile_photo user profile photo
      */
     public void addNewUser(String email, String username, String profile_photo) {
-
         User user = new User(userID, email, StringManipulation.condenseUsername(username));
 
         myRef.child(mContext.getString(R.string.dbname_users))
@@ -185,7 +182,6 @@ public class FirebaseMethods {
     /**
      * Retrieves the account settings for tech user currently logged in
      * Database: user_account_settings node
-     *
      * @param dataSnapshot
      * @return
      */
@@ -257,7 +253,6 @@ public class FirebaseMethods {
 
     /**
      * A method for adding photo to "user photos" node of the firebase database
-     *
      * @param url this is the download url of the photo. It shows the location of the photo in the firebase storage
      */
     public void addPhotoToDatabase(String url) {
@@ -318,11 +313,6 @@ public class FirebaseMethods {
         myRef.child(mContext.getString(R.string.dbname_user_photos))
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .child(image_id).setValue(photo);
-
-//        //insert into database's all_photos node
-//        myRef.child(mContext.getString(R.string.dbname_all_photos))
-//                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-//                .child(newPhotoKey).setValue(photo);
 
         //adds the photo to the tags_and_name node (under tag1 branch)
         myRef.child(mContext.getString(R.string.dbname_tags_and_photos))
@@ -387,7 +377,6 @@ public class FirebaseMethods {
 
     /**
      * A method for producing String which is the representation of current date and time
-     *
      * @return the current time and date
      */
     public String getTimestamp() {

@@ -11,26 +11,14 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
-
 import com.example.pictureit.R;
 import com.example.pictureit.Utils.BottomNavigationViewHelper;
-import com.example.pictureit.Utils.FirebaseMethods;
 import com.example.pictureit.Utils.SectionsStatePagerAdapter;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import java.util.ArrayList;
@@ -41,7 +29,6 @@ public class AccountSettingsActivity extends AppCompatActivity {
 
     private Context mContext ;
     private SectionsStatePagerAdapter pagerAdapter;
-
 
     //Widgets
     private ViewPager mViewPager;
@@ -54,8 +41,6 @@ public class AccountSettingsActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate: started.");
 
         mContext =  AccountSettingsActivity.this;
-
-
         mViewPager = findViewById(R.id.container);
         mRelativeLayout = findViewById(R.id.relLayout1);
 

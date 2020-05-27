@@ -41,7 +41,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ProfileFragment extends Fragment {
 
     private static final String TAG = "ProfileFragment";
-
     private static final int ACTIVITY_NUMBER = 2;
 
     //Firebase
@@ -166,7 +165,8 @@ public class ProfileFragment extends Fragment {
                 if (user != null) {
                     //User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in" + user.getUid());
-                } else {
+                }
+                else {
                     //User is signed out
                     Log.d(TAG, "on AuthStateChanged:signed_out");
                 }
@@ -176,11 +176,8 @@ public class ProfileFragment extends Fragment {
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
                 //retrieve user information from the database
                 setProfileWidgets(mFirebaseMethods.getUserSettings(dataSnapshot));
-
-                //retrieve images for the user in question
             }
 
             @Override

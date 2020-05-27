@@ -14,7 +14,6 @@ import com.example.pictureit.R;
 import com.example.pictureit.Utils.FirebaseMethods;
 import com.example.pictureit.models.User;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,6 +31,7 @@ public class RegisterActivity extends AppCompatActivity {
     private static final String TAG = "RegisterActivity";
 
     private Context mContext;
+    private String append = "";
 
     //Widgets
     private String email, username, password;
@@ -47,8 +47,6 @@ public class RegisterActivity extends AppCompatActivity {
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference myRef;
 
-    private String append = "";
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +60,9 @@ public class RegisterActivity extends AppCompatActivity {
         init();
     }
 
+    /**
+     *
+     */
     private void init() {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,12 +75,19 @@ public class RegisterActivity extends AppCompatActivity {
                     mProgressBar.setVisibility(View.VISIBLE);
                     loadingPleaseWait.setVisibility(View.VISIBLE);
 
-                    firebaseMethods.registerNewEmail(email, password, username);
+                    firebaseMethods.registerNewEmail(email, password);
                 }
             }
         });
     }
 
+    /**
+     * Checks whether the inputs are empty or not
+     * @param email
+     * @param username
+     * @param password
+     * @return boolean
+     */
     private boolean checkInputs(String email, String username, String password) {
         Log.d(TAG, "checkInputs: checking inputs for null values.");
         if (email.equals("") || username.equals("") || password.equals("")) {
@@ -110,7 +118,8 @@ public class RegisterActivity extends AppCompatActivity {
 
         if (string.equals("")) {
             return true;
-        } else {
+        }
+        else {
             return false;
         }
     }
@@ -130,8 +139,8 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                for (DataSnapshot singleSnapshot: dataSnapshot.getChildren()){
-                    if (singleSnapshot.exists()){
+                for (DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
+                    if (singleSnapshot.exists()) {
                         Log.d(TAG, "checkIfUsernameExists: FOUND A MATCH: " + singleSnapshot.getValue(User.class).getUsername());
                         append = myRef.push().getKey().substring(3, 10);
                         Log.d(TAG, "onDataChange: username already exists. Appending random string to name: " + append);
@@ -142,15 +151,13 @@ public class RegisterActivity extends AppCompatActivity {
 
                 //add new user to the database
                 firebaseMethods.addNewUser(email, mUsername, "");
-
                 Toast.makeText(mContext, "Signup successful. Sending verification email.", Toast.LENGTH_SHORT).show();
-
                 mAuth.signOut();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                Toast.makeText(RegisterActivity.this, "Cancelled", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -170,7 +177,6 @@ public class RegisterActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
 
-
                 if (user != null) {
                     //User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in" + user.getUid());
@@ -178,17 +184,15 @@ public class RegisterActivity extends AppCompatActivity {
                     myRef.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                           checkIfUsernameExists(username);
+                            checkIfUsernameExists(username);
                         }
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                            Toast.makeText(RegisterActivity.this, "Cancelled", Toast.LENGTH_SHORT).show();
                         }
                     });
-
                     finish();
-
                 } else {
                     //User is signed out
                     Log.d(TAG, "on AuthStateChanged:signed_out");
@@ -201,7 +205,6 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);
-
     }
 
     @Override
