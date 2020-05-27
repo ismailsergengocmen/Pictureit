@@ -76,7 +76,6 @@ public class AccountSettingsActivity extends AppCompatActivity {
         menuItem.setChecked(true);
     }
 
-
     /**
      * This method sends the user to the selected fragment.
      */
@@ -89,7 +88,6 @@ public class AccountSettingsActivity extends AppCompatActivity {
         } else if (fragmentNumber == 2) {
             replaceFragment(new SignOutFragment());
         }
-
     }
 
     /**
