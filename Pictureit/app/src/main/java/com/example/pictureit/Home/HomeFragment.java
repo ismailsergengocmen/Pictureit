@@ -44,6 +44,7 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 replaceFragment(new HelpFragment());
                 System.out.println("Hi");
+                System.out.println("Hi");
             }
         });
 
